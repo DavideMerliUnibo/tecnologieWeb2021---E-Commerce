@@ -6,6 +6,10 @@ body{
     padding-top: 100px;
 }
 
+button.navbar-toggler:focus{
+    box-shadow: none;
+}
+
 main{
     padding-bottom: 30px;
 }
