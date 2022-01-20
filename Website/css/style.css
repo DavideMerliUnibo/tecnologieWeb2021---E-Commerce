@@ -1,13 +1,9 @@
 nav{
-    background-color: #66AC51;
+    background-color: #29FA48;
 }
 
 body{
     padding-top: 100px;
-}
-
-button.navbar-toggler:focus{
-    box-shadow: none;
 }
 
 main{
@@ -15,6 +11,8 @@ main{
 }
 
 footer{
-    background-color: #DAAE58;
+    background-color: #EE9A49;
     padding: 10px 0 10px 0;
 }
+
+
