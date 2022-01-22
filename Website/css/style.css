@@ -1,0 +1,20 @@
+nav{
+    background-color: #66AC51;
+}
+
+body{
+    padding-top: 100px;
+}
+
+button.navbar-toggler:focus{
+    box-shadow: none;
+}
+
+main{
+    padding-bottom: 30px;
+}
+
+footer{
+    background-color: #DAAE58;
+    padding: 10px 0 10px 0;
+}
