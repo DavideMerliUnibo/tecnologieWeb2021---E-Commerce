@@ -89,7 +89,8 @@
         <main>
             <h1 class="p-2">Fungo porcino molto buono</h1>
 
-            <article class="row bg-light border p-2 m-2">
+            <!-- Articolo -->
+            <article class="bg-light border p-2 m-2">
                 <div class="mb-2 mt-2 align-items-center">
                     <img src="img/porcino.jpg" alt="" class="w-100"/>
                 </div>
@@ -103,19 +104,51 @@
                 </ul>
             </article>
 
-            <section class="row p-2 m-2">
-                <h2>Recensioni degli utenti</h2>
-                <section class="row bg-light border p-2 m-2">
-                    <div class="col-4 col-lg-2">
-                        <img src="img/menu.png" alt="img" height="100"/>
+            <!-- Recensioni degli utenti -->
+            <div class="container-fluid py-2">
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="text-center">Recensioni degli utenti</h2>
+                        <div style="overflow-y: scroll;height: 400px;" tabindex="0" class="">
+                            <!-- Un article per ogni commento -->
+                            <article class="row col-12 bg-light card-body my-1 border-bottom">
+                                <div class="col-4 col-lg-2">
+                                    <img src="img/profile.png" alt="img" height="100"/>
+                                </div>
+                                <div class="col-8 col-lg-10">
+                                    <h2 style="font-size: large;">Bene ma non benissimo</h2>
+                                    <p>by <strong>Giovanna</strong></p>
+                                    <p>Buono, niente da dire, ma la confezione non era il top</p>
+                                </div>
+                            </article>
+
+                            <article class="row col-12 bg-light card-body my-2 border-bottom">
+                                <div class="col-4 col-lg-2">
+                                    <img src="img/profile.png" alt="img" height="100"/>
+                                </div>
+                                <div class="col-8 col-lg-10">
+                                    <h2 style="font-size: large;">Delizioso</h2>
+                                    <p>by <strong>Marco Marchi</strong></p>
+                                    <p>Miglior porcino mai mangiato in vita mia, consigliato vivamente!!!</p>
+                            </article>
+
+                            <article class="row col-12 bg-light card-body my-2 border-bottom">
+                                <div class="col-4 col-lg-2">
+                                    <img src="img/profile.png" alt="img" height="100"/>
+                                </div>
+                                <div class="col-8 col-lg-10">
+                                    <h2 style="font-size: large;">S'i fosse foco . . .</h2>
+                                    <p>by <strong>Cecco Angiolieri</strong></p>
+                                    <p>. . . arderei 'l mondo!</p>
+                                </div>
+                            </article>
+                        </div>
                     </div>
-                    <div class="col-8 col-lg-10">
-                        <h2 style="font-size: large;"><a href="#">Fungo porcino molto buono</a></h2>
-                        <p><strong>19.90 €/Kg</strong></p>
-                        <p>3 in stock</p>
-                    </div>
-                </section>
-            </section>
+        
+                </div>
+            </div>
+
+
         </main>
 
         <footer class="text-center text-white">
