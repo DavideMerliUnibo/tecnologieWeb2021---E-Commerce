@@ -1,0 +1,23 @@
+Si vuole progettare il database per la gestione di una pagina web dedicata alla compravendita di funghi.
+L'utente dovrà essere in grado di scorrere le offerte presenti nel portale ed eventualmente di crearne lui stesso previa registrazione.
+L'utente potrà inserire,togliere,modificare  prodotti nel carrello, le cui informazioni dovranno persistere nel tempo e dovranno essere reperite in seguito.
+Per l'utente si vuole mantenere: 
+	email, password, nome, cognome, data di nascita, indirizzo, codice carta.
+L'utente dovrà anche essere in grado di visualizzare lo storico dei propri ordini effettuati o ricevuti (se possessore di un'offerta).
+Di ogni offerta si vuole mantenere:
+	prezzo per unità(o hg/kg/g), quantità disponibile, tipologia fungo, venditore (e relative info?), informazioni generiche, immagini.
+Sarà necessario anche organizzare un blog di ricette, cui principali ingredienti sono i funghi.
+Un utente dovrà quindi essere in grado di inserire e gestire offerte.
+Dalla pagina di un determinato prodotto saranno consultabili anche le ricette che ad esso fanno riferimento.
+Di ogni ricetta si vuole mantenere:
+	descrizione procedimento, ingredienti, tabella nutrizionale, eventuali immagini, commenti di utenti.
+A fronte delle seguenti azioni sarà notificato un avviso di avvenuta esecuzione:
+	aggiornamento carrello, acquisto, inserimento commento(?).
+Si vuole mantenere anche uno storico delle notifiche relativo all'utente.
+
+
+(?inserire commenti anche in prodotti?)
+(sarebbe carino mantenere informazioni di un utente venditore come numero di offerte vendute, possedute ecc, così che un utente che compra possa valutarle prima di acquistare)
+(indice qualità fungo con delle stelline? indice di velenosità fungo?)
+(difficoltà ricetta?)
+(pagina admin in grado di poteg gestire tutto il sito? quindi eliminare eventuali offerte, ricette?)
