@@ -7,12 +7,15 @@
         if(!$success){
           $templateParams['errorMessage'] = "Errore nella registrazione. Si prega di riprovare.";
           $templateParams["nome"] = "registrazione-form.php";
+        } else {
+          $templateParams["nome"] = "signUpSuccess.php";
         }
   } else
   {
     $templateParams["nome"] = "registrazione-form.php";
   }
-  $templateParams["nome"] = "signUpSuccess.php";
+  //TODO:se utente gia` loggato disabilitare registrazione
+  
   require("template/base.php")
 
   ?>
