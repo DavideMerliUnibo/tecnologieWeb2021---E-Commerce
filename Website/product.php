@@ -8,6 +8,7 @@
     }
     $templateParams["prodotto"] = $dbh -> getProductById($idprodotto);
     $templateParams["immagini"] = $dbh -> getProductImages($idprodotto);
+    $templateParams["recensioni"] = $dbh -> getProductReviews($idprodotto);
 
     require("template/base.php");
 ?>

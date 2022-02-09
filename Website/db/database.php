@@ -58,4 +58,16 @@ class DatabaseHelper
         $result = $stmt -> get_result() -> fetch_all(MYSQLI_ASSOC);
         return $result;
     }
+
+    public function getProductReviews($id){
+        $query = "SELECT r.titolo, r.data, r.contenuto, r.valutazione, u.username
+                  FROM recensione r, utente u
+                  WHERE r.utente = u.email
+                  AND codProdotto = ?";
+        $stmt = $this -> db -> prepare($query);
+        $stmt -> bind_param('i', $id);
+        $stmt -> execute();
+        $result = $stmt -> get_result() -> fetch_all(MYSQLI_ASSOC);
+        return $result;
+    }
 }

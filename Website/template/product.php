@@ -3,6 +3,7 @@
 
     <?php $prodotto = $templateParams["prodotto"][0]; ?>
     <?php $immagini = $templateParams["immagini"]; ?>
+    <?php $recensioni = $templateParams["recensioni"]; ?>
     <!-- Articolo -->
     <article class="bg-light border p-2 m-2">
         <div class="mb-2 mt-2 align-items-center">
@@ -21,17 +22,23 @@
             <div class="col-12">
                 <h2 class="text-center">Recensioni degli utenti</h2>
                 <div style="overflow-y: scroll;height: 400px;" tabindex="0" class="">
-                    <!-- Un article per ogni commento -->
+                    <?php if(empty($recensioni)): ?>
+                    <p class="text-center p-2">Non ci sono recensioni per questo prodotto.</p>
+                    <?php endif; ?>
+                    <?php foreach($recensioni as $recensione): ?>
                     <article class="row col-12 bg-light card-body my-1 border-bottom">
                         <div class="col-4 col-lg-2">
-                            <img src="img/profile.png" alt="img" height="100"/>
+                            <img src="img/profile.png" alt="" height="100"/>
                         </div>
                         <div class="col-8 col-lg-10">
-                            <h2 style="font-size: large;">Bene ma non benissimo</h2>
-                            <p>by <strong>Giovanna</strong></p>
-                            <p>Buono, niente da dire, ma la confezione non era il top</p>
+                            <h2 style="font-size: large;"><?php echo $recensione["titolo"]; ?></h2>
+                            <p>by <strong><?php echo $recensione["username"]; ?></strong></p>
+                            <p>Data: <?php echo $recensione["data"]; ?></p>
+                            <p>Valutazione: <?php echo $recensione["valutazione"]; ?></p>
+                            <p><?php echo $recensione["contenuto"]; ?></p>
                         </div>
                     </article>
+                    <?php endforeach; ?>
                 </div>
             </div>
         </div>
