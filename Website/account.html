@@ -17,20 +17,6 @@
     </head>
 
     <body>
-        <!--
-        <header>
-            <nav>
-                <ul>
-                    <li><a href="Shop.html">Shop</a></li>
-                    <li><a href="Account.html">Account</a></li>
-                    <li><a href="Ricette.html">Ricette</a></li>
-                    <li><a href="Info.html">About us</a></li>
-                    <li><a href="FAQ.html">FAQ</a></li>
-                </ul>
-            </nav>
-        </header>
-        -->
-
         <nav class="navbar navbar-expand-lg fixed-top">
             <div class="container">
                 <!-- Menu button -->
@@ -39,26 +25,26 @@
                 </button>
 
                 <!-- Logo -->
-                <a href="#">
-                    <img src="img/logo.svg" width="50" height="50" />
+                <a href="base.html">
+                    <img src="img/logo.svg" alt="logo" width="50" height="50" />
                 </a>
 
                 <!-- Shopping cart button -->
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#rightMenu" aria-controls="rightMenu" aria-expanded="false" label="Toggle right menu">
-                    <img src="img/shopping_cart.png" width="50" height="50" />
+                    <img src="img/shopping_cart.png" alt="Shopping cart" width="50" height="50" />
                 </button>
 
                 <!-- Left menu -->
                 <div class="collapse navbar-collapse" id="leftMenu">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="#">Shop</a>
+                            <a class="nav-link text-white" href="shop.html">Shop</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-white" href="login.html">Account</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="#">Ricette</a>
+                            <a class="nav-link text-white" href="paginaRicetta.html">Ricette</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-white" href="#">About Us</a>
@@ -87,7 +73,7 @@
         </nav>
 
         <main>
-            <div>
+            <div class="col-12">
                 <header>
                     <p style="text-align:center">
                         <img  src="img/profile.png" width="100" height="100"/>
@@ -96,22 +82,22 @@
                     
                     <form>
                         <div class="form-group row">
-                            <label class="col-sm-1">Email:</label>
-                            <div class="col-sm-10">
+                            <label class="col-sm-2" style="text-align:right">Email:</label>
+                            <div class="col-sm-9">
                                 <input class="form-control" type="text" placeholder="email@provider.it">
                                 <button type="submit" class="btn-default mb-3">Change</button>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-1">Adress:</label>
-                            <div class="col-sm-10">
+                            <label class="col-sm-2" style="text-align:right">Adress: </label>
+                            <div class="col-sm-9" >
                                 <input class="form-control" type="text" placeholder="Via che cazzo so 17, RM, 47924">
                                 <button type="submit" class="btn-default mb-3">Change</button>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-1">Payment card(s):</label>
-                            <div class="col-sm-10">
+                            <label class="col-sm-2" style="text-align:right">Payment card(s):</label>
+                            <div class="col-sm-9">
                                 <input class="form-control" type="text" placeholder="Num:44654867few786454">
                                 <button type="submit" class="btn-default mb-3">Change</button>
                             </div>
