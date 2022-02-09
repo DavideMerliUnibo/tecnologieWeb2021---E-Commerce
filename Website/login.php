@@ -1,6 +1,5 @@
 <?php 
     require_once("bootstrap.php");
-    
     if(isset($_POST['email']) && isset($_POST['password'])){
         $result = $dbh->checkUser($_POST["email"],$_POST["password"]);
 
@@ -12,10 +11,13 @@
         }
     }
 
+    if(isset($_POST["submitRicetta"]) && isUserLoggedIn()){
+        //aggiungi ricetta a db.
+    } 
+
+
     if(isUserLoggedIn()){
-        //reindirizzo alla main page utente al posto di login-form.php
-        var_dump($_SESSION["email"]);
-        $templateParams["nome"] = "login-form.php";
+        $templateParams["nome"] = "login-home.php";
 
     } else {
         //sostituire anche titolo
@@ -24,7 +26,5 @@
     }
 
     require("template/base.php");
-
-
 
 ?>
