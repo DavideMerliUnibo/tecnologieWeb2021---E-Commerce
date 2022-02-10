@@ -9,8 +9,8 @@ if(isUserLoggedIn()){}
             }
             break;
         case "content":
-            
-        
-
+                header("Content-type: application/json" );
+                $ricette = $dbh->getRicetteUtente();
+                echo json_encode($ricette);
     }
 }

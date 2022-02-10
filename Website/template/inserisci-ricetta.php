@@ -47,7 +47,7 @@
                         </div>
                     </div>
                     <div class="col-12 mt-1">
-                        <input class="btn btn-secondary" type="submit" name="submitRicetta" value="Inserisci" onclick="return func();">
+                        <input class="btn btn-secondary" type="submit" name="submitRicetta" value="Inserisci" onclick="return inserisciRicetta();">
                     </div>
             </div>
 
@@ -56,7 +56,7 @@
     </div>
 </div>
 <script>
-    function func() {
+    function inserisciRicetta() {
         let elems = $("form input,form textarea").toArray();
         elems = elems.map(x => {
             return [x.attributes['name'].value, x.value];
@@ -83,6 +83,7 @@
             cache: false,
             success: function(result) {
                 alert("nice");
+                
             }
         });
         return false;

@@ -8,13 +8,6 @@ $index = 0;
 $ricette = $dbh->getRicetteUtente();
 ?>
 <div class="row">
-    <!-- <div class="offcanvas offcanvas-end" id="offcanvasTab">
-        <div class="offcanvas-body d-flex">
-            <section id="offcanvasTabSection" class="my-auto w-100">
-
-            </section>
-        </div>
-    </div> -->
     <div class="modal fade" id="modalComponent" tabindex="-1" aria-labelledby="modalComponent" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -36,7 +29,36 @@ $ricette = $dbh->getRicetteUtente();
                 <button class="fs-0 btn btn-sm btn-info" type="button" name="inserisciButton">Inserisci ricetta</button>
             </div>
             <div class="col-12 table-responsive">
-                <table class="table text-center table-sm">
+                
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $().ready(function() {
+        loadContent();
+    })
+
+    function loadContent() {
+        $.ajax({
+            method: "post",
+            url: "api-gestione-ricetta.php",
+            cache: false,
+            data: {
+                "action": "content"
+            },
+            success: function(data) {
+                console.log(data);
+                let content = buildContent(data);
+                $("#gestisciRicetteRow div:nth-child(3)").addClass("table-responsive");
+                $("#gestisciRicetteRow div:nth-child(3)").html(content);
+            }
+        })
+    }
+
+    function buildContent(data) {
+        let content = `<table class="table text-center table-sm">
                     <thead class="table-light">
                         <th>Titolo</th>
                         <th>Tab. nutrizionale</th>
@@ -48,46 +70,43 @@ $ricette = $dbh->getRicetteUtente();
                         <th>Autore</th>
                         <th>Gestisci</th>
                     </thead>
-                    <tbody class="">
-                        <?php if (count($ricette) == 0) : ?>
-                            <td class="text-center" colspan="8">Nessuna ricetta inserita</td>
-                        <?php endif; ?>
-                        <?php foreach ($ricette as $ricetta) : ?>
-                            <?php $valoriNutriz = array($ricetta["valoreEnergetico"], $ricetta['proteine'], $ricetta["grassi"], $ricetta["carboidrati"], $ricetta["fibre"], $ricetta["sodio"]); ?>
-
-                            <td><?php echo $ricetta["titolo"]; ?></td>
+                    <tbody class="">`;
+        if (data.length == 0) {
+            content += `<td class="text-center" colspan="8">Nessuna ricetta inserita</td>`;
+        } else {
+            for(ricetta of data){
+                let valoriNutriz = [ricetta["valoreEnergetico"], ricetta['proteine'], ricetta["grassi"], ricetta["carboidrati"], ricetta["fibre"], ricetta["sodio"]];
+               content += `<tr>
+                            <td>${ricetta['titolo']}</td>
                             <td>
-                                <button onclick='setModal(<?php echo json_encode($valoriNutriz); ?>,"Tabella Nutrizionale");' class="btn btn-light mx-auto" type="button" data-bs-toggle="modal" data-bs-target="#modalComponent" aria-controls="modalComponent">look</button>
+                                <button onclick='setModal(${valoriNutriz},"Tabella Nutrizionale");' class="btn btn-light mx-auto" type="button" data-bs-toggle="modal" data-bs-target="#modalComponent" aria-controls="modalComponent">look</button>
                             </td>
-                            <td><?php echo $ricetta['difficoltà'] ?></td>
+                            <td>${ricetta['difficoltà']}</td>
                             <td>
-                                <button onclick='setModal(<?php echo "\"" . $ricetta["descrizione"] . "\""; ?>,"Descrizione");' type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#modalComponent">Descrizione</button>
-                            </td>
-                            <td>
-                                <button onclick='setModal(<?php echo "\"" . $ricetta["procedimento"] . "\""; ?>,"Procedimento");' type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#modalComponent">Procedimento</button>
+                                <button onclick='setModal(${ricetta['descrizione']},"Descrizione");' type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#modalComponent">Descrizione</button>
                             </td>
                             <td>
-                                <button onclick='setModal(<?php echo "\"" . $ricetta["consigli"] . "\""; ?>,"Consigli");' type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#modalComponent">Consigli</button>
+                                <button onclick='setModal(${ricetta['procedimento']},"Procedimento");' type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#modalComponent">Procedimento</button>
                             </td>
                             <td>
-                                <?php echo $ricetta['data'] ?>
+                                <button onclick='setModal(${ricetta['consigli']},"Consigli");' type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#modalComponent">Consigli</button>
                             </td>
                             <td>
-                                <?php echo $ricetta['autore'] ?>
+                                ${ricetta['data']}
                             </td>
                             <td>
-                                <button onclick="deleteRow(<?php echo $ricetta['titolo']; ?>);" class="btn btn-light">Delete</button>
+                                ${ricetta['autore']}
                             </td>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
-
-            </div>
-        </div>
-    </div>
-</div>
-<script>
-    
+                            <td>
+                                <button onclick="deleteRow(${ricetta['titolo']});" class="btn btn-light">Delete</button>
+                            </td>
+                            </tr>`;
+            }
+        }
+        content +=` </tbody>
+                </table>`;
+        return content;
+    }
 
     $("button[name='inserisciButton']").click(function() {
         $("#gestisciRicetteRow div > h2").html("Inserisci ricetta");
@@ -112,7 +131,7 @@ $ricette = $dbh->getRicetteUtente();
                 "titolo": titolo
             },
             success: function() {
-                //aggiornare todo
+                loadContent();
             }
         })
     }
