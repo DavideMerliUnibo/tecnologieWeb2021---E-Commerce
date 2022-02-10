@@ -5,7 +5,7 @@ class DatabaseHelper
 
     public function __construct($servername, $username, $password, $dbname)
     {
-        $this->db = new mysqli($servername, $username, $password, $dbname);
+        $this->db = new mysqli($servername, $username, $password, $dbname, 3340);
         if ($this->db->connect_error) {
             die("Connection failed " . $this->db->connect_error);
         }
@@ -106,6 +106,76 @@ class DatabaseHelper
                   AND codProdotto = ?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('i', $id);
+        $stmt->execute();
+        $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        return $result;
+    }
+
+    public function getRecipes(){
+        $query = "SELECT r.titolo, r.data, r.descrizione, u.username as autore, i.nome as immagine
+                  FROM ricetta r, utente u, immaginericetta i
+                  WHERE r.autore = u.email
+                  AND i.titoloRicetta = r.titolo
+                  GROUP BY r.titolo";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        return $result;
+    }
+
+    public function getRecipeByTitle($titolo){
+        $query = "SELECT r.*, u.username
+                  FROM ricetta r, utente u
+                  WHERE r.autore = u.email
+                  AND r.titolo = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('s', $titolo);
+        $stmt->execute();
+        $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        return $result;
+    }
+
+    public function getNutritionalTable($titolo){
+        $query = "SELECT t.*
+                  FROM ricetta r, tabellanutrizionale t
+                  WHERE r.tabellaNutrizionale = t.codice
+                  AND r.titolo = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('s', $titolo);
+        $stmt->execute();
+        $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        return $result;
+    }
+
+    public function getIngredientsForRecipe($titolo){
+        $query = "SELECT nome, quantità
+                  FROM ingrediente
+                  WHERE titoloRicetta = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('s', $titolo);
+        $stmt->execute();
+        $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        return $result;
+    }
+
+    public function getRecipeImages($titolo){
+        $query = "SELECT nome
+                  FROM immaginericetta
+                  WHERE titoloRicetta = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('s', $titolo);
+        $stmt->execute();
+        $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        return $result;
+    }
+
+    public function getRecipeComments($titolo){
+        $query = "SELECT c.contenuto, c.data, u.username
+                  FROM commento c, utente u
+                  WHERE c.autore = u.email
+                  AND c.ricetta = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('s', $titolo);
         $stmt->execute();
         $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
         return $result;
