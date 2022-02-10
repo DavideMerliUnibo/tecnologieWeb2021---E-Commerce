@@ -11,15 +11,16 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
     }
 }
 
-if (isset($_POST["submitRicetta"]) && isUserLoggedIn()) {
-    $data = json_decode($_POST["data"], true);
-    $dbh->insertRicetta($data["titolo"], $data["difficolta"], $data["descrizione"], $data["procedimento"], $data["consigli"], $data["valEnergetico"], $data["proteine"], $data["grassi"], $data["carboidrati"], $data["fibre"], $data["sodio"]);
-}
+// if (isset($_POST["submitRicetta"]) && isUserLoggedIn()) {
+//     $data = json_decode($_POST["data"], true);
+//     $dbh->insertRicetta($data["titolo"], $data["difficolta"], $data["descrizione"], $data["procedimento"], $data["consigli"], $data["valEnergetico"], $data["proteine"], $data["grassi"], $data["carboidrati"], $data["fibre"], $data["sodio"]);
+// }
 
-//var_dump($dbh->try()->fetch_assoc()['date']);
 
 if (isUserLoggedIn()) {
-    $templateParams["nome"] = "login-home.php";
+    header("location: home-utente.php");
+    die();
+    //$templateParams["nome"] = "login-home.php";
 } else {
     //sostituire anche titolo
     //$templateParams["titolo"] = 'Login';

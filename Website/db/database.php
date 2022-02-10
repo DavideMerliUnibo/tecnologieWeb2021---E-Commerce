@@ -109,4 +109,29 @@ class DatabaseHelper
         $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
         return $result;
     }
+
+    public function getRicetteUtente()
+    {
+        if (!isUserLoggedIn()) {
+            die("Error: utente non loggato");
+        }
+        $query =    "select r.*,t.*
+                    from ricetta r join utente u on (r.autore = u.email) 
+                    join tabellanutrizionale t on ( r.tabellaNutrizionale = t.codice) 
+                    where u.email = ?;";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("s", $_SESSION["email"]);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function deleteRicetta($titolo){
+        if(!isUserLoggedIn()){
+            die("Utente non loggato");
+        }
+        $query = "delete from ricetta where titolo=? and autore=?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("ss",$titolo,$_SESSION['email']);
+        $stmt->execute();
+    }
 }

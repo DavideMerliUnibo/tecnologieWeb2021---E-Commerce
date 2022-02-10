@@ -74,7 +74,7 @@
                                     </div>
                                 </div>
                                 <div class="d-none d-md-flex flex-column mt-3">
-                                    <h5 class="m-auto">Calorie</h5>
+                                    <h5 class="m-auto">Tabella Nutrizionale</h5>
                                     <table class="table table-success table-striped">
                                         <tr>
                                             <th>Valore energetico</th>
