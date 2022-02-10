@@ -11,7 +11,7 @@
                             <div class="carousel-item active">
                                 <img src="img/porcino1.jpg" class="d-block m-auto " alt="...">
                             </div>
-                            <div class="carousel-item ">
+                            <div class="carousel-item">
                                 <img src="img/porcino2.jpg" class="d-block m-auto" alt="...">
                             </div>
                         </div>

@@ -1,15 +1,38 @@
 <main>
-    <h1 class="p-2">Fungo porcino molto buono</h1>
+    
 
     <?php $prodotto = $templateParams["prodotto"][0]; ?>
     <?php $immagini = $templateParams["immagini"]; ?>
     <?php $recensioni = $templateParams["recensioni"]; ?>
-    <!-- Articolo -->
+
+    <h1 class="p-2"><?php echo $prodotto["nomeFungo"]; ?></h1>
+    <!-- Prodotto -->
     <article class="bg-light border p-2 m-2">
-        <div class="mb-2 mt-2 align-items-center">
-            <!-- Farlo per ogni immagine -->
-            <img src="img/<?php echo $immagini[0]["nome"]; ?>" alt="" class="w-100"/>
+
+        <!-- Immagini -->
+        <div class="col-12">
+            <div class="row justify-content-center">
+                <div id="carousel1" class="carousel slide col-10 " data-bs-ride="carousel" data-pause="hover">
+                    <div class="carousel-inner">
+                        <?php foreach($immagini as $immagine): ?>
+                        <div class="carousel-item <?php if($immagine == $immagini[0]){ echo "active"; }?>">
+                            <img src="img/<?php echo $immagine["nome"]; ?>" class="d-block m-auto " alt="...">
+                        </div>
+                        <?php endforeach; ?>
+                    </div>
+                    <button class="carousel-control-prev m-auto" type="button" data-bs-target="#carousel1" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next m-auto" type="button" data-bs-target="#carousel1" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
         </div>
+
+        <!-- Dati prodotto -->
         <p>Venduto da: <strong><?php echo $prodotto["username"]; ?></strong></p>
         <p>Prezzo: <strong><?php echo $prodotto["prezzoPerUnità"]; ?> €/Kg</strong></p>
         <p>Informazioni:</p>

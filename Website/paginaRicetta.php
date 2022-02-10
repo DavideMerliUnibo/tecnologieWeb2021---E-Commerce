@@ -1,7 +1,7 @@
 <?php 
 
 require_once("bootstrap.php");
-$templateParams["nome"] = "ricette-get.php";
+$templateParams["nome"] = "paginaRicetta-get.php";
 require("template/base.php");
 
 ?>

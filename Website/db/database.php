@@ -61,9 +61,10 @@ class DatabaseHelper
         $stmt->bind_param("sidsssss", $titolo, $idTabellaNutrizionale, $difficolta, $descrizione, $procedimento, $consigli, $date, $autore);
         return $stmt->execute();
     }
+
     public function getProducts()
     {
-        $query = "SELECT p.*, i.nome as img, u.username
+        $query = "SELECT p.nomeFungo, p.prezzoPerUnità, p.quantità, p.codice, i.nome as img, u.username
                   FROM prodotto p, immagineprodotto i, utente u
                   WHERE p.codice = i.codProdotto
                   AND p.offerente = u.email
