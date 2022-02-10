@@ -1,6 +1,6 @@
 <?php
 // require("../bootstrap.php");
-require("/xampp/htdocs/project/Website/bootstrap.php");
+//require("/xampp/htdocs/project/Website/bootstrap.php");
 if (!isUserLoggedIn()) {
     die();
 }
@@ -29,7 +29,7 @@ $ricette = $dbh->getRicetteUtente();
                 <button class="fs-0 btn btn-sm btn-info" type="button" name="inserisciButton">Inserisci ricetta</button>
             </div>
             <div class="col-12 table-responsive">
-                
+
 
             </div>
         </div>
@@ -74,12 +74,12 @@ $ricette = $dbh->getRicetteUtente();
         if (data.length == 0) {
             content += `<td class="text-center" colspan="8">Nessuna ricetta inserita</td>`;
         } else {
-            for(ricetta of data){
+            for (ricetta of data) {
                 let valoriNutriz = [ricetta["valoreEnergetico"], ricetta['proteine'], ricetta["grassi"], ricetta["carboidrati"], ricetta["fibre"], ricetta["sodio"]];
-               content += `<tr>
+                content += `<tr>
                             <td>${ricetta['titolo']}</td>
                             <td>
-                                <button onclick='setModal(${valoriNutriz},"Tabella Nutrizionale");' class="btn btn-light mx-auto" type="button" data-bs-toggle="modal" data-bs-target="#modalComponent" aria-controls="modalComponent">look</button>
+                                <button onclick='setModal(${JSON.stringify(valoriNutriz)},"Tabella Nutrizionale");' class="btn btn-light mx-auto" type="button" data-bs-toggle="modal" data-bs-target="#modalComponent" aria-controls="modalComponent">look</button>
                             </td>
                             <td>${ricetta['difficoltà']}</td>
                             <td>
@@ -98,12 +98,13 @@ $ricette = $dbh->getRicetteUtente();
                                 ${ricetta['autore']}
                             </td>
                             <td>
-                                <button onclick="deleteRow(${ricetta['titolo']});" class="btn btn-light">Delete</button>
+                                <button onclick="deleteRow(${ricetta['titolo']});" class="btn btn-sm btn-light">Delete</button>
+                                <button onclick='updateRow(${JSON.stringify(ricetta)});' class="btn btn-sm btn-light">Update</button>
                             </td>
                             </tr>`;
             }
         }
-        content +=` </tbody>
+        content += ` </tbody>
                 </table>`;
         return content;
     }
@@ -120,6 +121,34 @@ $ricette = $dbh->getRicetteUtente();
             }
         })
     });
+
+    function updateRow(values) {
+        console.log(values);
+        $.ajax({
+            method: "post",
+            url: "template/modifica-ricetta.php",
+            cache: false,
+            // data: {
+            //     values: JSON.stringify(values)
+            // },
+            success: function(data) {
+                $("#gestisciRicetteRow div:nth-child(3)").html(data);
+                //modifico ogni riga del template con value giusto di riga
+                //aggiungo script che faccia update
+                $("#titolo").val(values['titolo']);
+                $("#difficoltà").val(values['difficoltà']);
+                $("#descrizione").val(values['descrizione']);
+                $("#procedimento").val(values['procedimento']);
+                $("#consigli").val(values['consigli']);
+                $("#valoreEnergetico").val(values['valoreEnergetico']);
+                $("#proteine").val(values['proteine']);
+                $("#grassi").val(values['grassi']);
+                $("#carboidrati").val(values['carboidrati']);
+                $("#fibre").val(values['fibre']);
+                $("#sodio").val(values['sodio']);
+            }
+        })
+    }
 
     function deleteRow(titolo) {
         $.ajax({
@@ -150,6 +179,7 @@ $ricette = $dbh->getRicetteUtente();
                 );
                 break;
             case 'Tabella Nutrizionale':
+                console.log(value);
                 $("#modalComponent div.modal-header").html(
                     `<h2>${header}</h2>`
                 );

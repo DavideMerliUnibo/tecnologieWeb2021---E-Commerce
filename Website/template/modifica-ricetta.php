@@ -1,3 +1,4 @@
+
 <div class="row p-4">
     <div class="col">
         <div class="card fs-4">
@@ -8,8 +9,8 @@
                             <label class="form-label" for="titolo">Titolo</label><input required class="form-control form-control-sm" id="titolo" type="text" name="titolo">
                         </div>
                         <div class="col-12 mb-2">
-                            <label class="form-label" for="difficolta">Difficoltà</label>
-                            <output>0.0</output><input required class="form-range" oninput="this.previousElementSibling.value = parseFloat(this.value).toFixed(1)" id="difficolta" type="range" step="0.1" min="0.0" max="5.0" value="0.0" name="difficoltà">
+                            <label class="form-label" for="difficoltà">Difficoltà</label>
+                            <output>0.0</output><input required class="form-range" oninput="this.previousElementSibling.value = parseFloat(this.value).toFixed(1)" id="difficoltà" type="range" step="0.1" min="0.0" max="5.0" value="0.0" name="difficolta">
                         </div>
                         <div class="col-12 mb-2">
                             <label class="form-label" for="descrizione">Descizione</label><textarea required class="form-control form-control-sm" rows="2" id="descrizione" name="descrizione"></textarea>
@@ -55,37 +56,4 @@
         </div>
     </div>
 </div>
-<script>
-    function inserisciRicetta() {
-        let elems = $("form input,form textarea").toArray();
-        elems = elems.map(x => {
-            return [x.attributes['name'].value, x.value];
-        });
-        let data = "{";
-        for (let i = 0; i < elems.length; i++) {
-            data += '\"' + elems[i][0] +'\"' + ":" +'\"' + elems[i][1]+'\"';
-            if (i == elems.length - 1) {
-                data += '}';
-                break;
-            }
-            data += ','
-        }
-        console.log(data);
 
-        $.ajax({
-            type: "post",
-            // url: "login.php",
-            url: "api-gestione-ricetta.php",
-            data: {
-                'data': data,
-                'action':"insert",
-                'submitRicetta': 'inserisci'
-            },
-            cache: false,
-            success: function(result) {
-                window.location="http://localhost/project/Website/home-utente.php?action=gestisciRicette";
-            }
-        });
-        return false;
-    };
-</script>
