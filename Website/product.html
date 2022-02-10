@@ -31,61 +31,24 @@
         </header>
         -->
 
-        <nav class="navbar navbar-expand-lg fixed-top">
-            <div class="container">
-                <!-- Menu button -->
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#leftMenu" aria-controls="leftMenu" aria-expanded="false" label="Toggle left menu">
-                    <img src="img/menu.png" alt="Menu" width="50" height="50" />
-                </button>
-
-                <!-- Logo -->
-                <a href="#">
-                    <img src="img/logo.svg" alt="logo" width="50" height="50" />
-                </a>
-
-                <!-- Shopping cart button -->
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#rightMenu" aria-controls="rightMenu" aria-expanded="false" label="Toggle right menu">
-                    <img src="img/shopping_cart.png" alt="Shopping cart" width="50" height="50" />
-                </button>
-
-                <!-- Left menu -->
-                <div class="collapse navbar-collapse" id="leftMenu">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="#">Shop</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="#">Account</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="#">Ricette</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="#">About Us</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="#">FAQ</a>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Right menu -->
-                <div class="collapse navbar-collapse" id="rightMenu">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link  text-white" href="#">Articolo 1</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link  text-white" href="#">Articolo 2</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link  text-white" href="#">Articolo 3</a>
-                        </li>
-                    </ul>
-                </div>
+        <<nav id="sidebar">
+            <div class="sidebar-header">
+                <h3>Bootstrap Sidebar</h3>
             </div>
+            <ul class="list-unstyled components">
+                <li><a href="#">Home</a></li>
+                <li>
+                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
+                    <ul class="collapse list-unstyled" id="pageSubmenu">
+                        <li><a href="#">Page 1</a></li>
+                        <li><a href="#">Page 2</a></li>
+                        <li><a href="#">Page 3</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Portfolio</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
         </nav>
-
         <main>
             <h1 class="p-2">Fungo porcino molto buono</h1>
 
