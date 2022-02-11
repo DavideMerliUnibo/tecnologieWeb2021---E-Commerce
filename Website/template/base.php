@@ -55,18 +55,16 @@
                 <!-- Right Menu -->
                 <div class="collapse navbar-collapse" id="cart">
                     <ul class="navbar-nav">
+                        
+                        <?php 
+                        $templateParams["prodottiCarrello"] = $dbh-> getProductInCart($_SESSION['email']);
+                        foreach($templateParams["prodottiCarrello"] as $prodotto):?>
                         <li class="nav-item">
-
+                            <a class="nav-link text-white" href="#"><?php echo $prodotto["nomeFungo"] ?></a>
+                        </li>
+                        <?php endforeach; ?>
+                        <li class="nav-item">
                             <a class="nav-link text-white" aria-current="page" href="carrello.php">Visualizza carrello</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="#">ARticolo 1</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="#">Pricing</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="#">Articolo 2</a>
                         </li>
                     </ul>
                 </div>
