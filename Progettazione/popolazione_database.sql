@@ -15,15 +15,18 @@ VALUES ('Boletus edulis', 1, 7, 0);
 INSERT INTO tipologiafungo
 VALUES ('Amanita muscaria', 2, 5, 9);
 
+INSERT INTO tipologiafungo
+VALUES ('Champignon', 3, 2, 7);
+
 -- Prodotti
 INSERT INTO prodotto
-VALUES (1, 14.91, 3, 'Raccolto in val di Fiemme. Ideale per molte ricette. Non velenoso. Ottimo per molte ricette a base di porcini.', 4, 'Boletus Edulis', 2022-02-09, 'davide.merli5@studio.unibo.it');
+VALUES (1, 14.91, 3, 'Raccolto in val di Fiemme. Ideale per molte ricette. Non velenoso. Ottimo per molte ricette a base di porcini.', 4, 'Boletus edulis', 2022-02-09, 'davide.merli5@studio.unibo.it');
 
 INSERT INTO prodotto
-VALUES (2, 15.00, 10, "Conosciuta fin dai tempi antichi come fungo in grado di provocare allucinazioni. E' tra i funghi più conosciuti, specie a causa del suo aspetto appariscente.Non mangiare (a meno di non essere masochisti o sciamani).", 5, 'Amanita Muscaria', 2022-02-10, 'ryan.perrina@studio.unibo.it');
+VALUES (2, 15.00, 10, "Conosciuta fin dai tempi antichi come fungo in grado di provocare allucinazioni. E' tra i funghi più conosciuti, specie a causa del suo aspetto appariscente.Non mangiare (a meno di non essere masochisti o sciamani).", 5, 'Amanita muscaria', 2022-02-10, 'ryan.perrina@studio.unibo.it');
 
 INSERT INTO prodotto
-VALUES (3, 2.98, 20, 'I funghi champignon, nome scientifico Agaricus bisporus, appartengono alla famiglia delle Agaricaceae. Sono uno dei funghi maggiormente apprezzati e commercializzati al mondo. Hanno effetti benefici sulla salute grazie ai loro composti antiossidanti e bioattivi. Il loro consumo secondo gli studi potenzia anche il sistema immunitario.', 2022-02-10, 'davide.merli5@studio.unibo.it');
+VALUES (3, 2.98, 20, 'I funghi champignon, nome scientifico Agaricus bisporus, appartengono alla famiglia delle Agaricaceae. Sono uno dei funghi maggiormente apprezzati e commercializzati al mondo. Hanno effetti benefici sulla salute grazie ai loro composti antiossidanti e bioattivi. Il loro consumo secondo gli studi potenzia anche il sistema immunitario.', 'Chmapignon', 2022-02-10, 'davide.merli5@studio.unibo.it');
 
 -- Tabelle nutrizionali
 INSERT INTO tabellanutrizionale

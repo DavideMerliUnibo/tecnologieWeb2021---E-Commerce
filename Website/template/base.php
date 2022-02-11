@@ -9,6 +9,8 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="css/style.css"/>
         <script src="js/jquery-3.6.0.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script src="js/navbarOpenClose.js"></script>
     </head>
 
     <body>     
@@ -17,7 +19,7 @@
             <div class="container-fluid">
 
                 <!-- Menu button -->
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Toggle navigation" id="menuButton">
                     <img src="img/menu.png" alt="Menu" width="50" height="50" />
                 </button>
                 <!-- Logo -->
@@ -25,7 +27,7 @@
                     <img src="img/logo.svg" alt="logo" width="50" height="50" />
                 </a>
                 <!-- Shopping cart button -->
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#cart" aria-controls="cart" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#cart" aria-controls="cart" aria-expanded="false" aria-label="Toggle navigation" id="cartButton">
                     <img src="img/shopping_cart.png" alt="Shopping cart" width="50" height="50" />
                 </button>
 
@@ -78,15 +80,6 @@
             <p>Sito realizzato da Davide Merli, Manuel Luzietti e Ryan Perrina</p>
             <p>Tecnologie Web - 2022</p>
         </footer>
-    
-        <script>
-            function openLeftMenu() {
-            document.getElementById("leftSideMenu").style.width = "255px";
-            }
-            function closeLeftMenu() {
-            document.getElementById("leftSideMenu").style.width = "0";
-            }
-        </script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
     </body>
 </html>
