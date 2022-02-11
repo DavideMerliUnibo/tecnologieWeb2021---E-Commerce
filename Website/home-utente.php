@@ -4,6 +4,7 @@ if(!isUserLoggedIn()){
     die();
 }
 $templateParams["nome"] = "home.php";
+$templateParams["title"] = "Funghi - User homepage";
 //if se al posto di gestisci ricette voglio qualcos altro 
 $templateParams['inner']= "gestisci-ricette.php";
 $templateParams["ricette"] = $dbh->getRicetteUtente();

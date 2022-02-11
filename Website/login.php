@@ -25,6 +25,7 @@ if (isUserLoggedIn()) {
     //sostituire anche titolo
     //$templateParams["titolo"] = 'Login';
     $templateParams["nome"] = "login-form.php";
+    $templateParams["title"] = "Funghi - Login";
 }
 
 require("template/base.php");

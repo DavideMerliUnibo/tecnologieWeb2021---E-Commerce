@@ -2,6 +2,7 @@
 
 require_once("bootstrap.php");
 $templateParams["nome"] = "paginaRicetta-get.php";
+$templateParams["title"] = "Funghi - Ricetta";
 
 $titoloRicetta = "";
 if (isset($_GET["titoloRicetta"])){
