@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `websitecweb`
+-- Database: `databaseFunghi`
 --
 
 -- --------------------------------------------------------
@@ -26,8 +26,8 @@ SET time_zone = "+00:00";
 --
 -- Struttura della tabella `acquisto`
 --
-create schema websitetecweb;
-use websitetecweb;
+create schema databaseFunghi;
+use databaseFunghi;
 
 CREATE TABLE `acquisto` (
   `codice` int(11) NOT NULL,
