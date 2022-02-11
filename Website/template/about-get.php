@@ -2,61 +2,44 @@
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <div class="card m-3">
+            <div class="card m-3 bg-light">
                 <div class="row">
                     <div class="col-4">
-                        <img src="img/profile.png" class="img-fluid rounded-start" />
+                        <img src="img/davide.jpg" class="img-fluid rounded-start" />
                     </div>
                     <div class="col-8">
                         <div class=" card-body">
                             <p>
-                                Mi chiamo Giorgio Minguzzi e progetto strategie di marketing digitale per le aziende che
-                                vogliono trovare nuove opportunità di vendita:
-                                detto in poche parole, significa capire come e dove incontrare le persone giuste, come
-                                parlare con loro, rendersi utili e meritevoli di
-                                fiducia. È un percorso che chiamo Digital Transformation e il mio lavoro è aiutare a
-                                realizzarlo con strategie di marketing strutturate e
-                                obiettivi precisi, comprensibili, misurabili.
+                                Mi chiamo Davide Merli e sono un esperto in fisica quantistica e filosofia. A tempo perso creo siti web stupidi e mangio funghi. Io e questo team di disadattati abbiamo deciso di creare codesto sito di compravendita fungina per dare un luogo sicuro a tutti gli amanti di tali organismi. I have a dream . . .
                             </p>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="card m-3">
+            <div class="card m-3 bg-light">
                 <div class="row">
-                    <div class="col-4">
-                        <img src="img/profile.png" class="img-fluid rounded-start" />
-                    </div>
                     <div class="col-8">
                         <div class=" card-body">
                             <p>
-                                Mi chiamo Giorgio Minguzzi e progetto strategie di marketing digitale per le aziende che
-                                vogliono trovare nuove opportunità di vendita:
-                                detto in poche parole, significa capire come e dove incontrare le persone giuste, come
-                                parlare con loro, rendersi utili e meritevoli di
-                                fiducia. È un percorso che chiamo Digital Transformation e il mio lavoro è aiutare a
-                                realizzarlo con strategie di marketing strutturate e
-                                obiettivi precisi, comprensibili, misurabili.
+                                Mi chiamo Ryan Perrina e sono bravo a dare ripetizioni di matematica. Non so come mi sono ritrovato a far parte di questo team, so solo che ormai è andata così.
                             </p>
                         </div>
+                    </div>    
+                    <div class="col-4">
+                        <img src="img/ryan.jpg" class="img-fluid rounded-start" />
                     </div>
+                    
                 </div>
             </div>
-            <div class="card m-3">
+            <div class="card m-3 bg-light">
                 <div class="row">
                     <div class="col-4">
-                        <img src="img/profile.png" class="img-fluid rounded-start" />
+                        <img src="img/manuel.jpg" class="img-fluid rounded-start" />
                     </div>
                     <div class="col-8">
                         <div class=" card-body">
                             <p>
-                                Mi chiamo Giorgio Minguzzi e progetto strategie di marketing digitale per le aziende che
-                                vogliono trovare nuove opportunità di vendita:
-                                detto in poche parole, significa capire come e dove incontrare le persone giuste, come
-                                parlare con loro, rendersi utili e meritevoli di
-                                fiducia. È un percorso che chiamo Digital Transformation e il mio lavoro è aiutare a
-                                realizzarlo con strategie di marketing strutturate e
-                                obiettivi precisi, comprensibili, misurabili.
+                                Mi chiamo Manuel Luzietti e sono uno a cui piace scrivere codice tutto il giorno e bere Redbull. Sono entrato in questo gruppo giusto per avere qualcosa da fare nella vita.
                             </p>
                         </div>
                     </div>

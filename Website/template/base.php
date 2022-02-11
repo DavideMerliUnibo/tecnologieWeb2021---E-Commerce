@@ -4,7 +4,7 @@
 
     <head>
         <meta charset="utf-8"/>
-        <title>Page title</title>
+        <title><?php echo $templateParams["title"]; ?></title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="css/style.css"/>
@@ -12,17 +12,24 @@
     </head>
 
     <body>     
-        <nav class="navbar navbar-expand-lg ">
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg mb-3">
             <div class="container-fluid">
+
+                <!-- Menu button -->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Toggle navigation">
                     <img src="img/menu.png" alt="Menu" width="50" height="50" />
                 </button>
+                <!-- Logo -->
                 <a href="index.php">
                     <img src="img/logo.svg" alt="logo" width="50" height="50" />
                 </a>
+                <!-- Shopping cart button -->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#cart" aria-controls="cart" aria-expanded="false" aria-label="Toggle navigation">
                     <img src="img/shopping_cart.png" alt="Shopping cart" width="50" height="50" />
                 </button>
+
+                <!-- Left Menu -->
                 <div class="collapse navbar-collapse" id="menu">
                     <ul class="navbar-nav">
                         <li class="nav-item">
@@ -42,9 +49,12 @@
                         </li>
                     </ul>
                 </div>
+
+                <!-- Right Menu -->
                 <div class="collapse navbar-collapse" id="cart">
                     <ul class="navbar-nav">
                         <li class="nav-item">
+
                             <a class="nav-link text-white" aria-current="page" href="carrello.php">Visualizza carrello</a>
                         </li>
                         <li class="nav-item">
@@ -54,7 +64,7 @@
                             <a class="nav-link text-white" href="#">Pricing</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                            <a class="nav-link text-white" href="#">Articolo 2</a>
                         </li>
                     </ul>
                 </div>

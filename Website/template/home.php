@@ -42,6 +42,6 @@
 </script> -->
 <!-- <script>
     $("#gestisciRicetteButton").on("click", event => {
-            window.location = "http://localhost/project/Website/home-utente.php?action=gestisciRicette";
+            window.location = "http://localhost/tecnologieWeb2021---E-Commerce/Website/home-utente.php?action=gestisciRicette";
         });
 </script> -->

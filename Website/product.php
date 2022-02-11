@@ -1,6 +1,7 @@
 <?php 
     require_once("bootstrap.php");
     $templateParams["nome"] = "product.php";
+    $templateParams["title"] = "Funghi - Prodotto";
 
     $idprodotto = -1;
     if (isset($_GET["prodotto"])){

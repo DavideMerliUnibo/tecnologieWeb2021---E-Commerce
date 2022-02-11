@@ -1,5 +1,5 @@
 <?php
-require("/xampp/htdocs/project/Website/bootstrap.php");
+require("/xampp/htdocs/tecnologieWeb2021---E-Commerce/Website/bootstrap.php");
 if (isUserLoggedIn()) {
     if (isset($_POST["action"])) {
         switch ($_POST["action"]) {
