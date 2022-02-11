@@ -205,4 +205,16 @@ class DatabaseHelper
         $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
         return $result;
     }
+    public function getProductInCart($email){
+        $query = 'SELECT * 
+                  FROM utente u JOIN carrello c ON (u.email = c.utente)
+                  JOIN prodotto_carrello pc ON(pc.codCarrello = c.cod)
+                  JOIN prodotto prod ON (prod.codice = pc.codProdotto)
+                  WHERE u.email = ? ';
+        $stmt = $this -> db -> prepare($query);
+        $stmt -> bind_param('s', $email);
+        $stmt -> execute();
+        $result = $stmt -> get_result() -> fetch_all(MYSQLI_ASSOC);
+        return $result;
+    }
 }
