@@ -57,6 +57,9 @@
                     <ul class="navbar-nav">
                         
                         <?php 
+                        if(!isUserloggedIn()){
+                            echo "devi loggarti per vedere il carrello";   
+                        }
                         $templateParams["prodottiCarrello"] = $dbh-> getProductInCart($_SESSION['email']);
                         foreach($templateParams["prodottiCarrello"] as $prodotto):?>
                         <li class="nav-item">
