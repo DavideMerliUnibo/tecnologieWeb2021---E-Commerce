@@ -12,62 +12,54 @@
     </head>
 
     <body>     
-
-        <nav class="navbar navbar-expand-lg fixed-top">
-            <div class="container">
-                <!-- Menu button -->
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#leftMenu" aria-controls="leftMenu" aria-expanded="false" label="Toggle left menu">
+        <nav class="navbar navbar-expand-lg ">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Toggle navigation">
                     <img src="img/menu.png" alt="Menu" width="50" height="50" />
                 </button>
-
-                <!-- Logo -->
-                <a href="#">
+                <a href="index.php">
                     <img src="img/logo.svg" alt="logo" width="50" height="50" />
                 </a>
-
-                <!-- Shopping cart button -->
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#rightMenu" aria-controls="rightMenu" aria-expanded="false" label="Toggle right menu">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#cart" aria-controls="cart" aria-expanded="false" aria-label="Toggle navigation">
                     <img src="img/shopping_cart.png" alt="Shopping cart" width="50" height="50" />
                 </button>
-
-                <!-- Left menu -->
-                <div class="collapse navbar-collapse" id="leftMenu">
+                <div class="collapse navbar-collapse" id="menu">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="#">Shop</a>
+                            <a class="nav-link text-white" href="shop.php">Shop</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="login.html">Account</a>
+                            <a class="nav-link text-white" href="login.php">Account</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="#">Ricette</a>
+                            <a class="nav-link text-white" href="ricette.php">Ricette</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="#">About Us</a>
+                            <a class="nav-link text-white" href="faq.php">FAQ</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="#">FAQ</a>
+                            <a class="nav-link text-white" href="aboutus.php">About Us</a>
                         </li>
                     </ul>
                 </div>
-
-                <!-- Right menu -->
-                <div class="collapse navbar-collapse" id="rightMenu">
+                <div class="collapse navbar-collapse" id="cart">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link  text-white" href="#">Articolo 1</a>
+                            <a class="nav-link text-white" aria-current="page" href="#">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link  text-white" href="#">Articolo 2</a>
+                            <a class="nav-link text-white" href="#">ARticolo 1</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link  text-white" href="#">Articolo 3</a>
+                            <a class="nav-link text-white" href="#">Pricing</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
-
         <main>
             <?php require($templateParams["nome"]);?>
         </main>
