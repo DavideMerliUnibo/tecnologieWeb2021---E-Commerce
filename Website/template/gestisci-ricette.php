@@ -77,28 +77,28 @@ $ricette = $dbh->getRicetteUtente();
             for (ricetta of data) {
                 let valoriNutriz = [ricetta["valoreEnergetico"], ricetta['proteine'], ricetta["grassi"], ricetta["carboidrati"], ricetta["fibre"], ricetta["sodio"]];
                 content += `<tr>
-                            <td>${ricetta['titolo']}</td>
+                            <td>${JSON.stringify(ricetta['titolo'])}</td>
                             <td>
                                 <button onclick='setModal(${JSON.stringify(valoriNutriz)},"Tabella Nutrizionale");' class="btn btn-light mx-auto" type="button" data-bs-toggle="modal" data-bs-target="#modalComponent" aria-controls="modalComponent">look</button>
                             </td>
-                            <td>${ricetta['difficoltà']}</td>
+                            <td>${JSON.stringify(ricetta['difficoltà'])}</td>
                             <td>
-                                <button onclick='setModal(${ricetta['descrizione']},"Descrizione");' type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#modalComponent">Descrizione</button>
+                                <button onclick='setModal(${JSON.stringify(ricetta['descrizione'])},"Descrizione");' type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#modalComponent">Descrizione</button>
                             </td>
                             <td>
-                                <button onclick='setModal(${ricetta['procedimento']},"Procedimento");' type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#modalComponent">Procedimento</button>
+                                <button onclick='setModal(${JSON.stringify(ricetta['procedimento'])},"Procedimento");' type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#modalComponent">Procedimento</button>
                             </td>
                             <td>
-                                <button onclick='setModal(${ricetta['consigli']},"Consigli");' type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#modalComponent">Consigli</button>
+                                <button onclick='setModal(${JSON.stringify(ricetta['consigli'])},"Consigli");' type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#modalComponent">Consigli</button>
                             </td>
                             <td>
-                                ${ricetta['data']}
+                                ${JSON.stringify(ricetta['data'])}
                             </td>
                             <td>
-                                ${ricetta['autore']}
+                                ${JSON.stringify(ricetta['autore'])}
                             </td>
                             <td>
-                                <button onclick="deleteRow(${ricetta['titolo']});" class="btn btn-sm btn-light">Delete</button>
+                                <button onclick='deleteRow(${JSON.stringify(ricetta['titolo'])});' class="btn btn-sm btn-light">Delete</button>
                                 <button onclick='updateRow(${JSON.stringify(ricetta)});' class="btn btn-sm btn-light">Update</button>
                             </td>
                             </tr>`;
@@ -126,6 +126,7 @@ $ricette = $dbh->getRicetteUtente();
         console.log(values);
         $.ajax({
             method: "post",
+            //forse meglio mettere diretto il template se non dobbiamo farci niente col form di modifica ricetta.
             url: "template/modifica-ricetta.php",
             cache: false,
             // data: {
@@ -151,6 +152,7 @@ $ricette = $dbh->getRicetteUtente();
     }
 
     function deleteRow(titolo) {
+        console.log(titolo);
         $.ajax({
             method: 'post',
             url: "api-gestione-ricetta.php",
@@ -214,10 +216,6 @@ $ricette = $dbh->getRicetteUtente();
                         </table>
                     </div>`);
                 break;
-
-
-
-
         }
     }
 </script>
