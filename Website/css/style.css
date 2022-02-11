@@ -2,6 +2,10 @@ nav{
     background-color: #29FA48;
 }
 
+button.navbar-toggler:focus{
+    box-shadow: none;
+}
+
 main{
     padding-bottom: 30px;
 }
