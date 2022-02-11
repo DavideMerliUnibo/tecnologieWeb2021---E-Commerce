@@ -4,7 +4,7 @@
             <button class="btn btn-primary ml-auto" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu" aria-controls="offcanvasMenu">Menu</button>
             <div class="offcanvas offcanvas-start" id="offcanvasMenu">
                 <div class="offcanvas-body">
-                    <a class="btn" id="gestisciRicetteButton" href="http://localhost/project/Website/home-utente.php?action=gestisciRicette">Gestisci ricette</a>
+                    <a class="btn" id="gestisciRicetteButton" href="http://localhost/tecnologieWeb2021---E-Commerce/Website/home-utente.php?action=gestisciRicette">Gestisci ricette</a>
                 </div>
             </div>
         </div>

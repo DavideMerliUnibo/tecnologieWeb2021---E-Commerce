@@ -45,7 +45,7 @@
                 <div class="collapse navbar-collapse" id="cart">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link text-white" aria-current="page" href="#">Home</a>
+                            <a class="nav-link text-white" aria-current="page" href="carrello.php">Visualizza carrello</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-white" href="#">ARticolo 1</a>
