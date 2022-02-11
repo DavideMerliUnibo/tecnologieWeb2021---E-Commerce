@@ -5,7 +5,7 @@ class DatabaseHelper
 
     public function __construct($servername, $username, $password, $dbname)
     {
-        $this->db = new mysqli($servername, $username, $password, 'databasefunghi', 3340);
+        $this->db = new mysqli($servername, $username, $password, $dbname, 3306);
         if ($this->db->connect_error) {
             die("Connection failed " . $this->db->connect_error);
         }
