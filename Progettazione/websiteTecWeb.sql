@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Feb 11, 2022 alle 16:59
+-- Creato il: Feb 11, 2022 alle 18:08
 -- Versione del server: 10.4.21-MariaDB
 -- Versione PHP: 8.0.11
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `websitecweb`
+-- Database: `websitetecweb`
 --
 
 -- --------------------------------------------------------
@@ -26,8 +26,6 @@ SET time_zone = "+00:00";
 --
 -- Struttura della tabella `acquisto`
 --
-create schema websitetecweb;
-use websitetecweb;
 
 CREATE TABLE `acquisto` (
   `codice` int(11) NOT NULL,
@@ -106,7 +104,7 @@ CREATE TABLE `fungo_ricetta` (
 
 CREATE TABLE `immagineprodotto` (
   `codProdotto` int(11) NOT NULL,
-  `nome` varchar(15) NOT NULL
+  `nome` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -117,7 +115,7 @@ CREATE TABLE `immagineprodotto` (
 
 CREATE TABLE `immaginericetta` (
   `titoloRicetta` varchar(30) NOT NULL,
-  `nome` varchar(10) NOT NULL
+  `nome` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
