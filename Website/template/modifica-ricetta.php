@@ -1,2 +1,2 @@
-<?php require "/xampp/htdocs/project/Website/template/inserisci-modifica-template-form.php";
+<?php require "/xampp/htdocs/tecnologieWeb2021---E-Commerce/Website/template/inserisci-modifica-template-form.php";
 //se non serve aggiungere altro qui, allora togliere questa pagina e includere template direttamente da metodo update

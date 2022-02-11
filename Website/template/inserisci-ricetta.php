@@ -1,4 +1,4 @@
-<?php require "/xampp/htdocs/project/Website/template/inserisci-modifica-template-form.php"?>
+<?php require "/xampp/htdocs/tecnologieWeb2021---E-Commerce/Website/template/inserisci-modifica-template-form.php"?>
 <script>
     function inserisciRicetta() {
         let elems = $("form input,form textarea").toArray();
@@ -27,7 +27,7 @@
             },
             cache: false,
             success: function(result) {
-                window.location="http://localhost/project/Website/home-utente.php?action=gestisciRicette";
+                window.location="http://localhost/tecnologieWeb2021---E-Commerce/Website/home-utente.php?action=gestisciRicette";
             }
         });
         return false;

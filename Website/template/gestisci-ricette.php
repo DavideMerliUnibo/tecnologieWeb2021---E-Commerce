@@ -1,6 +1,6 @@
 <?php
 // require("../bootstrap.php");
-//require("/xampp/htdocs/project/Website/bootstrap.php");
+//require("/xampp/htdocs/tecnologieWeb2021---E-Commerce/Website/bootstrap.php");
 if (!isUserLoggedIn()) {
     die();
 }
