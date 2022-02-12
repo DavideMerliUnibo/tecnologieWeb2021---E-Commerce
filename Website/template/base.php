@@ -55,17 +55,18 @@
                 <!-- Right Menu -->
                 <div class="collapse navbar-collapse" id="cart">
                     <ul class="navbar-nav">
-                        
                         <?php 
                         if(!isUserloggedIn()){
-                            echo "devi loggarti per vedere il carrello";   
+                            echo "Devi loggarti per vedere il carrello";   
                         }
-                        $templateParams["prodottiCarrello"] = $dbh-> getProductInCart($_SESSION['email']);
-                        foreach($templateParams["prodottiCarrello"] as $prodotto):?>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="#"><?php echo $prodotto["nomeFungo"] ?></a>
-                        </li>
-                        <?php endforeach; ?>
+                        else{
+                            $templateParams["prodottiCarrello"] = $dbh-> getProductInCart($_SESSION['email']);
+                            foreach($templateParams["prodottiCarrello"] as $prodotto){
+                                echo '<li class="nav-item">';
+                                echo '<a class="nav-link text-white" href="#">$prodotto["nomeFungo"]</a>';    
+                                echo '</li>';
+                            }
+                        }?>
                         <li class="nav-item">
                             <a class="nav-link text-white" aria-current="page" href="carrello.php">Visualizza carrello</a>
                         </li>
