@@ -5,7 +5,7 @@ class DatabaseHelper
 
     public function __construct($servername, $username, $password, $dbname)
     {
-        $this->db = new mysqli($servername, $username, $password, $dbname, 3340);
+        $this->db = new mysqli($servername, $username, $password, $dbname, 3306);
         if ($this->db->connect_error) {
             die("Connection failed " . $this->db->connect_error);
         }
@@ -285,7 +285,7 @@ class DatabaseHelper
         $stmt->bind_param('s', $email);    
         $stmt->execute();
         $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-        return $result;
+        return $result[0]["cod"];
     }
     public function addProductInCart($codprod,$quantità,$email)
     {
@@ -296,6 +296,13 @@ class DatabaseHelper
         $stmt->bind_param('iii', $codCarr,$codprod,$quantità);
         $stmt->execute();
     }
-
+    public function createCart($email)
+    {   
+        $query = 'INSERT INTO carrello(utente,totaleCarrello)
+                   VALUES (?,0)';
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('s',$email);
+        $stmt->execute();
+    }
 
 }

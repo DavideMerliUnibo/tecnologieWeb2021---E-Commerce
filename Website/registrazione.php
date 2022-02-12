@@ -8,6 +8,7 @@
           $templateParams['errorMessage'] = "Errore nella registrazione. Si prega di riprovare.";
           $templateParams["nome"] = "registrazione-form.php";
         } else {
+          $dbh->createCart($_POST["email"]);
           $templateParams["nome"] = "signUpSuccess.php";
         }
   } else
