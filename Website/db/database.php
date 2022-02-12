@@ -161,6 +161,15 @@ class DatabaseHelper
         return $result;
     }
 
+    public function addProductReview($titolo, $contenuto, $voto, $utente, $prodotto){
+        $data = date("Y/m/d");
+        $query = "INSERT INTO recensione(titolo, contenuto, valutazione, data, utente, codProdotto)
+                  VALUES (?, ?, ?, ?, ?, ?);";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('ssdssi', $titolo, $contenuto, $voto, $data, $utente, $prodotto);
+        $stmt->execute();
+    }
+
     public function getRicetteUtente()
     {
         if (!isUserLoggedIn()) {
@@ -287,7 +296,7 @@ class DatabaseHelper
         $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
         return $result[0]["cod"];
     }
-    public function addProductInCart($codprod,$quantità,$email)
+    public function addProductToCart($codprod,$quantità,$email)
     {
         $codCarr=$this->getCartID($email);
         $query = 'INSERT INTO prodotto_carrello
