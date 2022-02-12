@@ -272,7 +272,7 @@ CREATE TABLE `utente` (
   `cognome` varchar(15) NOT NULL,
   `email` varchar(30) NOT NULL,
   `password` varchar(20) NOT NULL,
-  `username` varchar(10) NOT NULL,
+  `username` varchar(15) NOT NULL,
   `indirizzo` varchar(25) NOT NULL,
   `data nascita` date NOT NULL,
   `offerteVendute` int(11) DEFAULT 0,
