@@ -5,7 +5,7 @@ class DatabaseHelper
 
     public function __construct($servername, $username, $password, $dbname)
     {
-        $this->db = new mysqli($servername, $username, $password, $dbname, 3340);
+        $this->db = new mysqli($servername, $username, $password, $dbname);
         if ($this->db->connect_error) {
             die("Connection failed " . $this->db->connect_error);
         }
@@ -62,23 +62,54 @@ class DatabaseHelper
         return $stmt->execute();
     }
 
-    public function updateRicetta($titolo, $difficolta, $descrizione, $procedimento, $consigli, $valEnergetico, $proteine, $grassi, $carboidrati, $fibre, $sodio,$chiave){
+    public function updateRicetta($titolo, $difficolta, $descrizione, $procedimento, $consigli, $valEnergetico, $proteine, $grassi, $carboidrati, $fibre, $sodio, $chiave)
+    {
         if (!isset($_SESSION["email"])) {
             die("utente non loggato");
         }
         $stmt = $this->db->prepare('select tabellaNutrizionale from ricetta where titolo = ? and autore = ?');
-        $stmt->bind_param("ss",$chiave,$_SESSION['email']);
+        $stmt->bind_param("ss", $chiave, $_SESSION['email']);
         $stmt->execute();
-        $result = $stmt->get_result();  
+        $result = $stmt->get_result();
         $val = $result->fetch_all(MYSQLI_ASSOC)['0']['tabellaNutrizionale'];
         $query = 'UPDATE `ricetta` SET `titolo` = ?, `difficoltà`= ?,  `descrizione` = ?, `procedimento` = ?, `consigli` = ? WHERE `ricetta`.`titolo` = ? and autore = ?;';
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('sdsssss',$titolo,$difficolta,$descrizione,$procedimento,$consigli,$chiave,$_SESSION['email']);
+        $stmt->bind_param('sdsssss', $titolo, $difficolta, $descrizione, $procedimento, $consigli, $chiave, $_SESSION['email']);
         $stmt->execute();
         $query = 'UPDATE `tabellanutrizionale` SET `valoreEnergetico` = ?, `proteine` = ?, `grassi` = ?, `carboidrati` = ?, `fibre` = ?, `sodio` = ? WHERE `tabellanutrizionale`.`codice` = ? ;';
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('ddddddd',$valEnergetico,$proteine,$grassi,$carboidrati,$fibre,$sodio,$val);
+        $stmt->bind_param('ddddddd', $valEnergetico, $proteine, $grassi, $carboidrati, $fibre, $sodio, $val);
         return $stmt->execute();
+    }
+
+    public function imagesRecipe($titolo)
+    {
+        $stmt = $this->db->prepare("select nome from immaginericetta  where titoloRicetta = ?;");
+        $stmt->bind_param('s', $titolo);
+        $stmt->execute();
+        $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        return $result;
+    }
+
+    public function removeImageFromRecipe($nome, $titolo)
+    {
+        if (!isUserLoggedIn()) {
+            die('utente non loggato');
+        }
+        $stmt = $this->db->prepare("delete from immaginericetta where nome = ? and titoloRicetta = ?;");
+        $stmt->bind_param('ss', $nome, $titolo);
+        $result = $stmt->execute();
+        return $result;
+    }
+    public function insertImageToRecipe($nome, $titolo)
+    {
+        if (!isUserLoggedIn()) {
+            die('utente non loggato');
+        }
+        $stmt = $this->db->prepare("insert into immaginericetta(`titoloRicetta`,`nome`) values (?,?)");
+        $stmt->bind_param('ss', $titolo, $nome);
+        $result = $stmt->execute();
+        return $result;
     }
 
     public function getProducts()
@@ -145,17 +176,19 @@ class DatabaseHelper
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function deleteRicetta($titolo){
-        if(!isUserLoggedIn()){
+    public function deleteRicetta($titolo)
+    {
+        if (!isUserLoggedIn()) {
             die("Utente non loggato");
         }
         $query = "delete from ricetta where titolo=? and autore=?";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param("ss",$titolo,$_SESSION['email']);
+        $stmt->bind_param("ss", $titolo, $_SESSION['email']);
         $stmt->execute();
     }
     //?
-    public function getRecipes(){
+    public function getRecipes()
+    {
         $query = "SELECT r.titolo, r.data, r.descrizione, u.username as autore, i.nome as immagine
                   FROM ricetta r, utente u, immaginericetta i
                   WHERE r.autore = u.email
@@ -167,7 +200,8 @@ class DatabaseHelper
         return $result;
     }
 
-    public function getRecipeByTitle($titolo){
+    public function getRecipeByTitle($titolo)
+    {
         $query = "SELECT r.*, u.username
                   FROM ricetta r, utente u
                   WHERE r.autore = u.email
@@ -179,7 +213,8 @@ class DatabaseHelper
         return $result;
     }
 
-    public function getNutritionalTable($titolo){
+    public function getNutritionalTable($titolo)
+    {
         $query = "SELECT t.*
                   FROM ricetta r, tabellanutrizionale t
                   WHERE r.tabellaNutrizionale = t.codice
@@ -191,7 +226,8 @@ class DatabaseHelper
         return $result;
     }
 
-    public function getIngredientsForRecipe($titolo){
+    public function getIngredientsForRecipe($titolo)
+    {
         $query = "SELECT nome, quantità
                   FROM ingrediente
                   WHERE titoloRicetta = ?";
@@ -202,7 +238,8 @@ class DatabaseHelper
         return $result;
     }
 
-    public function getRecipeImages($titolo){
+    public function getRecipeImages($titolo)
+    {
         $query = "SELECT nome
                   FROM immaginericetta
                   WHERE titoloRicetta = ?";
@@ -213,7 +250,8 @@ class DatabaseHelper
         return $result;
     }
 
-    public function getRecipeComments($titolo){
+    public function getRecipeComments($titolo)
+    {
         $query = "SELECT c.contenuto, c.data, u.username
                   FROM commento c, utente u
                   WHERE c.autore = u.email
@@ -224,16 +262,17 @@ class DatabaseHelper
         $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
         return $result;
     }
-    public function getProductInCart($email){
+    public function getProductInCart($email)
+    {
         $query = 'SELECT * 
                   FROM utente u JOIN carrello c ON (u.email = c.utente)
                   JOIN prodotto_carrello pc ON(pc.codCarrello = c.cod)
                   JOIN prodotto prod ON (prod.codice = pc.codProdotto)
                   WHERE u.email = ? ';
-        $stmt = $this -> db -> prepare($query);
-        $stmt -> bind_param('s', $email);
-        $stmt -> execute();
-        $result = $stmt -> get_result() -> fetch_all(MYSQLI_ASSOC);
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('s', $email);
+        $stmt->execute();
+        $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
         return $result;
     }
 }

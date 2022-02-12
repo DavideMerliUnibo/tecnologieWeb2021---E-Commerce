@@ -100,6 +100,7 @@ $ricette = $dbh->getRicetteUtente();
                             <td>
                                 <button onclick='deleteRow(${JSON.stringify(ricetta['titolo'])});' class="btn btn-sm btn-light">Delete</button>
                                 <button onclick='updateRow(${JSON.stringify(ricetta)});' class="btn btn-sm btn-light">Update</button>
+                                <button onclick='imag(${JSON.stringify(ricetta['titolo'])});' class="btn btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#modalComponent" aria-controls="modalComponent">Img</button>
                             </td>
                             </tr>`;
             }
@@ -136,7 +137,7 @@ $ricette = $dbh->getRicetteUtente();
                 $("#gestisciRicetteRow div:nth-child(3)").html(data);
                 //modifico ogni riga del template con value giusto di riga
                 //aggiungo script che faccia update
-                $("#titolo").val(values['titolo']).attr('placeholder',values['titolo']);
+                $("#titolo").val(values['titolo']).attr('placeholder', values['titolo']);
                 $("#difficoltà").val(values['difficoltà']);
                 $("#descrizione").val(values['descrizione']);
                 $("#procedimento").val(values['procedimento']);
@@ -167,7 +168,24 @@ $ricette = $dbh->getRicetteUtente();
         })
     }
 
-    function setModal(value, header) {
+    function imag(titolo) {
+        $.ajax({
+            method: "post",
+            data: {
+                'action': 'img',
+                'titolo': titolo
+                // 'titolo': 'Risotto ai porcini '
+            },
+            url: "api-gestione-ricetta.php",
+            cache: false,
+            success: function(data) {
+                setModal(data, 'img', titolo);
+                console.log(data);
+            }
+        })
+    }
+
+    function setModal(value, header, titolo = null) {
         switch (header) {
             case "Consigli":
             case "Procedimento":
@@ -181,7 +199,6 @@ $ricette = $dbh->getRicetteUtente();
                 );
                 break;
             case 'Tabella Nutrizionale':
-                console.log(value);
                 $("#modalComponent div.modal-header").html(
                     `<h2>${header}</h2>`
                 );
@@ -216,6 +233,109 @@ $ricette = $dbh->getRicetteUtente();
                         </table>
                     </div>`);
                 break;
+            case 'img':
+                let content = createImgModalContent(value, titolo);
+                $("#modalComponent div.modal-header").html(
+                    `
+                    <div class="d-flex flex-column justify-content-center">
+                        <h2>Gestisci Immagini</h2>
+                        <button class="btn btn-light btn-sm" onclick='setModal("${titolo}","imgInsert","${titolo}")' >Aggiungi immagine</button>
+                    </div>
+                    `
+                );
+                $(".modal-dialog").addClass("modal-dialog-scrollable");
+                $("#modalComponent div.modal-body").html(content);
+                break;
+            case 'imgInsert':
+                let cont = `
+                    <div class="row">
+                        <div class="col">
+                            <div class="mb-3">
+                            <form id="form" action="ajaxupload.php" method="post" enctype="multipart/form-data">
+                                <div class="d-flex flex-column">
+                                    <input id="uploadImage" type="file" accept="image/*" name="image" class="form-control mb-2"/>
+                                    <input type="submit" class="btn btn-light btn-sm w-50 mx-auto" name="Upload" value="Upload"></button>
+                                </div>
+                            </form>
+                            </div>
+                `;
+
+                cont += `</div></div>`;
+                $("#modalComponent div.modal-header").html(
+                    `
+                    <div class="d-flex flex-column justify-content-center">
+                        <h2>Inserisci Immagine</h2>
+                    </div>
+                    `
+                );
+                $(".modal-dialog").addClass("modal-dialog-scrollable");
+                $("#modalComponent div.modal-body").html(cont);
+                break;
+
         }
     }
+
+    //  function loadImgModalContent(value,titolo){
+    //     let content = createImgModalContent(value,titolo);
+    //     $("#modalComponent div.modal-body").html(content);
+    // }
+    function createImgModalContent(value, titolo) {
+        let content = `
+                    <div 
+                    <div class='row justify-content-start'>
+                `;
+        if (value.length == 0) {
+            content += `<p class="text-center">nessuna immagine presente</p>`;
+        }
+        for (img of value) {
+            content += `
+                    <div class="col-3">
+                        <img src='${'/tecnologieWeb2021---E-Commerce/Website/upload/'+img['nome']}' alt='${img['nome']}' class="img-thumbnail">
+                        <div class="d-flex">
+                            <p class="ms-1">${img['nome']}</p>
+                            <button class="text-danger btn  bg-white" onclick='removeImg(${JSON.stringify(img['nome'])},"${titolo}")'>x</button>
+                        </div>
+                    </div>`;
+        }
+        content += `</div>`;
+        return content;
+    }
+
+    function removeImg(nome, titolo) {
+        $.ajax({
+            method: 'post',
+            url: 'api-gestione-ricetta.php',
+            data: {
+                'action': 'imgRemove',
+                'titolo': titolo,
+                'nome': nome
+            },
+            cache: false,
+            success: function(data) {
+                console.log(titolo + ' ' + nome + ' ' + data);
+                imag(titolo);
+            }
+        })
+    }
+
+    
+    $(document).ready(function(e) {
+        $("input[name=Upload]").on('click', (function(e) {
+            e.preventDefault();
+            $.ajax({
+                url: "ajaxupload.php",
+                type: "POST",
+                data: new FormData($("#form")),
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function(data) {
+                    //window.location = 'http://localhost/tecnologieWeb2021---E-Commerce/Website/home-utente.php';
+                },
+                error: function(e) {
+                }
+            });
+            return false;
+        }));
+    });
 </script>
