@@ -184,7 +184,6 @@ $ricette = $dbh->getRicetteUtente();
             }
         })
     }
-
     function setModal(value, header, titolo = null) {
         switch (header) {
             case "Consigli":
@@ -246,15 +245,31 @@ $ricette = $dbh->getRicetteUtente();
                 $(".modal-dialog").addClass("modal-dialog-scrollable");
                 $("#modalComponent div.modal-body").html(content);
                 break;
+            // case 'imgInsert':
+            //     let cont = `
+            //         <div class="row">
+            //             <div class="col">
+            //                 <div class="mb-3">
+            //                 <iframe  name="hidden-iframe" style="display: none;"></iframe>
+            //                 <form id="form" action="ajaxupload.php" target="hidden-iframe" method="post" enctype="multipart/form-data">
+            //                     <div class="d-flex flex-column">
+            //                         <input id="uploadImage" type="file" accept="image/*" name="image" class="form-control mb-2"/>
+            //                         <input type="submit" class="btn btn-light btn-sm w-50 mx-auto" name="Upload" value="Upload"/>
+            //                         <input type="text" hidden name="titolo" value="${titolo}"/>
+            //                     </div>
+            //                 </form>
+            //                 </div>
+            //     `;
             case 'imgInsert':
                 let cont = `
                     <div class="row">
                         <div class="col">
                             <div class="mb-3">
-                            <form id="form" action="ajaxupload.php" method="post" enctype="multipart/form-data">
+                            <form id="form" action="ajaxupload.php"  method="post" enctype="multipart/form-data">
                                 <div class="d-flex flex-column">
                                     <input id="uploadImage" type="file" accept="image/*" name="image" class="form-control mb-2"/>
-                                    <input type="submit" class="btn btn-light btn-sm w-50 mx-auto" name="Upload" value="Upload"></button>
+                                    <input type="submit" class="btn btn-light btn-sm w-50 mx-auto" name="Upload" value="Upload"/>
+                                    <input type="text" hidden name="titolo" value="${titolo}"/>
                                 </div>
                             </form>
                             </div>
@@ -318,7 +333,7 @@ $ricette = $dbh->getRicetteUtente();
         })
     }
 
-    
+
     $(document).ready(function(e) {
         $("input[name=Upload]").on('click', (function(e) {
             e.preventDefault();
@@ -330,12 +345,28 @@ $ricette = $dbh->getRicetteUtente();
                 cache: false,
                 processData: false,
                 success: function(data) {
-                    //window.location = 'http://localhost/tecnologieWeb2021---E-Commerce/Website/home-utente.php';
+                    //non vengono eseguiti :(
+                    console.log("ok")
+                    imag($('input[name=titolo]').val());
                 },
                 error: function(e) {
                 }
             });
-            return false;
+            //return false;
         }));
     });
+    // function upload() {
+    //     $.ajax({
+    //         url: "ajaxupload.php",
+    //         type: "POST",
+    //         data: new FormData($("#form")),
+    //         contentType: false,
+    //         cache: false,
+    //         processData: false,
+    //         success: function(data) {
+    //         },
+    //         error: function(e) {}
+    //     })
+    //     return false;
+    // }
 </script>
