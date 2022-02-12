@@ -3,6 +3,12 @@
         $_SESSION["email"] = $user["email"];
         $_SESSION["username"] = $user["username"];
     }
+
+    function logOut(){
+        unset($_SESSION["email"]);
+        unset($_SESSION["username"]);
+        header("Location: login.php");
+    }
     
     function isUserLoggedIn(){
         return !empty($_SESSION["email"]);

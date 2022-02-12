@@ -1,5 +1,4 @@
 <main>
-    
 
     <?php $prodotto = $templateParams["prodotto"][0]; ?>
     <?php $immagini = $templateParams["immagini"]; ?>
@@ -33,10 +32,34 @@
         </div>
 
         <!-- Dati prodotto -->
-        <p>Venduto da: <strong><?php echo $prodotto["username"]; ?></strong></p>
-        <p>Prezzo: <strong><?php echo $prodotto["prezzoPerUnità"]; ?> €/Kg</strong></p>
-        <p>Informazioni:</p>
-        <p class="px-2"><?php echo $prodotto["informazioni"]; ?></p>
+        <div class="row col-12">
+            <div class="col-12 col-md-10">
+                <p>Venduto da: <strong><?php echo $prodotto["username"]; ?></strong></p>
+                <p>Prezzo: <strong><?php echo $prodotto["prezzoPerUnità"]; ?> €/Kg</strong></p>
+                <p>Informazioni:</p>
+                <p class="px-2"><?php echo $prodotto["informazioni"]; ?></p>
+            </div>
+            
+            <!-- Add to cart button -->
+            <div class="text-center col-6 col-md-2 mx-auto my-auto">
+                <label for="sel" class="my-1">Scegli quantità:</label>
+                <form method="post">
+                    <select class="form-control text-center my-1" name="sel" style:="width: 50;">
+                        <?php 
+                            for($i=1;$i<=$prodotto["quantità"];$i++){
+                                echo '<option>',$i,'</option>';
+                            }?>
+                    </select>
+                    <input type="submit" name="quantity" value="Aggiungi al carrello"   class="btn btn-warning my-1"></input>
+                </form>
+                <?php  
+                    if(isset($_POST["quantity"])){
+                        $quantità=$_POST["sel"];
+                        $dbh->addProductToCart($prodotto["codice"],$quantità,$_SESSION["email"]);
+                    }
+                    
+                ?>
+            </div>
     </article>
 
     <!-- Recensioni degli utenti -->
@@ -72,7 +95,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div>
                 <div class="col-12">
                     <?php if(empty($recensioni)): ?>
                         <p class="text-center p-2">Non ci sono recensioni per questo prodotto.</p>
@@ -94,7 +117,7 @@
                 </div>
             </div>
             <div class="text-center">
-                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Aggiungi Recensione</button>
+                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">Aggiungi Recensione</button>
             </div>
         </div>
     </div>

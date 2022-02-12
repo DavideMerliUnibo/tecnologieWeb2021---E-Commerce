@@ -5,7 +5,7 @@ class DatabaseHelper
 
     public function __construct($servername, $username, $password, $dbname)
     {
-        $this->db = new mysqli($servername, $username, $password, $dbname);
+        $this->db = new mysqli($servername, $username, $password, $dbname, 3340);
         if ($this->db->connect_error) {
             die("Connection failed " . $this->db->connect_error);
         }
@@ -161,6 +161,15 @@ class DatabaseHelper
         return $result;
     }
 
+    public function addProductReview($titolo, $contenuto, $voto, $utente, $prodotto){
+        $data = date("Y/m/d");
+        $query = "INSERT INTO recensione(titolo, contenuto, valutazione, data, utente, codProdotto)
+                  VALUES (?, ?, ?, ?, ?, ?);";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('ssdssi', $titolo, $contenuto, $voto, $data, $utente, $prodotto);
+        $stmt->execute();
+    }
+
     public function getRicetteUtente()
     {
         if (!isUserLoggedIn()) {
@@ -264,7 +273,7 @@ class DatabaseHelper
     }
     public function getProductInCart($email)
     {
-        $query = 'SELECT * 
+        $query = 'SELECT prod.nomeFungo, pc.quantità, prod.prezzoPerUnità, prod.codice
                   FROM utente u JOIN carrello c ON (u.email = c.utente)
                   JOIN prodotto_carrello pc ON(pc.codCarrello = c.cod)
                   JOIN prodotto prod ON (prod.codice = pc.codProdotto)
@@ -275,4 +284,44 @@ class DatabaseHelper
         $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
         return $result;
     }
+    public function getCartID($email)
+    {
+        $query = 'SELECT c.cod
+                    FROM carrello c , utente u
+                    WHERE c.utente = u.email
+                    AND u.email =  ?';
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('s', $email);    
+        $stmt->execute();
+        $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        return $result[0]["cod"];
+    }
+    public function addProductToCart($codprod,$quantità,$email)
+    {
+        $codCarr=$this->getCartID($email);
+        $query = 'INSERT INTO prodotto_carrello
+                   VALUES (?,?,?)';
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('iii', $codCarr,$codprod,$quantità);
+        $stmt->execute();
+    }
+    public function removeProductfromCart($codprod, $email)
+    {
+        $codCarr=$this->getCartID($email);
+        $query = 'DELETE FROM prodotto_carrello
+                  WHERE codProdotto = ?
+                  AND codCarrello = ?';
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('ii', $codprod, $codCarr);
+        $stmt->execute();
+    }
+    public function createCart($email)
+    {   
+        $query = 'INSERT INTO carrello(utente,totaleCarrello)
+                   VALUES (?,0)';
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('s',$email);
+        $stmt->execute();
+    }
+
 }

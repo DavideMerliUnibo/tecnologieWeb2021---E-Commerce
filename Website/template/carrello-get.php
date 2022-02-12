@@ -9,21 +9,34 @@
                     <li class="list-group-item d-flex justify-content-between align-items-start">
                         <div class="ms-2 me-auto">
                             <div class="fw-bold"><?php echo $prodotto["nomeFungo"] ; ?></div>
-                            <div class="fw-italic mt-1">info</div>
+                            <div class="fw-italic mt-1">quantità</div>
                         </div>
                         <div class="ms-auto d-flex flex-column">
                             <span class="badge bg-primary rounded-pill ms-auto me-2">
-                            <?php $totale=$totale+$prodotto["nomeFungo"]* $prodotto["quantità"];
-                            echo $prodotto["nomeFungo"]* $prodotto["quantità"]; ?>
+                            <?php $totale=$totale+ $prodotto["quantità"]*$prodotto["prezzoPerUnità"];
+                            echo $prodotto["prezzoPerUnità"], " €/Kg ";
+                             ?>
                             </span>                         
-                            <label class="w-50 ms-auto me-0 justify-content-end d-flex align-items-center">
-                                <?php echo $prodotto["quantità"] ; ?><input type="number" class="w-50 mt-2"></label>
+                            <p class="w-50 ms-auto me-0 justify-content-end d-flex align-items-center">
+                                <input type="number" class="w-50 mt-2" value="<?php echo $prodotto["quantità"]; ?>"></input>
+                            </p>
                         </div>
+
+                        <!-- Delete button -->
+                        <?php 
+                            if(isset($_POST["delete".$prodotto["codice"]])){
+                                $dbh -> removeProductfromCart($prodotto["codice"], $_SESSION["email"]);
+                                echo '<script> location.reload(); </script>';
+                            }
+                        ?>
+                        <form method="post" class="px-2">
+                            <button type="submit" name="delete<?php echo $prodotto["codice"]; ?>" class="btn"><img src="img/trash.svg" alt="trash bin"/></button>
+                        </form>
                     </li>
                     <?php endforeach; ?>
                 </ol>
                 <div class="col-12 mt-3 d-flex justify-content-around align-items-center">
-                    <h3 class="ms-2 fst-italic fw-bold">Totale</h3>
+                    <h3 class="ms-2 fst-italic fw-bold">Totale: <?php echo $totale; ?> €</h3>
                     <p class=" fw-bold fs-1 text-primary"></p>
                 </div>
             </div>
