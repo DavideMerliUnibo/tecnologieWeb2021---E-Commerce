@@ -18,9 +18,20 @@
                              ?>
                             </span>                         
                             <p class="w-50 ms-auto me-0 justify-content-end d-flex align-items-center">
-                            <input type="number" class="w-50 mt-2" value="<?php echo $prodotto["quantità"]; ?>"></input>
+                                <input type="number" class="w-50 mt-2" value="<?php echo $prodotto["quantità"]; ?>"></input>
                             </p>
                         </div>
+
+                        <!-- Delete button -->
+                        <?php 
+                            if(isset($_POST["delete".$prodotto["codice"]])){
+                                $dbh -> removeProductfromCart($prodotto["codice"], $_SESSION["email"]);
+                                echo '<script> location.reload(); </script>';
+                            }
+                        ?>
+                        <form method="post" class="px-2">
+                            <button type="submit" name="delete<?php echo $prodotto["codice"]; ?>" class="btn"><img src="img/trash.svg" alt="trash bin"/></button>
+                        </form>
                     </li>
                     <?php endforeach; ?>
                 </ol>

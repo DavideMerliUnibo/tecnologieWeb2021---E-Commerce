@@ -10,7 +10,7 @@
                 logOut();
             }?>
 
-            <form method="post"  class="col-2 col-lg-1">
+            <form method="post" class="col-2 col-lg-1">
                 <input type="submit" name="logout" value="Log Out" class="btn btn-primary ml-auto" type="button" style="white-space: nowrap;"></input>
             </form>
             <div class="offcanvas offcanvas-start" id="offcanvasMenu">
