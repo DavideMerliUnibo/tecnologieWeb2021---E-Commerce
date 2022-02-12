@@ -9,6 +9,7 @@
           $templateParams["nome"] = "registrazione-form.php";
           
         } else {
+          $dbh->createCart($_POST["email"]);
           $templateParams["nome"] = "signUpSuccess.php";
           $templateParams["title"] = "Funghi - Registrato!";
         }
