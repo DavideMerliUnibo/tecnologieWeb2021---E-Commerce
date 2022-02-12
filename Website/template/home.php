@@ -1,7 +1,18 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="col d-flex">
-            <button class="btn btn-primary ml-auto" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu" aria-controls="offcanvasMenu">Menu</button>
+        <div class="row col-12 d-flex">
+            <div class="col-2 col-lg-1">
+                <button class="btn btn-primary ml-auto" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu" aria-controls="offcanvasMenu">Menu</button>
+            </div>
+            <div class="col-8 col-lg-10"></div>
+
+            <?php if(isset($_POST["logout"])){
+                logOut();
+            }?>
+
+            <form method="post"  class="col-2 col-lg-1">
+                <input type="submit" name="logout" value="Log Out" class="btn btn-primary ml-auto" type="button" style="white-space: nowrap;"></input>
+            </form>
             <div class="offcanvas offcanvas-start" id="offcanvasMenu">
                 <div class="offcanvas-body">
                     <a class="btn" id="gestisciRicetteButton" href="http://localhost/tecnologieWeb2021---E-Commerce/Website/home-utente.php?action=gestisciRicette">Gestisci ricette</a>
