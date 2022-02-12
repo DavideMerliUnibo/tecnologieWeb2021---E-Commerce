@@ -47,7 +47,7 @@
                         </div>
                     </div>
                     <div class="col-12 mt-1">
-                        <input class="btn btn-secondary" type="submit" name="submitRicetta" value="Inserisci" onclick="return inserisciRicetta();">
+                        <input class="btn btn-secondary" type="submit" name="submitRicetta" value="Inserisci" onclick="">
                     </div>
                 </form>
             </div>

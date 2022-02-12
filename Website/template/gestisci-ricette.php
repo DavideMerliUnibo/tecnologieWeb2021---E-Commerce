@@ -136,7 +136,7 @@ $ricette = $dbh->getRicetteUtente();
                 $("#gestisciRicetteRow div:nth-child(3)").html(data);
                 //modifico ogni riga del template con value giusto di riga
                 //aggiungo script che faccia update
-                $("#titolo").val(values['titolo']);
+                $("#titolo").val(values['titolo']).attr('placeholder',values['titolo']);
                 $("#difficoltà").val(values['difficoltà']);
                 $("#descrizione").val(values['descrizione']);
                 $("#procedimento").val(values['procedimento']);

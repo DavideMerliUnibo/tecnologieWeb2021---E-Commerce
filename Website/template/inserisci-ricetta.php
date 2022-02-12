@@ -1,5 +1,9 @@
 <?php require "/xampp/htdocs/tecnologieWeb2021---E-Commerce/Website/template/inserisci-modifica-template-form.php"?>
 <script>
+    $().ready(function(){
+        $("input[name=submitRicetta]").attr('onclick','return inserisciRicetta();');
+    });
+
     function inserisciRicetta() {
         let elems = $("form input,form textarea").toArray();
         elems = elems.map(x => {

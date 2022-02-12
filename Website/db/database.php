@@ -62,6 +62,25 @@ class DatabaseHelper
         return $stmt->execute();
     }
 
+    public function updateRicetta($titolo, $difficolta, $descrizione, $procedimento, $consigli, $valEnergetico, $proteine, $grassi, $carboidrati, $fibre, $sodio,$chiave){
+        if (!isset($_SESSION["email"])) {
+            die("utente non loggato");
+        }
+        $stmt = $this->db->prepare('select tabellaNutrizionale from ricetta where titolo = ? and autore = ?');
+        $stmt->bind_param("ss",$chiave,$_SESSION['email']);
+        $stmt->execute();
+        $result = $stmt->get_result();  
+        $val = $result->fetch_all(MYSQLI_ASSOC)['0']['tabellaNutrizionale'];
+        $query = 'UPDATE `ricetta` SET `titolo` = ?, `difficoltà`= ?,  `descrizione` = ?, `procedimento` = ?, `consigli` = ? WHERE `ricetta`.`titolo` = ? and autore = ?;';
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('sdsssss',$titolo,$difficolta,$descrizione,$procedimento,$consigli,$chiave,$_SESSION['email']);
+        $stmt->execute();
+        $query = 'UPDATE `tabellanutrizionale` SET `valoreEnergetico` = ?, `proteine` = ?, `grassi` = ?, `carboidrati` = ?, `fibre` = ?, `sodio` = ? WHERE `tabellanutrizionale`.`codice` = ? ;';
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('ddddddd',$valEnergetico,$proteine,$grassi,$carboidrati,$fibre,$sodio,$val);
+        return $stmt->execute();
+    }
+
     public function getProducts()
     {
         $query = "SELECT p.nomeFungo, p.prezzoPerUnità, p.quantità, p.codice, i.nome as img, u.username

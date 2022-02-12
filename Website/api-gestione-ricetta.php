@@ -17,6 +17,14 @@ if (isUserLoggedIn()) {
                     $data = json_decode($_POST["data"], true);
                     $dbh->insertRicetta($data["titolo"], $data["difficoltà"], $data["descrizione"], $data["procedimento"], $data["consigli"], $data["valoreEnergetico"], $data["proteine"], $data["grassi"], $data["carboidrati"], $data["fibre"], $data["sodio"]);
                 }
+                break;
+            case 'update':
+                if(isset($_POST['submitRicetta'])){
+                    $data = json_decode($_POST["data"], true);
+                    $chiave = $_POST['titolo'];
+                    return $dbh->updateRicetta($data["titolo"], $data["difficoltà"], $data["descrizione"], $data["procedimento"], $data["consigli"], $data["valoreEnergetico"], $data["proteine"], $data["grassi"], $data["carboidrati"], $data["fibre"], $data["sodio"],$chiave);
+                }
+            break;
         }
     }
 }
