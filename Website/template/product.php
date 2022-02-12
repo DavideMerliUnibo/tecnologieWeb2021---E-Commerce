@@ -1,5 +1,4 @@
 <main>
-    
 
     <?php $prodotto = $templateParams["prodotto"][0]; ?>
     <?php $immagini = $templateParams["immagini"]; ?>
@@ -33,10 +32,33 @@
         </div>
 
         <!-- Dati prodotto -->
-        <p>Venduto da: <strong><?php echo $prodotto["username"]; ?></strong></p>
-        <p>Prezzo: <strong><?php echo $prodotto["prezzoPerUnità"]; ?> €/Kg</strong></p>
-        <p>Informazioni:</p>
-        <p class="px-2"><?php echo $prodotto["informazioni"]; ?></p>
+        <div class="row">
+            <div class="col-6">
+                <p>Venduto da: <strong><?php echo $prodotto["username"]; ?></strong></p>
+                <p>Prezzo: <strong><?php echo $prodotto["prezzoPerUnità"]; ?> €/Kg</strong></p>
+                <p>Informazioni:</p>
+                <p class="px-2"><?php echo $prodotto["informazioni"]; ?></p>
+            </div>
+            <div class="col-3 text-center p-3">
+                <label for="sel1">Scegli quantità:</label>
+                <form method="post">
+                    <select class="form-control" name="sel">
+                        <?php 
+                            for($i=1;$i<=$prodotto["quantità"];$i++){
+                                echo '<option>',$i,'</option>';
+                            }?>
+                    </select>
+                    <input type="submit" name="quantity" value="Aggiungi al carrello"   class="btn btn-warning"></input>
+                </form>
+                <?php  
+                    if(isset($_POST["quantity"])){
+                        $quantità=$_POST["sel"];
+                        $dbh->addProductInCart($prodotto["codice"],$quantità,$_SESSION["email"]);
+                    }
+                    
+                ?>
+                
+            </div>
     </article>
 
     <!-- Recensioni degli utenti -->
@@ -94,7 +116,7 @@
                 </div>
             </div>
             <div class="text-center">
-                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Aggiungi Recensione</button>
+                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">Aggiungi Recensione</button>
             </div>
         </div>
     </div>

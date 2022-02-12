@@ -264,7 +264,7 @@ class DatabaseHelper
     }
     public function getProductInCart($email)
     {
-        $query = 'SELECT * 
+        $query = 'SELECT prod.nomeFungo, pc.quantità, prod.prezzoPerUnità 
                   FROM utente u JOIN carrello c ON (u.email = c.utente)
                   JOIN prodotto_carrello pc ON(pc.codCarrello = c.cod)
                   JOIN prodotto prod ON (prod.codice = pc.codProdotto)
@@ -275,4 +275,27 @@ class DatabaseHelper
         $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
         return $result;
     }
+    public function getCartID($email)
+    {
+        $query = 'SELECT c.cod
+                    FROM carrello c , utente u
+                    WHERE c.utente = u.email
+                    AND u.email =  ?';
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('s', $email);    
+        $stmt->execute();
+        $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        return $result;
+    }
+    public function addProductInCart($codprod,$quantità,$email)
+    {
+        $codCarr=$this->getCartID($email);
+        $query = 'INSERT INTO prodotto_carrello
+                   VALUES (?,?,?)';
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('iii', $codCarr,$codprod,$quantità);
+        $stmt->execute();
+    }
+
+
 }

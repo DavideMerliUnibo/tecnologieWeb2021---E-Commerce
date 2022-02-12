@@ -63,7 +63,7 @@
                             $templateParams["prodottiCarrello"] = $dbh-> getProductInCart($_SESSION['email']);
                             foreach($templateParams["prodottiCarrello"] as $prodotto){
                                 echo '<li class="nav-item">';
-                                echo '<a class="nav-link text-white" href="#">$prodotto["nomeFungo"]</a>';    
+                                echo '<a class="nav-link text-white" href="#">',$prodotto["nomeFungo"],'</a>';    
                                 echo '</li>';
                             }
                         }?>
