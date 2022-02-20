@@ -18,10 +18,11 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `websitetecweb`
+-- Database: `databasefunghi`
 --
 
 -- --------------------------------------------------------
+CREATE DATABASE databasefunghi;
 
 --
 -- Struttura della tabella `acquisto`
