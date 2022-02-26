@@ -114,7 +114,7 @@ class DatabaseHelper
 
     public function getProducts()
     {
-        $query = "SELECT p.nomeFungo, p.prezzoPerUnità, p.quantità, p.codice, i.nome as img, u.username
+        $query = "SELECT p.nomeFungo, p.prezzoPerUnità, p.quantità, p.codice, p.data, i.nome as img, u.username
                   FROM prodotto p, immagineprodotto i, utente u
                   WHERE p.codice = i.codProdotto
                   AND p.offerente = u.email
