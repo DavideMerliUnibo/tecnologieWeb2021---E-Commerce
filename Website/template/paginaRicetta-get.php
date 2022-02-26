@@ -119,7 +119,7 @@
         </div> 
 
         <!-- Commenti -->
-        <div class="col-12 col-md-8 mx-auto">
+        <div class="col-12 col-md-8 mx-auto py-3">
             <h2 class="text-center my-auto">Commenti</h2>
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
@@ -149,7 +149,7 @@
             </div>
             <div class="row">
                 <div class="col-12">
-                    <?php if(empty($commento)): ?>
+                    <?php if(empty($commenti)): ?>
                         <p class="text-center p-2">Non ci sono commenti per questa ricetta.</p>
                     <?php endif; ?>
                     <div tabindex="0" class="divScrollabile">
