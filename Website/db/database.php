@@ -315,6 +315,7 @@ class DatabaseHelper
         $stmt->bind_param('ii', $codprod, $codCarr);
         $stmt->execute();
     }
+
     public function createCart($email)
     {   
         $query = 'INSERT INTO carrello(utente,totaleCarrello)
@@ -322,6 +323,36 @@ class DatabaseHelper
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('s',$email);
         $stmt->execute();
+    }
+
+    public function getLatestProducts($n){
+        $query = "SELECT p.nomeFungo, p.prezzoPerUnità, p.quantità, p.codice, i.nome as img, u.username
+                  FROM prodotto p, immagineprodotto i, utente u
+                  WHERE p.codice = i.codProdotto
+                  AND p.offerente = u.email
+                  GROUP BY p.codice
+                  ORDER BY p.data DESC
+                  LIMIT ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('i', $n);
+        $stmt->execute();
+        $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        return $result;
+    }
+
+    public function getLatestRecipes($n){
+        $query = "SELECT r.titolo, r.data, r.descrizione, u.username as autore, i.nome as immagine
+                  FROM ricetta r, utente u, immaginericetta i
+                  WHERE r.autore = u.email
+                  AND i.titoloRicetta = r.titolo
+                  GROUP BY r.titolo
+                  ORDER BY r.data
+                  LIMIT ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('i', $n);
+        $stmt->execute();
+        $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        return $result;
     }
 
 }
