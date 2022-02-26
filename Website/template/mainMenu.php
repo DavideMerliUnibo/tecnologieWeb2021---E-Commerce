@@ -28,6 +28,9 @@
     </article>
     <?php endforeach; ?>
 </section>
+<div class="d-flex flex-column align-items-end">
+    <a href="shop.php" type="button" class="btn btn-warning my-1">Vai al negozio</a>
+</div>
 
 <!-- Sezione ultime ricette -->
 <section class="p-3">
@@ -45,3 +48,6 @@
     </article>
     <?php endforeach; ?>
 </section>
+<div class="d-flex flex-column align-items-end">
+    <a href="ricette.php" type="button" class="btn btn-warning my-1">Vedi tutte</a>
+</div>
