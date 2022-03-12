@@ -175,10 +175,10 @@ class DatabaseHelper
         if (!isUserLoggedIn()) {
             die("Error: utente non loggato");
         }
-        $query =    "select r.*,t.*
-                    from ricetta r join utente u on (r.autore = u.email) 
-                    join tabellanutrizionale t on ( r.tabellaNutrizionale = t.codice) 
-                    where u.email = ?;";
+        $query = "SELECT r.*,t.*
+                  FROM ricetta r JOIN utente u ON (r.autore = u.email) 
+                  JOIN tabellanutrizionale t ON ( r.tabellaNutrizionale = t.codice) 
+                  WHERE u.email = ?;";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("s", $_SESSION["email"]);
         $stmt->execute();
@@ -271,6 +271,16 @@ class DatabaseHelper
         $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
         return $result;
     }
+
+    public function addRecipeComment($contenuto, $autore, $ricetta){
+        $data = date("Y/m/d");
+        $query = "INSERT INTO commento(contenuto, data, autore, ricetta)
+                  VALUES (?, ?, ?, ?);";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('ssss', $contenuto, $data, $autore, $ricetta);
+        $stmt->execute();
+    }
+
     public function getProductInCart($email)
     {
         $query = 'SELECT prod.nomeFungo, pc.quantità, prod.prezzoPerUnità, prod.codice
