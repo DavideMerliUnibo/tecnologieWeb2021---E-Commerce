@@ -73,25 +73,40 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form>
+                            <form method="post">
+                                <?php if (!isUserLoggedIn()):?>
+                                <h3>Utente non loggato!</h3>
+                                <?php endif; ?>
                                 <div class="mb-3">
                                     <label for="message-text" class="col-form-label">Titolo recensione:</label>
-                                    <textarea class="form-control" id="message-text"></textarea>
+                                    <textarea class="form-control" id="message-text" name="titoloRecensione" <?php if(!isUserLoggedIn()){ echo "disabled"; }?>></textarea>
                                 </div>
                                 <div class="mb-3">
                                     <label for="message-text" class="col-form-label">Contenuto recensione:</label>
-                                    <textarea class="form-control" id="message-text"></textarea>
+                                    <textarea class="form-control" id="message-text" name="contenutoRecensione" <?php if(!isUserLoggedIn()){ echo "disabled"; }?>></textarea>
                                 </div>
                                 <div class="mb-3">
                                     <label for="message-text" class="col-form-label">Valutazione:</label>
-                                    <output>0</output><input required class="form-range" oninput="this.previousElementSibling.value = parseFloat(this.value).toFixed(1)" id="difficolta" type="range" step="1" min="0" max="5" value="0" name="difficolta">
+                                    <output>0</output><input required class="form-range" oninput="this.previousElementSibling.value = parseFloat(this.value).toFixed(1)" id="votoRecensione" type="range" step="1" min="0" max="5" value="0" name="votoRecensione" <?php if(!isUserLoggedIn()){ echo " disabled"; }?>>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+                                    <input type="submit" name="addReview" value="Invia" class="btn btn-primary" <?php if(!isUserLoggedIn()){ echo "disabled"; }?>></input>
                                 </div>
                             </form>
+
+                            <?php  
+                            if(isset($_POST["addReview"]) && isUserLoggedIn()){
+                                $titolo = $_POST["titoloRecensione"];
+                                $contenuto = $_POST["contenutoRecensione"];
+                                $voto = $_POST["votoRecensione"];
+                                $dbh->addProductReview($titolo, $contenuto, $voto, $_SESSION["email"], $prodotto["codice"]);
+                            }
+                            ?>
+
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
-                            <button type="button" class="btn btn-primary">Invia</button>
-                        </div>
+                        
                     </div>
                 </div>
             </div>

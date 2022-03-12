@@ -116,7 +116,7 @@
                 </div>
                       
             </div>
-        </div> 
+        </div>
 
         <!-- Commenti -->
         <div class="col-12 col-md-8 mx-auto py-3">
@@ -129,20 +129,28 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form>
-                                <div class="mb-3">
-                                    <label for="message-text" class="col-form-label">Titolo commento:</label>
-                                    <textarea class="form-control" id="message-text"></textarea>
-                                </div>
+                            <form method="post">
+                                <?php if (!isUserLoggedIn()):?>
+                                <h3>Utente non loggato!</h3>
+                                <?php endif; ?>
                                 <div class="mb-3">
                                     <label for="message-text" class="col-form-label">Contenuto commento:</label>
-                                    <textarea class="form-control" id="message-text"></textarea>
+                                    <textarea class="form-control" id="message-text" name="contenutoCommento" <?php if(!isUserLoggedIn()){ echo "disabled"; }?>></textarea>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+                                    <input type="submit" name="addComment" value="Invia" class="btn btn-primary" <?php if(!isUserLoggedIn()){ echo "disabled"; }?>></input>
                                 </div>
                             </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
-                            <button type="button" class="btn btn-primary">Invia</button>
+
+                            <?php  
+                            if(isset($_POST["addComment"]) && isUserLoggedIn()){
+                                $contenuto = $_POST["contenutoCommento"];
+                                $dbh->addRecipeComment($contenuto, $_SESSION["email"], $ricetta["titolo"]);
+                            }
+                            ?>
+
                         </div>
                     </div>
                 </div>
