@@ -1,12 +1,13 @@
 <?php 
 
 require_once("bootstrap.php");
-$templateParams["nome"] = "carrello-get.php";
+
 $templateParams["title"] = "Funghi - Carrello";
 if(isUserloggedIn()){
     $templateParams["prodottiCarrello"] = $dbh-> getProductInCart($_SESSION['email']);
-}else{
-    die("user not logged in");
+    $templateParams["nome"] = "carrello-get.php";
+} else {
+    $templateParams["nome"] = "carrello-no-user.php";
 }
 require("template/base.php");
 ?>
