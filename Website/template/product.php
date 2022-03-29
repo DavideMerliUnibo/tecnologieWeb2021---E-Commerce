@@ -1,8 +1,30 @@
+<?php $prodotto = $templateParams["prodotto"][0]; ?>
+<?php $immagini = $templateParams["immagini"]; ?>
+<?php $recensioni = $templateParams["recensioni"]; ?>
+
+<?php  
+    if(isset($_POST["addReview"]) && isUserLoggedIn()){
+        $titolo = $_POST["titoloRecensione"];
+        $contenuto = $_POST["contenutoRecensione"];
+        $voto = $_POST["votoRecensione"];
+        $dbh->addProductReview($titolo, $contenuto, $voto, $_SESSION["email"], $prodotto["codice"]);
+        header("Location: https://localhost/tecnologieWeb2021---E-Commerce/Website/product.php?prodotto=".$prodotto["codice"]);
+        unset($_POST["addReview"]);
+    }
+?>
+
+<?php if(isset($_POST["deleteReview"])){
+    $dbh -> deleteReviews();
+    header("Location: https://localhost/tecnologieWeb2021---E-Commerce/Website/product.php?prodotto=".$prodotto["codice"]);
+}?>
+
+
+
 <main>
 
-    <?php $prodotto = $templateParams["prodotto"][0]; ?>
+    <!-- <?php $prodotto = $templateParams["prodotto"][0]; ?>
     <?php $immagini = $templateParams["immagini"]; ?>
-    <?php $recensioni = $templateParams["recensioni"]; ?>
+    <?php $recensioni = $templateParams["recensioni"]; ?> -->
 
     <h1 class="p-2"><?php echo $prodotto["nomeFungo"]; ?></h1>
     <!-- Prodotto -->
@@ -62,6 +84,11 @@
             </div>
     </article>
 
+    <form method="post">
+        <input type="submit" name="deleteReview" value="Cancella" class="btn btn-primary"></input>
+    </form>
+    
+
     <!-- Recensioni degli utenti -->
     <div class="col-12 col-md-8 mx-auto">
             <h2 class="text-center my-auto">Recensioni degli utenti</h2>
@@ -96,14 +123,7 @@
                                 </div>
                             </form>
 
-                            <?php  
-                            if(isset($_POST["addReview"]) && isUserLoggedIn()){
-                                $titolo = $_POST["titoloRecensione"];
-                                $contenuto = $_POST["contenutoRecensione"];
-                                $voto = $_POST["votoRecensione"];
-                                $dbh->addProductReview($titolo, $contenuto, $voto, $_SESSION["email"], $prodotto["codice"]);
-                            }
-                            ?>
+                            
 
                         </div>
                         

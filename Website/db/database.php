@@ -365,4 +365,11 @@ class DatabaseHelper
         return $result;
     }
 
+
+    public function deleteReviews(){
+        $query = "DELETE FROM recensione
+                  WHERE data='2022-03-29'";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+    }
 }
