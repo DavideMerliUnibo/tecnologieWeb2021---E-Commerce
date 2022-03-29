@@ -2,27 +2,23 @@
 <?php $tabella = $templateParams["tabella"][0]; ?>
 <?php $immagini = $templateParams["immaginiRicetta"]; ?>
 <?php $commenti = $templateParams["commenti"]; ?>
+<?php $thisPage = "http://localhost/tecnologieWeb2021---E-Commerce/Website/paginaricetta.php?titoloRicetta=".$ricetta["titolo"]; ?>
 
+<!-- Funzione per aggiungere un commento -->
 <?php  
     if(isset($_POST["addComment"]) && isUserLoggedIn()){
         $contenuto = $_POST["contenutoCommento"];
         $dbh->addRecipeComment($contenuto, $_SESSION["email"], $ricetta["titolo"]);
-        header("Location: http://localhost/tecnologieWeb2021---E-Commerce/Website/paginaricetta.php?titoloRicetta=".$ricetta["titolo"]);
+        header("Location: ".$thisPage);
         unset($_POST["addComment"]);
     }
 ?>
-
-<!-- Finire -->
+<!-- Funzione per eliminare un commento -->
 <?php if(isset($_POST["deleteComment"])){
-    $dbh -> deleteRecipeComment(/* Qui manca l'id del commento */);
-    header("Location: http://localhost/tecnologieWeb2021---E-Commerce/Website/product.php?prodotto=".$prodotto["codice"]);
+    $dbh -> deleteCommentById($_POST["com"]);
+    header("Location: ".$thisPage);
+    unset($_POST["com"]);
     unset($_POST["deleteComment"]);
-}?>
-
-<!-- Questo è per momentaneamente rimuovere merda -->
-<?php if(isset($_POST["deleteComments"])){
-    $dbh -> deleteComments();
-    header("Location: http://localhost/tecnologieWeb2021---E-Commerce/Website/paginaricetta.php?titoloRicetta=".$ricetta["titolo"]);
 }?>
 
 <div class="container-fluid">
@@ -140,11 +136,6 @@
             </div>
         </div>
 
-        <!-- Questo è per momentaneamente rimuovere merda -->
-        <form method="post">
-            <input type="submit" name="deleteComment" value="Cancella" class="btn btn-primary"></input>
-        </form>
-
         <!-- Commenti -->
         <div class="col-12 col-md-8 mx-auto py-3">
             <h2 class="text-center my-auto">Commenti</h2>
@@ -187,12 +178,13 @@
                             </div>
                             <div class="col-8 col-lg-10">
                                 <p>by <strong><?php echo $commento["username"]; ?></strong></p>
-                                <p>Data: <?php echo $commento["data"]; ?></p>
                                 <p><?php echo $commento["contenuto"]; ?></p>
+                                <p><small class="text-muted"><?php echo $commento["data"]; ?></small></p>
                             </div>
-                            <?php if($_SESSION["username"] == $commento["username"]):?>
+                            <?php if(isset($_SESSION["username"]) && $_SESSION["username"] == $commento["username"]):?>
                             <div class="d-flex flex-column align-items-end">
                                 <form method="post">
+                                    <input type="hidden" name="com" value="<?php echo $commento["codice"]; ?>"></input>
                                     <input type="submit" name="deleteComment" value="Cancella" class="btn btn-warning"></input>
                                 </form>
                             </div>
