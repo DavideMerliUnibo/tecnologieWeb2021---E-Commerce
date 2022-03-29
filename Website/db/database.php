@@ -5,7 +5,7 @@ class DatabaseHelper
 
     public function __construct($servername, $username, $password, $dbname)
     {
-        $this->db = new mysqli($servername, $username, $password, $dbname, 3306);
+        $this->db = new mysqli($servername, $username, $password, $dbname, 3340);
         if ($this->db->connect_error) {
             die("Connection failed " . $this->db->connect_error);
         }
@@ -368,6 +368,13 @@ class DatabaseHelper
 
     public function deleteReviews(){
         $query = "DELETE FROM recensione
+                  WHERE data='2022-03-29'";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+    }
+
+    public function deleteComments(){
+        $query = "DELETE FROM commento
                   WHERE data='2022-03-29'";
         $stmt = $this->db->prepare($query);
         $stmt->execute();

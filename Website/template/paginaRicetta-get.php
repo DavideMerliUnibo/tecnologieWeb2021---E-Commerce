@@ -3,6 +3,21 @@
 <?php $immagini = $templateParams["immaginiRicetta"]; ?>
 <?php $commenti = $templateParams["commenti"]; ?>
 
+<?php  
+    if(isset($_POST["addComment"]) && isUserLoggedIn()){
+        $contenuto = $_POST["contenutoCommento"];
+        $dbh->addRecipeComment($contenuto, $_SESSION["email"], $ricetta["titolo"]);
+        header("Location: http://localhost/tecnologieWeb2021---E-Commerce/Website/paginaricetta.php?titoloRicetta=".$ricetta["titolo"]);
+        unset($_POST["addComment"]);
+    }
+?>
+
+<!-- Questo è per momentaneamente rimuovere merda -->
+<?php if(isset($_POST["deleteComment"])){
+    $dbh -> deleteComments();
+    header("Location: http://localhost/tecnologieWeb2021---E-Commerce/Website/paginaricetta.php?titoloRicetta=".$ricetta["titolo"]);
+}?>
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
@@ -118,6 +133,11 @@
             </div>
         </div>
 
+        <!-- Questo è per momentaneamente rimuovere merda -->
+        <form method="post">
+            <input type="submit" name="deleteComment" value="Cancella" class="btn btn-primary"></input>
+        </form>
+
         <!-- Commenti -->
         <div class="col-12 col-md-8 mx-auto py-3">
             <h2 class="text-center my-auto">Commenti</h2>
@@ -143,14 +163,6 @@
                                     <input type="submit" name="addComment" value="Invia" class="btn btn-primary" <?php if(!isUserLoggedIn()){ echo "disabled"; }?>></input>
                                 </div>
                             </form>
-
-                            <?php  
-                            if(isset($_POST["addComment"]) && isUserLoggedIn()){
-                                $contenuto = $_POST["contenutoCommento"];
-                                $dbh->addRecipeComment($contenuto, $_SESSION["email"], $ricetta["titolo"]);
-                            }
-                            ?>
-
                         </div>
                     </div>
                 </div>

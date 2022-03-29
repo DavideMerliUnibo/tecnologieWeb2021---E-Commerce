@@ -13,6 +13,7 @@
     }
 ?>
 
+<!-- Questo è per momentaneamente rimuovere merda -->
 <?php if(isset($_POST["deleteReview"])){
     $dbh -> deleteReviews();
     header("Location: http://localhost/tecnologieWeb2021---E-Commerce/Website/product.php?prodotto=".$prodotto["codice"]);
@@ -21,11 +22,6 @@
 
 
 <main>
-
-    <!-- <?php $prodotto = $templateParams["prodotto"][0]; ?>
-    <?php $immagini = $templateParams["immagini"]; ?>
-    <?php $recensioni = $templateParams["recensioni"]; ?> -->
-
     <h1 class="p-2"><?php echo $prodotto["nomeFungo"]; ?></h1>
     <!-- Prodotto -->
     <article class="bg-light border p-2 m-2">
@@ -84,6 +80,7 @@
             </div>
     </article>
 
+    <!-- Questo è per momentaneamente rimuovere merda -->
     <form method="post">
         <input type="submit" name="deleteReview" value="Cancella" class="btn btn-primary"></input>
     </form>
@@ -122,11 +119,7 @@
                                     <input type="submit" name="addReview" value="Invia" class="btn btn-primary" <?php if(!isUserLoggedIn()){ echo "disabled"; }?>></input>
                                 </div>
                             </form>
-
-                            
-
                         </div>
-                        
                     </div>
                 </div>
             </div>
