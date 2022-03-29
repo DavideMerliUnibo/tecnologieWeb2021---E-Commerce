@@ -150,7 +150,7 @@ class DatabaseHelper
 
     public function getProductReviews($id)
     {
-        $query = "SELECT r.titolo, r.data, r.contenuto, r.valutazione, u.username
+        $query = "SELECT r.codice, r.titolo, r.data, r.contenuto, r.valutazione, u.username
                   FROM recensione r, utente u
                   WHERE r.utente = u.email
                   AND codProdotto = ?";
@@ -261,7 +261,7 @@ class DatabaseHelper
 
     public function getRecipeComments($titolo)
     {
-        $query = "SELECT c.contenuto, c.data, u.username
+        $query = "SELECT c.codice, c.contenuto, c.data, u.username
                   FROM commento c, utente u
                   WHERE c.autore = u.email
                   AND c.ricetta = ?";
@@ -365,34 +365,19 @@ class DatabaseHelper
         return $result;
     }
 
-
-    public function deleteProductReview($id){
+    public function deleteReviewById($id){
         $query = "DELETE FROM recensione
-                  WHERE codice=?";
+                  WHERE codice = ?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('i', $id);
         $stmt->execute();
     }
 
-    public function deleteRecipeComment($id){
+    public function deleteCommentById($id){
         $query = "DELETE FROM commento
-                  WHERE codice=?";
+                  WHERE codice = ?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('i', $id);
-        $stmt->execute();
-    }
-
-    public function deleteReviews(){
-        $query = "DELETE FROM recensione
-                  WHERE data='2022-03-29'";
-        $stmt = $this->db->prepare($query);
-        $stmt->execute();
-    }
-
-    public function deleteComments(){
-        $query = "DELETE FROM commento
-                  WHERE data='2022-03-29'";
-        $stmt = $this->db->prepare($query);
         $stmt->execute();
     }
 }
