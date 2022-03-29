@@ -1,7 +1,7 @@
 <?php $prodotto = $templateParams["prodotto"][0]; ?>
 <?php $immagini = $templateParams["immagini"]; ?>
 <?php $recensioni = $templateParams["recensioni"]; ?>
-
+<?php $name = $_SESSION["username"] ?>
 <?php  
     if(isset($_POST["addReview"]) && isUserLoggedIn()){
         $titolo = $_POST["titoloRecensione"];
@@ -146,10 +146,16 @@
                                 <p>Data: <?php echo $recensione["data"]; ?></p>
                                 <p><?php echo $recensione["contenuto"]; ?></p>
                             </div>
+                            <?php if($name == $recensione["username"]):?>
+                                <div class="d-flex flex-column align-items-end">
+                                    <button type="button" class="btn btn-warning" ">Cancella</button>
+                                </div>
+                            <?php endif; ?>    
                         </article>
                         <?php endforeach; ?>
                     </div>
                 </div>
+           
             </div>
             <div class="text-center">
                 <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">Aggiungi Recensione</button>
