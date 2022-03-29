@@ -8,14 +8,14 @@
         $contenuto = $_POST["contenutoRecensione"];
         $voto = $_POST["votoRecensione"];
         $dbh->addProductReview($titolo, $contenuto, $voto, $_SESSION["email"], $prodotto["codice"]);
-        header("Location: https://localhost/tecnologieWeb2021---E-Commerce/Website/product.php?prodotto=".$prodotto["codice"]);
+        header("Location: http://localhost/tecnologieWeb2021---E-Commerce/Website/product.php?prodotto=".$prodotto["codice"]);
         unset($_POST["addReview"]);
     }
 ?>
 
 <?php if(isset($_POST["deleteReview"])){
     $dbh -> deleteReviews();
-    header("Location: https://localhost/tecnologieWeb2021---E-Commerce/Website/product.php?prodotto=".$prodotto["codice"]);
+    header("Location: http://localhost/tecnologieWeb2021---E-Commerce/Website/product.php?prodotto=".$prodotto["codice"]);
 }?>
 
 
