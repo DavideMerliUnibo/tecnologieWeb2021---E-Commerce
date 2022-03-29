@@ -1,7 +1,6 @@
 <?php $prodotto = $templateParams["prodotto"][0]; ?>
 <?php $immagini = $templateParams["immagini"]; ?>
 <?php $recensioni = $templateParams["recensioni"]; ?>
-<?php $name = $_SESSION["username"] ?>
 <?php  
     if(isset($_POST["addReview"]) && isUserLoggedIn()){
         $titolo = $_POST["titoloRecensione"];
@@ -13,8 +12,15 @@
     }
 ?>
 
-<!-- Questo è per momentaneamente rimuovere merda -->
+<!-- Finire -->
 <?php if(isset($_POST["deleteReview"])){
+    $dbh -> deleteProductReview(/* Qui manca l'id della recensione */);
+    header("Location: http://localhost/tecnologieWeb2021---E-Commerce/Website/product.php?prodotto=".$prodotto["codice"]);
+    unset($_POST["deleteReview"]);
+}?>
+
+<!-- Questo è per momentaneamente rimuovere merda -->
+<?php if(isset($_POST["deleteReviews"])){
     $dbh -> deleteReviews();
     header("Location: http://localhost/tecnologieWeb2021---E-Commerce/Website/product.php?prodotto=".$prodotto["codice"]);
 }?>
@@ -82,7 +88,7 @@
 
     <!-- Questo è per momentaneamente rimuovere merda -->
     <form method="post">
-        <input type="submit" name="deleteReview" value="Cancella" class="btn btn-primary"></input>
+        <input type="submit" name="deleteReviews" value="Cancella" class="btn btn-primary"></input>
     </form>
     
 
@@ -139,11 +145,13 @@
                                 <p>Data: <?php echo $recensione["data"]; ?></p>
                                 <p><?php echo $recensione["contenuto"]; ?></p>
                             </div>
-                            <?php if($name == $recensione["username"]):?>
-                                <div class="d-flex flex-column align-items-end">
-                                    <button type="button" class="btn btn-warning" ">Cancella</button>
-                                </div>
-                            <?php endif; ?>    
+                            <?php if($_SESSION["username"] == $recensione["username"]):?>
+                            <div class="d-flex flex-column align-items-end">
+                                <form method="post">
+                                    <input type="submit" name="deleteReview" value="Cancella" class="btn btn-warning"></input>
+                                </form>
+                            </div>
+                            <?php endif; ?> 
                         </article>
                         <?php endforeach; ?>
                     </div>

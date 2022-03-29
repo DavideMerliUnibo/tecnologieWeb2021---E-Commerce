@@ -7,7 +7,7 @@
         </h1>
        <p><a href="login.php" class="btn bg-transparent text-white border-white" role="button">Accedi all'area personale</a></p>
     </div>
-    </div>
+</div>
 
 <!-- Sezione ultimi arrivi -->
 <section class="p-3">

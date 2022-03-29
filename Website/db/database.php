@@ -366,6 +366,22 @@ class DatabaseHelper
     }
 
 
+    public function deleteProductReview($id){
+        $query = "DELETE FROM recensione
+                  WHERE codice=?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('i', $id);
+        $stmt->execute();
+    }
+
+    public function deleteRecipeComment($id){
+        $query = "DELETE FROM commento
+                  WHERE codice=?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('i', $id);
+        $stmt->execute();
+    }
+
     public function deleteReviews(){
         $query = "DELETE FROM recensione
                   WHERE data='2022-03-29'";

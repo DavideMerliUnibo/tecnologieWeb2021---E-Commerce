@@ -12,8 +12,15 @@
     }
 ?>
 
-<!-- Questo è per momentaneamente rimuovere merda -->
+<!-- Finire -->
 <?php if(isset($_POST["deleteComment"])){
+    $dbh -> deleteRecipeComment(/* Qui manca l'id del commento */);
+    header("Location: http://localhost/tecnologieWeb2021---E-Commerce/Website/product.php?prodotto=".$prodotto["codice"]);
+    unset($_POST["deleteComment"]);
+}?>
+
+<!-- Questo è per momentaneamente rimuovere merda -->
+<?php if(isset($_POST["deleteComments"])){
     $dbh -> deleteComments();
     header("Location: http://localhost/tecnologieWeb2021---E-Commerce/Website/paginaricetta.php?titoloRicetta=".$ricetta["titolo"]);
 }?>
@@ -183,6 +190,13 @@
                                 <p>Data: <?php echo $commento["data"]; ?></p>
                                 <p><?php echo $commento["contenuto"]; ?></p>
                             </div>
+                            <?php if($_SESSION["username"] == $commento["username"]):?>
+                            <div class="d-flex flex-column align-items-end">
+                                <form method="post">
+                                    <input type="submit" name="deleteComment" value="Cancella" class="btn btn-warning"></input>
+                                </form>
+                            </div>
+                            <?php endif; ?> 
                         </article>
                         <?php endforeach; ?>
                     </div>
