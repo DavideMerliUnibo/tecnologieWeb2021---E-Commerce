@@ -1,31 +1,26 @@
 <?php $prodotto = $templateParams["prodotto"][0]; ?>
 <?php $immagini = $templateParams["immagini"]; ?>
 <?php $recensioni = $templateParams["recensioni"]; ?>
+<?php $thisPage = "http://localhost/tecnologieWeb2021---E-Commerce/Website/product.php?prodotto=".$prodotto["codice"]; ?>
+
+<!-- Funzione per aggiungere una recensione -->
 <?php  
     if(isset($_POST["addReview"]) && isUserLoggedIn()){
         $titolo = $_POST["titoloRecensione"];
         $contenuto = $_POST["contenutoRecensione"];
         $voto = $_POST["votoRecensione"];
         $dbh->addProductReview($titolo, $contenuto, $voto, $_SESSION["email"], $prodotto["codice"]);
-        header("Location: http://localhost/tecnologieWeb2021---E-Commerce/Website/product.php?prodotto=".$prodotto["codice"]);
+        header("Location: ".$thisPage);
         unset($_POST["addReview"]);
     }
 ?>
-
-<!-- Finire -->
+<!-- Funzione per eliminare una recensione -->
 <?php if(isset($_POST["deleteReview"])){
-    $dbh -> deleteProductReview(/* Qui manca l'id della recensione */);
-    header("Location: http://localhost/tecnologieWeb2021---E-Commerce/Website/product.php?prodotto=".$prodotto["codice"]);
+    $dbh -> deleteReviewById($_POST["rev"]);
+    header("Location: ".$thisPage);
+    unset($_POST["rev"]);
     unset($_POST["deleteReview"]);
 }?>
-
-<!-- Questo è per momentaneamente rimuovere merda -->
-<?php if(isset($_POST["deleteReviews"])){
-    $dbh -> deleteReviews();
-    header("Location: http://localhost/tecnologieWeb2021---E-Commerce/Website/product.php?prodotto=".$prodotto["codice"]);
-}?>
-
-
 
 <main>
     <h1 class="p-2"><?php echo $prodotto["nomeFungo"]; ?></h1>
@@ -86,12 +81,6 @@
             </div>
     </article>
 
-    <!-- Questo è per momentaneamente rimuovere merda -->
-    <form method="post">
-        <input type="submit" name="deleteReviews" value="Cancella" class="btn btn-primary"></input>
-    </form>
-    
-
     <!-- Recensioni degli utenti -->
     <div class="col-12 col-md-8 mx-auto">
             <h2 class="text-center my-auto">Recensioni degli utenti</h2>
@@ -141,18 +130,21 @@
                                 <img src="img/profile.png" alt="" height="100"/>
                             </div>
                             <div class="col-8 col-lg-10">
+                                <p><strong><?php echo $recensione["titolo"]; ?></strong></p>
                                 <p>by <strong><?php echo $recensione["username"]; ?></strong></p>
-                                <p>Data: <?php echo $recensione["data"]; ?></p>
                                 <p><?php echo $recensione["contenuto"]; ?></p>
+                                <p><small class="text-muted"><?php echo $recensione["data"]; ?></small></p>
                             </div>
-                            <?php if($_SESSION["username"] == $recensione["username"]):?>
+                            <?php if(isset($_SESSION["username"]) && $_SESSION["username"] == $recensione["username"]):?>
                             <div class="d-flex flex-column align-items-end">
                                 <form method="post">
+                                    <input type="hidden" name="rev" value="<?php echo $recensione["codice"]; ?>"></input>
                                     <input type="submit" name="deleteReview" value="Cancella" class="btn btn-warning"></input>
                                 </form>
                             </div>
                             <?php endif; ?> 
                         </article>
+
                         <?php endforeach; ?>
                     </div>
                 </div>
