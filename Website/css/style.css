@@ -54,7 +54,6 @@ article div img{
     max-height: 150px;
 }
 
-div div div img{
-    max-height: 200px;
-    max-width: 200px;
+a#carrelloBtnLetters{
+    color: white;
 }

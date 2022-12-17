@@ -8,7 +8,7 @@
                     foreach($templateParams["prodottiCarrello"] as $prodotto):?>
                     <li class="list-group-item d-flex justify-content-between align-items-start">
                         <div class="ms-2 me-auto">
-                            <div class="fw-bold"><?php echo $prodotto["nomeFungo"] ; ?></div>
+                            <div class="fw-bold"><a href="/tecnologieWeb2021---E-Commerce/Website/product.php?prodotto=<?php echo $prodotto["codice"]?>" class="text-dark"><?php echo $prodotto["nomeFungo"] ; ?></a></div>
                             <div class="fw-italic mt-1">quantità</div>
                         </div>
                         <div class="ms-auto d-flex flex-column">
