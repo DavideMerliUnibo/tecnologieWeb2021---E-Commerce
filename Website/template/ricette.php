@@ -35,7 +35,7 @@
         <div class="card my-1 col-12 col-md-3 px-0" >
             <div class="row">
                 <div class="col-6 col-md-12 d-flex">
-                    <img src="./img/<?php echo $ricetta["immagine"]; ?>" class="img-fluid rounded-left"   alt="...">
+                    <img src="./img/<?php echo $ricetta["immagine"]; ?>" class="img-fluid rounded-left mx-auto" alt="...">
                 </div>
                 <div class="col-6 col-md-12">
                 <div class="card-body">

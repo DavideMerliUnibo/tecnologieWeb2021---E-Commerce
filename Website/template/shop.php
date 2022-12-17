@@ -4,8 +4,8 @@
     <?php foreach($templateParams["prodotti"] as $prodotto): ?>
     <div class="card my-1 col-12 col-md-3 px-0" >
         <div class="row">
-                <div class="col-6 col-md-12 d-flex">
-                <img src="./img/<?php echo $prodotto["img"]; ?>" class="img-fluid rounded-left"   alt="...">
+                <div class="col-6 col-md-12 mx-auto d-flex">
+                <img src="./img/<?php echo $prodotto["img"]; ?>" class="img-fluid rounded-left mx-auto"   alt="...">
             </div>
             <div class="col-6 col-md-12">
             <div class="card-body">

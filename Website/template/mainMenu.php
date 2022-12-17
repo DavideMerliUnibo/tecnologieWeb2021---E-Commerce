@@ -15,7 +15,7 @@
     <?php foreach($templateParams["nuoviProdotti"] as $prodotto): ?>
     <article class="row align-items-center bg-light border my-2">
         <div class="col-4 col-lg-2">
-            <img src="./img/<?php echo $prodotto["img"]; ?>" alt="" height="100"/>
+            <img src="./img/<?php echo $prodotto["img"]; ?>" class="img-fluid" alt=""/>
         </div>
         <div class="col-8 col-lg-10">
             <h3 style="font-size: large;"><a href="product.php?prodotto=<?php echo $prodotto["codice"]; ?>"><?php echo $prodotto["nomeFungo"]; ?></a></h2>
@@ -36,7 +36,7 @@
     <?php foreach($templateParams["nuoveRicette"] as $ricetta): ?>
     <article class="row align-items-center bg-light border my-2">
         <div class="col-4 col-lg-2">
-            <img src="./img/<?php echo $ricetta["immagine"]; ?>" alt="" height="100"/>
+            <img src="./img/<?php echo $ricetta["immagine"]; ?>" class="img-fluid" alt=""/>
         </div>
         <div class="col-8 col-lg-10">
             <h3 style="font-size: large;"><a href="paginaricetta.php?titoloRicetta=<?php echo $ricetta["titolo"]; ?>"><?php echo $ricetta["titolo"]; ?></a></h2>

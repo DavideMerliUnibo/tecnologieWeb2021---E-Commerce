@@ -32,7 +32,7 @@
                     <div class="carousel-inner">
                         <?php foreach($immagini as $img): ?>
                         <div class="carousel-item <?php if ($img == $immagini[0]) { echo "active"; } ?>">
-                            <img src="img/<?php echo $img["nome"]; ?>" class="d-block m-auto " alt="...">
+                            <img src="img/<?php echo $img["nome"]; ?>" class="d-block m-auto img-fluid" alt="...">
                         </div>
                         <?php endforeach; ?>
                     </div>
