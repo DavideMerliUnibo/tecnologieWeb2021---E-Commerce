@@ -1,9 +1,7 @@
 $(document).ready(function(){
-    $("#menuButton").click(function(){
+    /* $("#menuButton").click(function(){
         if(!$("#menu").hasClass("selected")){
             $("#menu").addClass("selected");
-            $("#cart").removeClass("selected");
-            $("#cart").slideUp();
             $("#menu").slideDown();
         } else {
             $("#menu").removeClass("selected");
@@ -22,4 +20,4 @@ $(document).ready(function(){
             $("#cart").slideUp();
         }
     });
-})
+ */})

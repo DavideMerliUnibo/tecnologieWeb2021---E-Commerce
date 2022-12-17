@@ -15,21 +15,22 @@
 
     <body>     
         <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg mb-3">
+        <nav class="navbar navbar-expand-lg mb-3" >
             <div class="container-fluid">
 
                 <!-- Menu button -->
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Toggle navigation" id="menuButton">
+                <button  class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Toggle navigation" id="menuButton">
                     <img src="img/menu.png" alt="Menu" width="50" height="50" />
                 </button>
                 <!-- Logo -->
-                <a href="index.php">
-                    <img src="img/logo.svg" alt="logo" width="50" height="50" />
+                <a href="index.php" id="logo" class="d-flex">
+                    <img src="img/logo.svg" alt="logo" width="50" height="50" class="m-auto"/>
                 </a>
                 <!-- Shopping cart button -->
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#cart" aria-controls="cart" aria-expanded="false" aria-label="Toggle navigation" id="cartButton">
+                <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#cart" aria-controls="cart" aria-expanded="false" aria-label="Toggle navigation" id="cartButton">
                     <img src="img/shopping_cart.png" alt="Shopping cart" width="50" height="50" />
                 </button>
+                
 
                 <!-- Left Menu -->
                 <div class="collapse navbar-collapse" id="menu">
@@ -53,23 +54,27 @@
                 </div>
 
                 <!-- Right Menu -->
-                <div class="collapse navbar-collapse" id="cart">
-                    <ul class="navbar-nav">
+                <div class="collapse navbar-collapse justify-content-end" id="cart">
+                    <ul class="navbar-nav ">
                         <?php 
                         if(!isUserloggedIn()){
-                            echo "Devi loggarti per vedere il carrello";   
+                            echo '<li class="nav-item">Devi loggarti per vedere il carrello</li>';   
                         }
                         else{
                             $templateParams["prodottiCarrello"] = $dbh-> getProductInCart($_SESSION['email']);
-                            foreach($templateParams["prodottiCarrello"] as $prodotto){
-                                echo '<li class="nav-item">';
-                                echo '<a class="nav-link text-white" href="#">',$prodotto["nomeFungo"],'</a>';    
-                                echo '</li>';
+                            if(count($templateParams["prodottiCarrello"])==0){
+                                echo '<li class="nav-item">Carrello Vuoto</li>';   
+                            } else{
+                                foreach($templateParams["prodottiCarrello"] as $prodotto){
+                                    echo '<li class="nav-item d-lg-none">';
+                                    echo '<a class="nav-link text-white" href="#">',$prodotto["nomeFungo"],'</a>';    
+                                    echo '</li>';
+                                }
+                                echo '<li class"nav-item"> <a class="btn" href="carrello.php"> Visualizza carrello</a> </li> ';
                             }
+                           
                         }?>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" aria-current="page" href="carrello.php">Visualizza carrello</a>
-                        </li>
+                        
                     </ul>
                 </div>
             </div>

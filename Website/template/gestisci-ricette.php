@@ -4,7 +4,6 @@
 if (!isUserLoggedIn()) {
     die();
 }
-$index = 0;
 $ricette = $dbh->getRicetteUtente();
 ?>
 <div class="row">
@@ -292,10 +291,10 @@ $ricette = $dbh->getRicetteUtente();
         }
         for (img of value) {
             content += `
-                    <div class="col-3">
+                    <div class="col-3 d-flex flex-column">
                         <img src='${'/tecnologieWeb2021---E-Commerce/Website/upload/'+img['nome']}' alt='${img['nome']}' class="img-thumbnail">
                         <div class="d-flex">
-                            <p class="ms-1">${img['nome']}</p>
+                            <p class="ms-1" style="word-break: break-word;">${img['nome']}</p>
                             <button class="text-danger btn  bg-white" onclick='removeImg(${JSON.stringify(img['nome'])},"${titolo}")'>x</button>
                         </div>
                     </div>`;
