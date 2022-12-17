@@ -13,9 +13,9 @@
         <script src="js/navbarOpenClose.js"></script>
     </head>
 
-    <body>     
+    <body>
         <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg mb-3" >
+        <nav class="navbar navbar-expand-lg mb-3" style="background: url('./img/topbar.jpg') no-repeat center; background-size: cover;">
             <div class="container-fluid">
 
                 <!-- Menu button -->
@@ -83,7 +83,7 @@
             <?php require($templateParams["nome"]);?>
         </main>
 
-        <footer class="text-center text-white">
+        <footer class="text-center text-white" style="background: url('./img/bottombar.jpg') no-repeat center; background-size: cover;">
             <p>Sito realizzato da Davide Merli, Manuel Luzietti e Ryan Perrina</p>
             <p>Tecnologie Web - 2022</p>
         </footer>
