@@ -301,7 +301,7 @@ class DatabaseHelper
                     WHERE c.utente = u.email
                     AND u.email =  ?';
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('s', $email);    
+        $stmt->bind_param('s', $email);
         $stmt->execute();
         $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
         return $result[0]["cod"];
@@ -379,5 +379,22 @@ class DatabaseHelper
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('i', $id);
         $stmt->execute();
+    }
+
+    public function getAcquisti(){
+        if (!isUserLoggedIn()) {
+            die("Error: utente non loggato");
+        }
+        $query = "SELECT a.data, a.totale, ap.quantità, p.nomeFungo
+                  FROM acquisto a, acquisto_prodotto ap, prodotto p
+                  WHERE a.codice = ap.codAcquisto
+                  AND ap.codProdotto = p.codice
+                  AND a.acquirente = ?
+                  LIMIT 3";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('s', $_SESSION["email"]);
+        $stmt->execute();
+        $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        return $result;
     }
 }
