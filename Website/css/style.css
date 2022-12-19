@@ -47,11 +47,7 @@ a#logo:hover img {
 }
 
 img{
-    max-height: 350px;
-}
-
-article div img{
-    max-height: 150px;
+    max-height: 300px;
 }
 
 a#carrelloBtnLetters{
