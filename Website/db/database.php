@@ -5,7 +5,7 @@ class DatabaseHelper
 
     public function __construct($servername, $username, $password, $dbname)
     {
-        $this->db = new mysqli($servername, $username, $password, $dbname, 3340);
+        $this->db = new mysqli($servername, $username, $password, $dbname);
         if ($this->db->connect_error) {
             die("Connection failed " . $this->db->connect_error);
         }
@@ -62,6 +62,18 @@ class DatabaseHelper
         return $stmt->execute();
     }
 
+    public function insertProdotto($nomeFungo,$prezzoUnità,$quantità,$informazioni){
+        if(!isUserLoggedIn()){
+            die("utente non loggato");
+        }
+        $date = $this->db->query("select CURRENT_DATE() as date")->fetch_assoc()["date"];
+        $query = "INSERT INTO `prodotto` ( `prezzoPerUnità`, `quantità`, `informazioni`, `mediaValutazione`, `nomeFungo`, `data`, `offerente`) VALUES (?,?,?,?,?,?,?)";
+        $stmt = $this->db->prepare($query);
+        $media = 0;
+        $stmt->bind_param("disdsss", $prezzoUnità, $quantità, $informazioni, $media, $nomeFungo, $date,$_SESSION["email"]);
+        return  $stmt->execute();
+    }
+
     public function updateRicetta($titolo, $difficolta, $descrizione, $procedimento, $consigli, $valEnergetico, $proteine, $grassi, $carboidrati, $fibre, $sodio, $chiave)
     {
         if (!isset($_SESSION["email"])) {
@@ -82,10 +94,29 @@ class DatabaseHelper
         return $stmt->execute();
     }
 
+
+    public function updateProdotto($nomeFungo,$descrizione,$quantità,$prezzoUnità,$idProdotto){
+        if (!isset($_SESSION["email"])) {
+            die("utente non loggato");
+        }
+        $stmt = $this->db->prepare('update prodotto set nomeFungo=? ,informazioni=?, quantità=?, prezzoPerUnità=? where codice=? and offerente=?');
+        $stmt->bind_param("ssidis", $nomeFungo, $descrizione,$quantità,$prezzoUnità,$idProdotto,$_SESSION["email"]);
+        $stmt->execute();
+    }
+
     public function imagesRecipe($titolo)
     {
         $stmt = $this->db->prepare("select nome from immaginericetta  where titoloRicetta = ?;");
         $stmt->bind_param('s', $titolo);
+        $stmt->execute();
+        $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        return $result;
+    }
+
+    public function imagesProduct($codice)
+    {
+        $stmt = $this->db->prepare("select nome from immagineprodotto where codProdotto = ?;");
+        $stmt->bind_param('i', $codice);
         $stmt->execute();
         $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
         return $result;
@@ -101,6 +132,17 @@ class DatabaseHelper
         $result = $stmt->execute();
         return $result;
     }
+    
+    public function removeImageFromProduct($nome, $codice)
+    {
+        if (!isUserLoggedIn()) {
+            die('utente non loggato');
+        }
+        $stmt = $this->db->prepare("delete from immagineprodotto where nome = ? and codProdotto = ?;");
+        $stmt->bind_param('si', $nome, $codice);
+        $result = $stmt->execute();
+        return $result;
+    }
     public function insertImageToRecipe($nome, $titolo)
     {
         if (!isUserLoggedIn()) {
@@ -112,6 +154,17 @@ class DatabaseHelper
         return $result;
     }
 
+    
+    public function insertImgToProduct($nome, $codice)
+    {
+        if (!isUserLoggedIn()) {
+            die('utente non loggato');
+        }
+        $stmt = $this->db->prepare("insert into immagineprodotto(`codProdotto`,`nome`) values (?,?)");
+        $stmt->bind_param('is', $codice, $nome);
+        $result = $stmt->execute();
+        return $result;
+    }
     public function getProducts()
     {
         $query = "SELECT p.nomeFungo, p.prezzoPerUnità, p.quantità, p.codice, p.data, i.nome as img, u.username
@@ -185,6 +238,19 @@ class DatabaseHelper
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function getProdottiUtente(){
+        if (!isUserLoggedIn()) {
+            die("Error: utente non loggato");
+        }
+        $query = "SELECT p.*
+                  FROM prodotto p JOIN utente u ON (p.offerente = u.email)  
+                  WHERE u.email = ?;";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("s", $_SESSION["email"]);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+
     public function deleteRicetta($titolo)
     {
         if (!isUserLoggedIn()) {
@@ -194,6 +260,23 @@ class DatabaseHelper
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("ss", $titolo, $_SESSION['email']);
         $stmt->execute();
+    }
+
+    public function deleteProdotto($codice){
+        if (!isUserLoggedIn()) {
+            die("Utente non loggato");
+        }
+        $query = "delete from prodotto where codice=? and offerente=?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("is", $codice, $_SESSION['email']);
+        $stmt->execute();
+    }
+
+    public function getNomiScientificiFunghi(){
+        $query = "select nomeScientifico from tipologiafungo";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
     //?
     public function getRecipes()

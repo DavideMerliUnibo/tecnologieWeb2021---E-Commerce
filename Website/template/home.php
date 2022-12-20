@@ -15,16 +15,13 @@
             </form>
             <div class="offcanvas offcanvas-start" id="offcanvasMenu">
                 <div class="offcanvas-body">
-                    <ul class="list-group">
-                        <li class="list-group-item active"><a class="btn" id="gestisciRicetteButton" href="http://localhost/tecnologieWeb2021---E-Commerce/Website/home-utente.php?action=gestisciRicette">Gestisci ricette</a></li>
-                        <li class="list-group-item"><a class="btn" id="acquistiPassatiButton" href="http://localhost/tecnologieWeb2021---E-Commerce/Website/home-utente.php?action=acquistiPassati">Acquisti passati</a></li>
-                    </ul>
+                    <a class="btn" id="gestisciRicetteButton" href="/tecnologieWeb2021---E-Commerce/Website/home-utente.php?action=gestisciRicette">Gestisci ricette</a>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col">
-                <section>
+                <section id="innerTemplate">
                     <?php 
                         require($templateParams['inner']);
                     ?>

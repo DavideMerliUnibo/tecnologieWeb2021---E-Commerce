@@ -1,5 +1,5 @@
 <?php
-require("/xampp/htdocs/tecnologieWeb2021---E-Commerce/Website/bootstrap.php");
+require("bootstrap.php");
 if (isUserLoggedIn()) {
     if (isset($_POST["action"])) {
         switch ($_POST["action"]) {
@@ -12,6 +12,7 @@ if (isUserLoggedIn()) {
                 header("Content-type: application/json");
                 $ricette = $dbh->getRicetteUtente();
                 echo json_encode($ricette);
+                break;
             case "insert":
                 if (isset($_POST["submitRicetta"])) {
                     $data = json_decode($_POST["data"], true);
