@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <?php $prodotto = $templateParams["prodotto"][0]; ?>
 <?php $immagini = $templateParams["immagini"]; ?>
 <?php $recensioni = $templateParams["recensioni"]; ?>
@@ -130,8 +131,12 @@
                                 <img src="img/profile.png" alt="" height="100"/>
                             </div>
                             <div class="col-8 col-lg-10">
+                                <div class="col-8 col-lg-10">
                                 <p><strong><?php echo $recensione["titolo"]; ?></strong></p>
                                 <p>by <strong><?php echo $recensione["username"]; ?></strong></p>
+                                <?php for($i=0;$i<intval($recensione["valutazione"]);$i++) {
+                                    echo '<span style="color:orange;" class="fa fa-star checked"></span>';
+                                }?>
                                 <p><?php echo $recensione["contenuto"]; ?></p>
                                 <p><small class="text-muted"><?php echo $recensione["data"]; ?></small></p>
                             </div>
