@@ -9,31 +9,31 @@ $acquisti = $dbh->getAcquisti();
 
 <h2 class="text-center py-2">Acquisti passati</h2>
 
-<list>
-    <?php if($acquisti != NULL): ?>
-    <table class="table text-center table-sm">
+<?php if($acquisti != NULL): ?>
+<div class="table-responsive">
+    <table id="tab" class="table table-striped text-center table-sm" style="white-space:nowrap;">
         <thead class="table-light">
             <th>Data</th>
             <th>Fungo</th>
             <th>Quantità</th>
             <th>Totale</th>
         </thead>
-        
     
-        <?php foreach($acquisti as $acquisto): ?>
         <tbody>
-            <td><?php echo $acquisto["data"]; ?></th>
-            <td><?php echo $acquisto["nomeFungo"]; ?></th>
-            <td><?php echo $acquisto["quantità"]; ?></th>
-            <td><?php echo $acquisto["totale"]; ?> €</th>
-        </tbody>
+        <?php foreach($acquisti as $acquisto): ?>
+            <tr>
+                <td><?php echo $acquisto["data"]; ?></td>
+                <td><?php echo $acquisto["nomeFungo"]; ?></td>
+                <td><?php echo $acquisto["quantità"]; ?></td>
+                <td><?php echo $acquisto["totale"]; ?> €</td>
+            </tr>
         <?php endforeach; ?>
+        </tbody>
     
     </table>
-    <?php endif; ?>
+</div>
+<?php endif; ?>
 
-    <?php if($acquisti == NULL): ?>
-        <div class="text-center">Nessun acquisto trovato</div>
-    <?php endif; ?>
-    
-</list>
+<?php if($acquisti == NULL): ?>
+<div class="text-center">Nessun acquisto trovato</div>
+<?php endif; ?>
