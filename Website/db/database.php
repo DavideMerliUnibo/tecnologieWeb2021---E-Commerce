@@ -11,11 +11,32 @@ class DatabaseHelper
         }
     }
 
-    public function registerUser($nome, $cognome, $email, $password, $username, $indirizzo, $dataNascita)
-    {
-        $query = "insert into utente(nome,cognome,email,password,username,indirizzo,`data nascita`) values (?,?,?,?,?,?,?);";
+    public function getCurrentUser(){
+        if(!isUserLoggedIn()){
+            die("not logged in");
+        }
+        $query = " select * from utente where email=?";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('sssssss', $nome, $cognome, $email, $password, $username, $indirizzo, $dataNascita);
+        $stmt->bind_param("s",$_SESSION["email"]);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function registerUser($nome, $cognome, $email, $password, $username, $indirizzo, $dataNascita,$infoUtente)
+    {
+        $query = "insert into utente(nome,cognome,email,password,username,indirizzo,`data nascita`,`info_venditore`) values (?,?,?,?,?,?,?,?);";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('ssssssss', $nome, $cognome, $email, $password, $username, $indirizzo, $dataNascita,$infoUtente);
+        return $stmt->execute();
+    }
+
+    public function updateUser($nome, $cognome, $email, $password, $username, $indirizzo, $dataNascita,$infoUtente){
+        if(!isUserLoggedIn()){
+            die("not logged in");
+        }
+        $query = "update utente set nome=?,cognome=?,email=?,password=?,username=?,indirizzo=?,`data nascita`=?,`info_venditore`=? where email =?;";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('sssssssss', $nome, $cognome, $email, $password, $username, $indirizzo, $dataNascita,$infoUtente,$_SESSION['email']);
         return $stmt->execute();
     }
 
