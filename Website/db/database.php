@@ -472,8 +472,24 @@ class DatabaseHelper
                   FROM acquisto a, acquisto_prodotto ap, prodotto p
                   WHERE a.codice = ap.codAcquisto
                   AND ap.codProdotto = p.codice
-                  AND a.acquirente = ?
-                  LIMIT 3";
+                  AND a.acquirente = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('s', $_SESSION["email"]);
+        $stmt->execute();
+        $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        return $result;
+    }
+
+    public function getProdottiVenduti(){
+        if (!isUserLoggedIn()) {
+            die("Error: utente non loggato");
+        }
+        $query = "SELECT a.codice, a.data, a.totale, ap.quantità, p.nomeFungo, u.username
+                  FROM utente u, acquisto a, acquisto_prodotto ap, prodotto p
+                  WHERE u.email = a.acquirente
+                  AND a.codice = ap.codAcquisto
+                  AND ap.codProdotto = p.codice
+                  AND p.offerente = ?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('s', $_SESSION["email"]);
         $stmt->execute();
