@@ -54,9 +54,9 @@
         <div class="row col-12">
             <div class="col-12 col-md-10">
                 <p>Venduto da: <strong><?php echo $prodotto["username"]; ?></strong></p>
+                <p>Info venditore:</br><strong><?php echo $dbh->getUtente($prodotto["username"])[0]["info_venditore"]?> </strong></p>
                 <p>Prezzo: <strong><?php echo $prodotto["prezzoPerUnità"]; ?> €/Kg</strong></p>
-                <p>Informazioni:</p>
-                <p class="px-2"><?php echo $prodotto["informazioni"]; ?></p>
+                <p>Informazioni:</br><strong><?php echo $prodotto["informazioni"]; ?></strong></p>
             </div>
             
             <!-- Add to cart button -->

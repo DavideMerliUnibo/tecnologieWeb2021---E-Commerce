@@ -260,6 +260,20 @@ class DatabaseHelper
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function getRicetteUtenteByUsername($username)
+    {
+        $query = "SELECT r.*,im.nome as img
+                  FROM ricetta r JOIN utente u ON (r.autore = u.email) 
+                  join immaginericetta im on ( im.titoloRicetta = r.titolo)
+                  WHERE u.username = ?
+                  group by r.titolo;";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+
+
     public function getProdottiUtente(){
         if (!isUserLoggedIn()) {
             die("Error: utente non loggato");
@@ -269,6 +283,19 @@ class DatabaseHelper
                   WHERE u.email = ?;";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("s", $_SESSION["email"]);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getProdottiUtenteByUsername($username){
+        
+        $query = "SELECT p.*,ip.nome as img
+                  FROM prodotto p JOIN utente u ON (p.offerente = u.email)  
+                  join immagineprodotto ip on (p.codice = ip.codProdotto)
+                  WHERE u.username = ?
+                  group by p.codice ";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("s", $username);
         $stmt->execute();
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
@@ -517,5 +544,13 @@ class DatabaseHelper
         $stmt->execute();
         $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
         return $result;
+    }
+
+
+    public function getUtente($username){
+        $stmt = $this->db->prepare("select nome,cognome,email,indirizzo,'data nascita',username,offerteVendute,offerteInserite,mediaValutazioni,info_venditore from utente where username=?");
+        $stmt->bind_param("s",$username);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 }
