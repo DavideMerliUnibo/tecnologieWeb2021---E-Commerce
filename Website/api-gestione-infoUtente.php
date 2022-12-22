@@ -15,8 +15,6 @@ if (isUserLoggedIn()) {
                     $dbh->updateUser($user["nome"],$user["cognome"],$user["email"],$user["password"],$user["username"],$user["indirizzo"],$user["dataNascita"],$user["infoUtente"]);
                 }
                 break;
-            //finire update user
-                break;
         }
     }
 }
