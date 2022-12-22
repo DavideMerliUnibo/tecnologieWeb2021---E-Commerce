@@ -188,6 +188,7 @@ class DatabaseHelper
     }
     public function getProducts()
     {
+        //restituisce prodotti con immagine associata ma solo una tra le immagini
         $query = "SELECT p.nomeFungo, p.prezzoPerUnità, p.quantità, p.codice, p.data, i.nome as img, u.username
                   FROM prodotto p, immagineprodotto i, utente u
                   WHERE p.codice = i.codProdotto
