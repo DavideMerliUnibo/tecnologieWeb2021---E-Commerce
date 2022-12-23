@@ -289,7 +289,7 @@ class DatabaseHelper
 
     public function getProdottiUtenteByUsername($username){
         
-        $query = "SELECT p.*,ip.nome as img
+        $query = "SELECT p.*,ip.nome as img ,u.username
                   FROM prodotto p JOIN utente u ON (p.offerente = u.email)  
                   join immagineprodotto ip on (p.codice = ip.codProdotto)
                   WHERE u.username = ?
@@ -330,7 +330,7 @@ class DatabaseHelper
     //?
     public function getRecipes()
     {
-        $query = "SELECT r.titolo, r.data, r.descrizione, u.username as autore, i.nome as immagine
+        $query = "SELECT r.titolo, r.data, r.descrizione, u.username as autore, i.nome as img
                   FROM ricetta r, utente u, immaginericetta i
                   WHERE r.autore = u.email
                   AND i.titoloRicetta = r.titolo
