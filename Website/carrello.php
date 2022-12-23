@@ -9,5 +9,11 @@ if(isUserloggedIn()){
 } else {
     $templateParams["nome"] = "carrello-no-user.php";
 }
+if(isset($_POST["metodoPagamento"])){
+    echo var_dump($_POST);
+    echo var_dump("ciao");
+    die();
+}
 require("template/base.php");
+
 ?>
