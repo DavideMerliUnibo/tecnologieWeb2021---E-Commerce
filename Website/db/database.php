@@ -1,7 +1,7 @@
 <?php
 class DatabaseHelper
 {
-    private $db;
+    public $db;
 
     public function __construct($servername, $username, $password, $dbname)
     {
@@ -95,7 +95,20 @@ class DatabaseHelper
         $stmt = $this->db->prepare($query);
         $media = 0;
         $stmt->bind_param("disdsss", $prezzoUnità, $quantità, $informazioni, $media, $nomeFungo, $date, $_SESSION["email"]);
-        return  $stmt->execute();
+        if (!$stmt->execute()) {
+            return false;
+        }
+        return $this->incrementaOfferteInserite();
+    }
+
+    public function incrementaOfferteInserite()
+    {
+        if (!isUserLoggedIn()) {
+            die('utente non loggato');
+        }
+        $stmt = $this->db->prepare("update utente set offerteInserite = offerteInserite + 1 where email = ?;");
+        $stmt->bind_param("s", $_SESSION['email']);
+        return $stmt->execute();
     }
 
     public function updateRicetta($titolo, $difficolta, $descrizione, $procedimento, $consigli, $valEnergetico, $proteine, $grassi, $carboidrati, $fibre, $sodio, $chiave)
@@ -242,12 +255,18 @@ class DatabaseHelper
 
     public function addProductReview($titolo, $contenuto, $voto, $utente, $prodotto)
     {
+        if (!isUserLoggedIn()) {
+            die("utente non loggato");
+        }
         $data = date("Y/m/d");
         $query = "INSERT INTO recensione(titolo, contenuto, valutazione, data, utente, codProdotto)
                   VALUES (?, ?, ?, ?, ?, ?);";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('ssdssi', $titolo, $contenuto, $voto, $data, $utente, $prodotto);
-        $stmt->execute();
+        if ($stmt->execute()) {
+            return $this->updateMediaValutazioneProdotto($prodotto);
+        }
+        return false;
     }
 
     public function getRicetteUtente()
@@ -425,7 +444,7 @@ class DatabaseHelper
 
     public function getProductInCart($email)
     {
-        $query = 'SELECT prod.nomeFungo, pc.quantità, prod.prezzoPerUnità, prod.codice
+        $query = 'SELECT prod.nomeFungo, pc.quantità, prod.prezzoPerUnità, prod.codice, prod.offerente
                   FROM utente u JOIN carrello c ON (u.email = c.utente)
                   JOIN prodotto_carrello pc ON(pc.codCarrello = c.cod)
                   JOIN prodotto prod ON (prod.codice = pc.codProdotto)
@@ -511,11 +530,19 @@ class DatabaseHelper
 
     public function deleteReviewById($id)
     {
+        $stmt = $this->db->prepare("select codProdotto from recensione where codice =? ");
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $codProd = $stmt->get_result()->fetch_all(MYSQLI_ASSOC)[0]["codProdotto"];
+
         $query = "DELETE FROM recensione
                   WHERE codice = ?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('i', $id);
-        $stmt->execute();
+        if ($stmt->execute()) {
+            return $this->updateMediaValutazioneProdotto($codProd);
+        }
+        return false;
     }
 
     public function deleteCommentById($id)
@@ -541,7 +568,8 @@ class DatabaseHelper
         $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
         return $result;
     }
-    public function getProdottiInAcquisto($codice){
+    public function getProdottiInAcquisto($codice)
+    {
         $query = "SELECT ap.quantità, p.nomeFungo
                   FROM acquisto_prodotto ap, prodotto p
                   WHERE ap.codProdotto = p.codice
@@ -552,7 +580,7 @@ class DatabaseHelper
         $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
         return $result;
     }
-    
+
     public function getProdottiVenduti()
     {
         if (!isUserLoggedIn()) {
@@ -574,7 +602,7 @@ class DatabaseHelper
 
     public function getUtente($username)
     {
-        $stmt = $this->db->prepare("select nome,cognome,email,indirizzo,'data nascita',username,offerteVendute,offerteInserite,mediaValutazioni,info_venditore from utente where username=?");
+        $stmt = $this->db->prepare("select nome,cognome,email,indirizzo,'data nascita',username,funghiVendutiKg,offerteInserite,mediaValutazioni,info_venditore from utente where username=?");
         $stmt->bind_param("s", $username);
         $stmt->execute();
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
@@ -676,9 +704,18 @@ class DatabaseHelper
             if (!$ok) {
                 return false;
             }
+            if (!$this->incrementaFunghiVendutiKg($prod["quantità"], $prod["offerente"])) {
+                return false;
+            }
         }
         return $this->subtractProducts();
-          
+    }
+
+    public function incrementaFunghiVendutiKg($kg, $emailVenditore)
+    {
+        $stmt = $this->db->prepare("update utente set funghiVendutiKg = funghiVendutiKg + ? where email = ?;");
+        $stmt->bind_param("is", $kg, $emailVenditore);
+        return $stmt->execute();
     }
 
     public function svuotaCarrello()
@@ -729,5 +766,30 @@ class DatabaseHelper
             }
         }
         return true;
+    }
+
+
+    public function updateMediaValutazioneProdotto($codProd)
+    {
+        if (!isUserLoggedIn()) {
+            die("utente non loggato");
+        }
+        $stmt = $this->db->prepare("update prodotto set mediaValutazione = (select avg(r.valutazione) from recensione r where r.codProdotto=? group by codProdotto) where codice = ?;");
+        $stmt->bind_param("ii", $codProd, $codProd);
+        if ($stmt->execute()) {
+            $offerente = $this->getProductById($codProd)[0]["offerente"];
+            return $this->updateMediaValutazioniUtente($offerente);
+        }
+        return false;
+    }
+
+    public function updateMediaValutazioniUtente($email)
+    {
+        if (!isUserLoggedIn()) {
+            die("utente non loggato");
+        }
+        $stmt = $this->db->prepare("update utente set mediaValutazioni = (select avg(mediaValutazione) from prodotto where offerente = ?) where email = ?");
+        $stmt->bind_param("ss", $email, $email);
+        return $stmt->execute();
     }
 }

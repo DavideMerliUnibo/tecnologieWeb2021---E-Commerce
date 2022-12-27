@@ -13,7 +13,7 @@ $user = $templateParams["user"];
             <p><strong>Email:</strong> <?php echo $user["email"] ?></p>
             <p><strong>Indirizzo:</strong> <?php echo $user["indirizzo"] ?></p>
             <p><strong>Data di nascita:</strong> <?php echo $user["data nascita"] ?></p>
-            <p><strong>Offerte vendute:</strong> <?php echo $user["offerteVendute"] ?></p>
+            <p><strong>Kg di funghi venduti:</strong> <?php echo $user["funghiVendutiKg"] ?></p>
             <p><strong>Offerte inserite:</strong> <?php echo $user["offerteInserite"] ?></p>
             <p><strong>Media Valutazioni:</strong> <?php echo $user["mediaValutazioni"] ?></p>
             <p><strong>Info Venditore:</strong> <?php echo $user["info_venditore"] ?></p>
