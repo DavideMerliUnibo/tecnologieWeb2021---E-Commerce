@@ -9,5 +9,14 @@ if(isUserloggedIn()){
 } else {
     $templateParams["nome"] = "carrello-no-user.php";
 }
+if(isset($_POST["metodoPagamento"]) && isset($_POST["nomeCarta"]) && isset($_POST["numeroCarta"]) 
+    && isset($_POST["scadenzaCarta"]) && isset($_POST["ccvCarta"]) ){
+        $result = $dbh->insertAcquisto($_POST["metodoPagamento"],$_POST["nomeCarta"], $_POST["numeroCarta"],$_POST["scadenzaCarta"],$_POST["ccvCarta"]);
+        echo $result;
+        if( $result=="success"){
+            //far comparire popup o qualcosa per avvertire che ordine è andato a buon fine. (anche un altra pagina volendo).
+        }
+}
 require("template/base.php");
+
 ?>

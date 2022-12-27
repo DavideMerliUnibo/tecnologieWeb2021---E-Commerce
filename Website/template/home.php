@@ -15,7 +15,13 @@
             </form>
             <div class="offcanvas offcanvas-start" id="offcanvasMenu">
                 <div class="offcanvas-body">
-                    <a class="btn" id="gestisciRicetteButton" href="/tecnologieWeb2021---E-Commerce/Website/home-utente.php?action=gestisciRicette">Gestisci ricette</a>
+                    <div class="vstack mt-2">
+                        <a class="btn" id="gestisciRicetteButton" href="/tecnologieWeb2021---E-Commerce/Website/home-utente.php?action=gestisciRicette">Gestisci ricette</a>
+                        <a class="btn" id="" href="/tecnologieWeb2021---E-Commerce/Website/home-utente.php?action=gestisciProdotti">Gestisci prodotti</a>
+                        <a class="btn" id="" href="/tecnologieWeb2021---E-Commerce/Website/home-utente.php?action=gestisciInfoUtente">Gestisci info Utente</a>
+                        <a class="btn" id="" href="/tecnologieWeb2021---E-Commerce/Website/home-utente.php?action=visualizzaProdottiVenduti">Visualizza prodotti venduti</a>
+                        <a class="btn" id="" href="/tecnologieWeb2021---E-Commerce/Website/home-utente.php?action=visualizzaAcquisti">Visualizza acquisti passati</a>
+                    </div>
                 </div>
             </div>
         </div>

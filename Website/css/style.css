@@ -46,10 +46,12 @@ a#logo:hover img {
     }
 }
 
-img{
-    max-height: 300px;
-}
 
 a#carrelloBtnLetters{
     color: white;
+}
+
+img{
+    max-width: 300px;
+    max-height: 300px;
 }
