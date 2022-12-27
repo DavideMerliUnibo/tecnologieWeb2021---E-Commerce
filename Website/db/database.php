@@ -468,17 +468,28 @@ class DatabaseHelper
         if (!isUserLoggedIn()) {
             die("Error: utente non loggato");
         }
-        $query = "SELECT a.data, a.totale, ap.quantità, p.nomeFungo
-                  FROM acquisto a, acquisto_prodotto ap, prodotto p
-                  WHERE a.codice = ap.codAcquisto
-                  AND ap.codProdotto = p.codice
-                  AND a.acquirente = ?";
+        $query = "SELECT codice, data, totale
+                  FROM acquisto
+                  WHERE acquirente = ?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('s', $_SESSION["email"]);
         $stmt->execute();
         $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
         return $result;
     }
+
+    public function getProdottiInAcquisto($codice){
+        $query = "SELECT ap.quantità, p.nomeFungo
+                  FROM acquisto_prodotto ap, prodotto p
+                  WHERE ap.codProdotto = p.codice
+                  AND ap.codAcquisto = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('i', $codice);
+        $stmt->execute();
+        $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        return $result;
+    }
+    
 
     public function getProdottiVenduti(){
         if (!isUserLoggedIn()) {
