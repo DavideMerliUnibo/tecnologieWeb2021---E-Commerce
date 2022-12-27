@@ -11,7 +11,7 @@ $acquisti = $dbh->getAcquisti();
 
 <?php if($acquisti != NULL): ?>
 <div class="table-responsive">
-    <table id="tab" class="table table-striped text-center table-sm" style="white-space:nowrap;">
+    <table id="tab" class="table text-center align-middle table-sm" style="white-space:nowrap;">
         <thead class="table-light">
             <th>Data</th>
             <th>Fungo</th>
@@ -21,12 +21,20 @@ $acquisti = $dbh->getAcquisti();
     
         <tbody>
         <?php foreach($acquisti as $acquisto): ?>
+            <?php $prodotti = $dbh->getProdottiInAcquisto($acquisto["codice"]); ?>
+            <?php $len = count($prodotti); ?>
             <tr>
-                <td><?php echo $acquisto["data"]; ?></td>
-                <td><?php echo $acquisto["nomeFungo"]; ?></td>
-                <td><?php echo $acquisto["quantità"]; ?></td>
-                <td><?php echo $acquisto["totale"]; ?> €</td>
+                <td rowspan=<?php echo $len; ?> ><?php echo $acquisto["data"]; ?></td>
+                <td><?php echo $prodotti[0]["nomeFungo"]; ?></td>
+                <td><?php echo $prodotti[0]["quantità"]; ?></td>
+                <td rowspan=<?php echo $len; ?> ><?php echo $acquisto["totale"]; ?> €</td>
             </tr>
+            <?php for($i = 1; $i < $len; $i = $i + 1):?>
+            <tr>
+                <td><?php echo $prodotti[$i]["nomeFungo"]; ?></td>
+                <td><?php echo $prodotti[$i]["quantità"]; ?></td>
+            </tr>
+            <?php endfor;?>
         <?php endforeach; ?>
         </tbody>
     
