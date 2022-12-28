@@ -1,7 +1,7 @@
 <?php $prodotto = $templateParams["prodotto"][0]; ?>
 <?php $immagini = $templateParams["immagini"]; ?>
 <?php $recensioni = $templateParams["recensioni"]; ?>
-<?php $thisPage = "http://localhost/tecnologieWeb2021---E-Commerce/Website/product.php?prodotto=" . $prodotto["codice"]; ?>
+<?php $thisPage = "/tecnologieWeb2021---E-Commerce/Website/product.php?prodotto=" . $prodotto["codice"]; ?>
 
 <!-- Funzione per aggiungere una recensione -->
 <?php
@@ -9,9 +9,14 @@ if (isset($_POST["addReview"]) && isUserLoggedIn()) {
     $titolo = $_POST["titoloRecensione"];
     $contenuto = $_POST["contenutoRecensione"];
     $voto = $_POST["votoRecensione"];
-    $dbh->addProductReview($titolo, $contenuto, $voto, $_SESSION["email"], $prodotto["codice"]);
-    header("Location: " . $thisPage);
-    unset($_POST["addReview"]);
+    //$errorRecensione = false;
+    $res = $dbh->addProductReview($titolo, $contenuto, $voto, $_SESSION["email"], $prodotto["codice"]);
+    if ($res === "Recensione utente già presente") {
+        $errorRecensione = true;
+    } else {
+        header("Location: " . $thisPage);
+        unset($_POST["addReview"]);
+    }
 }
 ?>
 <!-- Funzione per eliminare una recensione -->
@@ -195,6 +200,12 @@ if (isset($_POST["addReview"]) && isUserLoggedIn()) {
         <div class="text-center">
             <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">Aggiungi Recensione</button>
         </div>
+        <?php
+        if (isset($errorRecensione)) : ?>
+            <p class="text-danger"> Recensione utente già presente</p>
+        <?php
+            unset($errorRecensione);
+        endif; ?>
     </div>
     </div>
 </main>

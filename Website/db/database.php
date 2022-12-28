@@ -258,6 +258,9 @@ class DatabaseHelper
         if (!isUserLoggedIn()) {
             die("utente non loggato");
         }
+        if(!$this->checkProdottoNotReviewed($prodotto,$utente)){
+            return "Recensione utente già presente";
+        }
         $data = date("Y/m/d");
         $query = "INSERT INTO recensione(titolo, contenuto, valutazione, data, utente, codProdotto)
                   VALUES (?, ?, ?, ?, ?, ?);";
@@ -269,6 +272,20 @@ class DatabaseHelper
         return false;
     }
 
+    public function checkProdottoNotReviewed($codProd,$utente){
+        $stmt = $this->db->prepare("select * from recensione where codProdotto = ? and utente = ?;");
+        $stmt->bind_param("is",$codProd,$utente);
+        $stmt->execute();
+        $res = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        return count($res)==0;
+    }
+    public function checkRicettaNotReviewed($ricetta,$autore){
+        $stmt = $this->db->prepare("select * from commento where ricetta = ? and autore = ?;");
+        $stmt->bind_param("ss",$ricetta,$autore);
+        $stmt->execute();
+        $res = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        return count($res)==0;
+    }
     public function getRicetteUtente()
     {
         if (!isUserLoggedIn()) {
@@ -434,6 +451,12 @@ class DatabaseHelper
 
     public function addRecipeComment($contenuto, $autore, $ricetta)
     {
+        if (!isUserLoggedIn()) {
+            die("utente non loggato");
+        }
+        if(!$this->checkRicettaNotReviewed($ricetta,$autore)){
+            return "Commento utente già presente";
+        }
         $data = date("Y/m/d");
         $query = "INSERT INTO commento(contenuto, data, autore, ricetta)
                   VALUES (?, ?, ?, ?);";
