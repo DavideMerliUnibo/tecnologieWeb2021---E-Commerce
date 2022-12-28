@@ -258,6 +258,9 @@ class DatabaseHelper
         if (!isUserLoggedIn()) {
             die("utente non loggato");
         }
+        if(!$this->checkOfferenteProdotto($prodotto)){
+            return "Recensione non consentita su proprio prodotto";
+        }
         if(!$this->checkProdottoNotReviewed($prodotto,$utente)){
             return "Recensione utente già presente";
         }
@@ -268,6 +271,20 @@ class DatabaseHelper
         $stmt->bind_param('ssdssi', $titolo, $contenuto, $voto, $data, $utente, $prodotto);
         if ($stmt->execute()) {
             return $this->updateMediaValutazioneProdotto($prodotto);
+        }
+        return false;
+    }
+
+    public function checkOfferenteProdotto($codProd){
+        if (!isUserLoggedIn()) {
+            die("utente non loggato");
+        }
+        $stmt = $this->db->prepare("select offerente from prodotto where codice = ?");
+        $stmt->bind_param("i",$codProd);
+        $stmt->execute();
+        $res = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        if(count($res)>0){
+            return $res[0]["offerente"] !== $_SESSION['email'];
         }
         return false;
     }
@@ -454,6 +471,9 @@ class DatabaseHelper
         if (!isUserLoggedIn()) {
             die("utente non loggato");
         }
+        if(!$this->checkAutoreRicetta($ricetta)){
+            return "Commento non consentito su propria ricetta";
+        }
         if(!$this->checkRicettaNotReviewed($ricetta,$autore)){
             return "Commento utente già presente";
         }
@@ -463,6 +483,20 @@ class DatabaseHelper
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('ssss', $contenuto, $data, $autore, $ricetta);
         $stmt->execute();
+    }
+
+    public function checkAutoreRicetta($ricetta){
+        if (!isUserLoggedIn()) {
+            die("utente non loggato");
+        }
+        $stmt = $this->db->prepare("select autore from ricetta where titolo = ?");
+        $stmt->bind_param("s",$ricetta);
+        $stmt->execute();
+        $res = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        if(count($res)>0){
+            return $res[0]["autore"] !== $_SESSION['email'];
+        }
+        return false;
     }
 
     public function getProductsInCart($email)

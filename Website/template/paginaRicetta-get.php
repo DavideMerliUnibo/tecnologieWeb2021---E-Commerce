@@ -10,8 +10,10 @@ if (isset($_POST["addComment"]) && isUserLoggedIn()) {
     $contenuto = $_POST["contenutoCommento"];
     $res = $dbh->addRecipeComment($contenuto, $_SESSION["email"], $ricetta["titolo"]);
     if ($res === "Commento utente già presente") {
-        $errorCommento = true;
-    } else {
+        $errorCommento = 1;
+    } else if($res === "Commento non consentito su propria ricetta"){
+        $errorCommento = 2;
+    }else {
         header("Location: " . $thisPage);
         unset($_POST["addComment"]);
     }
@@ -206,8 +208,10 @@ if (isset($_POST["addComment"]) && isUserLoggedIn()) {
             <div class="text-center">
                 <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Aggiungi Commento</button>
             </div>
-            <?php if (isset($errorCommento)) : ?>
-                <p class="text-danger"> Commento utente già presente </p>
+            <?php if (isset($errorCommento) && $errorCommento ===1) : ?>
+                <p class="text-danger text-center"> Commento utente già presente </p>
+            <?php elseif(isset($errorCommento) && $errorCommento ===2) :?>
+                <p class="text-danger text-center"> Non puoi commentare una tua ricetta </p>
             <?php
                 unset($errorCommento);
             endif; ?>

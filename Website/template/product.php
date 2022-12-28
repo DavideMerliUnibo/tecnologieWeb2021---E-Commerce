@@ -12,7 +12,9 @@ if (isset($_POST["addReview"]) && isUserLoggedIn()) {
     //$errorRecensione = false;
     $res = $dbh->addProductReview($titolo, $contenuto, $voto, $_SESSION["email"], $prodotto["codice"]);
     if ($res === "Recensione utente già presente") {
-        $errorRecensione = true;
+        $errorRecensione = 1;
+    } else if ($res === "Recensione non consentita su proprio prodotto") {
+        $errorRecensione = 2;
     } else {
         header("Location: " . $thisPage);
         unset($_POST["addReview"]);
@@ -201,8 +203,10 @@ if (isset($_POST["addReview"]) && isUserLoggedIn()) {
             <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">Aggiungi Recensione</button>
         </div>
         <?php
-        if (isset($errorRecensione)) : ?>
-            <p class="text-danger"> Recensione utente già presente</p>
+        if (isset($errorRecensione) && $errorRecensione===1) : ?>
+            <p class="text-danger text-center"> Recensione utente già presente</p>
+        <?php elseif(isset($errorRecensione) && $errorRecensione===2) : ?>   
+            <p class="text-danger text-center"> Non puoi recensire un tuo prodotto.</p>
         <?php
             unset($errorRecensione);
         endif; ?>
