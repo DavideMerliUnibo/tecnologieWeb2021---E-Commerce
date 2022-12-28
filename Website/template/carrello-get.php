@@ -1,4 +1,17 @@
-    <div class="container mt-3">
+<?php if(isset($templateParams["toast"])){
+    switch($templateParams["toast"]){
+        case "success":
+            echo '<script type="text/javascript">toastr.success("Acquisto completato!");</script>';
+            $dbh -> insertNotifica("Acquisto completato!", $_SESSION["email"]);
+            break;
+        case "error":
+            echo '<script type="text/javascript">toastr.error("Errore nell\'acquisto!");</script>';
+            break;
+    }
+    unset($templateParams["toast"]);
+}?>
+
+<div class="container mt-3">
         <div class="row">
             <div class="col-12">
                 <h1 class="text-center mb-3">Carrello</h1>
@@ -90,8 +103,9 @@
             <input type="text" class="form-control" id="cc-cvv" placeholder="" required="" name="ccvCarta">
             <div class="invalid-feedback"> Inserire il codice di sicurezza è necessario </div>
         </div>
+
         <div class="col-12 d-flex justify-content-center">
-            <button type="submit" class="btn btn-dark">Checkout</button>
+            <button id="add" type="submit" class="btn btn-dark">Checkout</button>
         </div>
 
     </form>
