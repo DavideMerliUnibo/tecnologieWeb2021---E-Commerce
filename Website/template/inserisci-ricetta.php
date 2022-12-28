@@ -31,7 +31,7 @@
             },
             cache: false,
             success: function(result) {
-                window.location="http://localhost/tecnologieWeb2021---E-Commerce/Website/home-utente.php?action=gestisciRicette";
+                window.location="http://localhost/tecnologieWeb2021---E-Commerce/Website/home-utente.php?action=gestisciRicette&toast=addRec";
             }
         });
         return false;
