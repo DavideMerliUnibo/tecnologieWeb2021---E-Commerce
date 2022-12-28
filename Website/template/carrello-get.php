@@ -16,9 +16,16 @@
                                     echo $prodotto["prezzoPerUnità"], " €/Kg ";
                                     ?>
                                 </span>
-                                <p class="w-50 ms-auto me-0 justify-content-end d-flex align-items-center">
-                                    <input type="number" class="w-50 mt-2" value="<?php echo $prodotto["quantità"]; ?>"></input>
-                                </p>
+                                <?php if (!$dbh->checkDisponibilitàProdottoCarrello($prodotto["codice"])) : ?>
+                                    <p class=" ms-auto me-0 justify-content-end d-flex align-items-center text-danger">
+                                        Non disponibile
+                                    </p>
+                                <?php else : ?>
+                                    <p class="w-50 ms-auto me-0 justify-content-end d-flex align-items-center">
+                                        <input type="number" class="w-50 mt-2" value="<?php echo $prodotto["quantità"]; ?>"></input>
+                                    </p>
+                                <?php endif ?>
+
                             </div>
 
                             <!-- Delete button -->

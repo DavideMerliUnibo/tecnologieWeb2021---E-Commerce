@@ -66,7 +66,7 @@
                             echo '<li class="nav-item">Devi loggarti per vedere il carrello</li>';   
                         }
                         else{
-                            $templateParams["prodottiCarrello"] = $dbh-> getProductInCart($_SESSION['email']);
+                            $templateParams["prodottiCarrello"] = $dbh-> getProductsInCart($_SESSION['email']);
                             if(count($templateParams["prodottiCarrello"])==0){
                                 echo '<li class="nav-item">Carrello Vuoto</li>';   
                             } else{

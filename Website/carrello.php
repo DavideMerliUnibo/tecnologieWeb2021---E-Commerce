@@ -4,7 +4,7 @@ require_once("bootstrap.php");
 
 $templateParams["title"] = "Funghi - Carrello";
 if(isUserloggedIn()){
-    $templateParams["prodottiCarrello"] = $dbh-> getProductInCart($_SESSION['email']);
+    $templateParams["prodottiCarrello"] = $dbh-> getProductsInCart($_SESSION['email']);
     $templateParams["nome"] = "carrello-get.php";
 } else {
     $templateParams["nome"] = "carrello-no-user.php";
@@ -15,6 +15,7 @@ if(isset($_POST["metodoPagamento"]) && isset($_POST["nomeCarta"]) && isset($_POS
         echo $result;
         if( $result=="success"){
             //far comparire popup o qualcosa per avvertire che ordine è andato a buon fine. (anche un altra pagina volendo).
+            //gestire casi d'errore
         }
 }
 require("template/base.php");

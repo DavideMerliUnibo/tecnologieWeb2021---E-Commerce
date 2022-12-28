@@ -37,7 +37,11 @@ $user = $templateParams["user"];
                             <h3 class="mb-2 text-start"><a href="product.php?prodotto=<?php echo $prodotti[$i]["codice"]; ?>"><?php echo $prodotti[$i]["nomeFungo"]; ?></a></h3>
                             <p><?php echo substr($prodotti[$i]["informazioni"], 0, 45) . ".."; ?></p>
                             <div class="d-flex justify-content-between">
-                                <p><?php echo $prodotti[$i]["quantità"]; ?> in stock</p>
+                                <?php if ($prodotti[$i]["quantità"] <= 0) : ?>
+                                    <p class="text-danger">Non disponibile</p>
+                                <?php else : ?>
+                                    <p><?php echo $prodotti[$i]["quantità"]; ?> in stock</p>
+                                <?php endif; ?>
                                 <p><strong><?php echo $prodotti[$i]["prezzoPerUnità"]; ?> €/Kg</strong></p>
                             </div>
                         </div>
@@ -46,7 +50,7 @@ $user = $templateParams["user"];
             <?php endfor; ?>
             <div class="row">
                 <div class="d-flex col-12">
-                    <button class="ms-auto me-4 btn btn-secondary btn-sm ml-auto"><a href="shop.php?username=<?php echo $user["username"]?>">Vedi altro..</a> </button>
+                    <button class="ms-auto me-4 btn btn-secondary btn-sm ml-auto"><a href="shop.php?username=<?php echo $user["username"] ?>">Vedi altro..</a> </button>
                 </div>
             </div>
         </div>
@@ -75,7 +79,7 @@ $user = $templateParams["user"];
                 </section>
                 <div class="row">
                     <div class="d-flex col-12">
-                        <button class="ms-auto me-4 btn btn-secondary btn-sm ml-auto"><a href="ricette.php?username=<?php echo $user["username"]?>">Vedi altro..</a> </button>
+                        <button class="ms-auto me-4 btn btn-secondary btn-sm ml-auto"><a href="ricette.php?username=<?php echo $user["username"] ?>">Vedi altro..</a> </button>
                     </div>
                 </div>
 

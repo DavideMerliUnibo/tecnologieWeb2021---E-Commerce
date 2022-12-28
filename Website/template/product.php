@@ -66,7 +66,7 @@ if (isset($_POST["addReview"]) && isUserLoggedIn()) {
                             <div class="modal-body">
                                 <p>Info venditore:</br><strong><?php echo $dbh->getUtente($prodotto["username"])[0]["info_venditore"] ?> </strong></p>
                             </div>
-                
+
                         </div>
                     </div>
                 </div>
@@ -74,22 +74,27 @@ if (isset($_POST["addReview"]) && isUserLoggedIn()) {
                 <p>Informazioni:</br><strong><?php echo $prodotto["informazioni"]; ?></strong></p>
                 <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#modalInfoVenditore">
                     Visualizza Info Venditore
-            </button>
+                </button>
 
             </div>
 
             <!-- Add to cart button -->
+
             <div class="text-center col-6 col-md-2 mx-auto my-auto">
-                <label for="sel" class="my-1">Scegli quantità:</label>
-                <form method="post">
-                    <select class="form-control text-center my-1" name="sel" style:="width: 50;">
-                        <?php
-                        for ($i = 1; $i <= $prodotto["quantità"]; $i++) {
-                            echo '<option>', $i, '</option>';
-                        } ?>
-                    </select>
-                    <input type="submit" name="quantity" value="Aggiungi al carrello" class="btn btn-warning my-1"></input>
-                </form>
+                <?php if ($prodotto["quantità"] <= 0) : ?>
+                    <p class="text-danger"> Prodotto non disponibile </p>
+                <?php else : ?>
+                    <label for="sel" class="my-1">Scegli quantità:</label>
+                    <form method="post">
+                        <select class="form-control text-center my-1" name="sel" style:="width: 50;">
+                            <?php
+                            for ($i = 1; $i <= $prodotto["quantità"]; $i++) {
+                                echo '<option>', $i, '</option>';
+                            } ?>
+                        </select>
+                        <input  type="submit" name="quantity" value="Aggiungi al carrello" class="btn btn-warning my-1"></input>
+                    </form>
+                <?php endif; ?>
                 <?php
                 if (isset($_POST["quantity"])) {
                     $quantità = $_POST["sel"];

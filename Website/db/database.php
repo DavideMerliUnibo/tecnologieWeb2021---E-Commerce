@@ -442,7 +442,7 @@ class DatabaseHelper
         $stmt->execute();
     }
 
-    public function getProductInCart($email)
+    public function getProductsInCart($email)
     {
         $query = 'SELECT prod.nomeFungo, pc.quantità, prod.prezzoPerUnità, prod.codice, prod.offerente
                   FROM utente u JOIN carrello c ON (u.email = c.utente)
@@ -502,7 +502,7 @@ class DatabaseHelper
                   FROM prodotto p, immagineprodotto i, utente u
                   WHERE p.codice = i.codProdotto
                   AND p.offerente = u.email
-                  GROUP BY p.codice
+                  AND p.quantità > 0 
                   ORDER BY p.data DESC
                   LIMIT ?";
         $stmt = $this->db->prepare($query);
@@ -696,7 +696,7 @@ class DatabaseHelper
         if (!isUserLoggedIn()) {
             return false;
         }
-        $prodotti = $this->getProductInCart($_SESSION["email"]);
+        $prodotti = $this->getProductsInCart($_SESSION["email"]);
         foreach ($prodotti as $prod) {
             $stmt = $this->db->prepare("insert into acquisto_prodotto(codProdotto,codAcquisto,quantità) values (?,?,?);");
             $stmt->bind_param("iii", $prod["codice"], $codAcquisto, $prod["quantità"]);
@@ -734,7 +734,7 @@ class DatabaseHelper
         if (!isUserLoggedIn()) {
             return false;
         }
-        $prodInCart = $this->getProductInCart($_SESSION["email"]);
+        $prodInCart = $this->getProductsInCart($_SESSION["email"]);
         foreach ($prodInCart as $prod) {
             $qtyCart = $prod["quantità"];
             $qtyProd = $this->getProductById($prod["codice"])[0]["quantità"];
@@ -745,12 +745,48 @@ class DatabaseHelper
         return true;
     }
 
+    public function getProductInCart($email, $codProd)
+    {
+        if (!isUserLoggedIn()) {
+            die("utente non loggato");
+        }
+        $query = 'SELECT prod.nomeFungo, pc.quantità, prod.prezzoPerUnità, prod.codice, prod.offerente
+                  FROM utente u JOIN carrello c ON (u.email = c.utente)
+                  JOIN prodotto_carrello pc ON(pc.codCarrello = c.cod)
+                  JOIN prodotto prod ON (prod.codice = pc.codProdotto)
+                  WHERE u.email = ? 
+                  AND prod.codice = ?';
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('si', $email, $codProd);
+        $stmt->execute();
+        $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        return $result;
+    }
+
+    public function checkDisponibilitàProdottoCarrello($codProd)
+    {
+        if (!isUserLoggedIn()) {
+            die("utente non loggato");
+        }
+        $prod = $this->getProductInCart($_SESSION["email"], $codProd);
+        if (count($prod) > 0) {
+            $qtyCart = $prod[0]["quantità"];
+            $qtyProd = $this->getProductById($prod[0]["codice"])[0]["quantità"];
+            if ($qtyCart > $qtyProd) {
+                return false;
+            }
+            return true;
+        }
+        return false;
+    }
+
+
     public function subtractProducts()
     {
         if (!isUserLoggedIn()) {
             return false;
         }
-        $prodInCart = $this->getProductInCart($_SESSION["email"]);
+        $prodInCart = $this->getProductsInCart($_SESSION["email"]);
         foreach ($prodInCart as $prod) {
             $qtyCart = $prod["quantità"];
             $qtyProd = $this->getProductById($prod["codice"])[0]["quantità"];
