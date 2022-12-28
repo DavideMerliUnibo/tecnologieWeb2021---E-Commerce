@@ -5,7 +5,7 @@ class DatabaseHelper
 
     public function __construct($servername, $username, $password, $dbname)
     {
-        $this->db = new mysqli($servername, $username, $password, $dbname, 3340);
+        $this->db = new mysqli($servername, $username, $password, $dbname);
         if ($this->db->connect_error) {
             die("Connection failed " . $this->db->connect_error);
         }
@@ -804,7 +804,6 @@ class DatabaseHelper
         return true;
     }
 
-<<<<<<< Updated upstream
 
     public function updateMediaValutazioneProdotto($codProd)
     {
@@ -828,7 +827,8 @@ class DatabaseHelper
         $stmt = $this->db->prepare("update utente set mediaValutazioni = (select avg(mediaValutazione) from prodotto where offerente = ?) where email = ?");
         $stmt->bind_param("ss", $email, $email);
         return $stmt->execute();
-=======
+    }
+
     public function getNotifiche()
     {
         if (!isUserLoggedIn()) {
@@ -861,6 +861,5 @@ class DatabaseHelper
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('sss', $msg, $data, $user);
         $stmt->execute();
->>>>>>> Stashed changes
     }
 }
