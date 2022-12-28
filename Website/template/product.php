@@ -1,7 +1,7 @@
 <?php $prodotto = $templateParams["prodotto"][0]; ?>
 <?php $immagini = $templateParams["immagini"]; ?>
 <?php $recensioni = $templateParams["recensioni"]; ?>
-<?php $thisPage = "http://localhost/tecnologieWeb2021---E-Commerce/Website/product.php?prodotto=" . $prodotto["codice"]; ?>
+<?php $thisPage = "/tecnologieWeb2021---E-Commerce/Website/product.php?prodotto=" . $prodotto["codice"]; ?>
 
 <!-- Funzione per aggiungere una recensione -->
 <?php
@@ -9,9 +9,14 @@ if (isset($_POST["addReview"]) && isUserLoggedIn()) {
     $titolo = $_POST["titoloRecensione"];
     $contenuto = $_POST["contenutoRecensione"];
     $voto = $_POST["votoRecensione"];
-    $dbh->addProductReview($titolo, $contenuto, $voto, $_SESSION["email"], $prodotto["codice"]);
-    header("Location: " . $thisPage);
-    unset($_POST["addReview"]);
+    //$errorRecensione = false;
+    $res = $dbh->addProductReview($titolo, $contenuto, $voto, $_SESSION["email"], $prodotto["codice"]);
+    if ($res === "Recensione utente già presente") {
+        $errorRecensione = true;
+    } else {
+        header("Location: " . $thisPage);
+        unset($_POST["addReview"]);
+    }
 }
 ?>
 <!-- Funzione per eliminare una recensione -->
@@ -80,7 +85,7 @@ if (isset($_POST["addReview"]) && isUserLoggedIn()) {
 
             <!-- Add to cart button -->
 
-            <div class="text-center col-6 col-md-2 mx-auto my-auto">
+            <div class="text-center col-6 col-md-2 mx-auto my-auto ">
                 <?php if ($prodotto["quantità"] <= 0) : ?>
                     <p class="text-danger"> Prodotto non disponibile </p>
                 <?php else : ?>
@@ -92,8 +97,18 @@ if (isset($_POST["addReview"]) && isUserLoggedIn()) {
                                 echo '<option>', $i, '</option>';
                             } ?>
                         </select>
-                        <input  type="submit" name="quantity" value="Aggiungi al carrello" class="btn btn-warning my-1"></input>
+                        <?php
+                        if (isUserLoggedIn() && $prodotto["offerente"] == $_SESSION["email"]) : ?>
+                            <input disabled type="submit" name="quantity" value="Aggiungi al carrello" class="btn btn-warning my-1"></input>
+                        <?php else : ?>
+                            <input type="submit" name="quantity" value="Aggiungi al carrello" class="btn btn-warning my-1"></input>
+                        <?php endif; ?>
                     </form>
+                    <?php if (isUserLoggedIn() && $prodotto["offerente"] == $_SESSION["email"]) : ?>
+                        <p class="text-danger text-left "> Non puoi aggiungere al carrello prodotti di cui sei il proprietario </p>
+                    <?php endif; ?>
+
+
                 <?php endif; ?>
                 <?php
                 if (isset($_POST["quantity"])) {
@@ -185,6 +200,12 @@ if (isset($_POST["addReview"]) && isUserLoggedIn()) {
         <div class="text-center">
             <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">Aggiungi Recensione</button>
         </div>
+        <?php
+        if (isset($errorRecensione)) : ?>
+            <p class="text-danger"> Recensione utente già presente</p>
+        <?php
+            unset($errorRecensione);
+        endif; ?>
     </div>
     </div>
 </main>
