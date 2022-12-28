@@ -141,6 +141,7 @@ $ricette = $dbh->getProdottiUtente();
                 "codice": codice
             },
             success: function() {
+                window.location="http://localhost/tecnologieWeb2021---E-Commerce/Website/home-utente.php?action=gestisciProdotti&toast=deleteProd";
                 loadContent();
             }
         })
