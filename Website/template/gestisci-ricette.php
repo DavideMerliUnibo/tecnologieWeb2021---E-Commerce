@@ -162,6 +162,7 @@ $ricette = $dbh->getRicetteUtente();
                 "titolo": titolo
             },
             success: function() {
+                window.location="http://localhost/tecnologieWeb2021---E-Commerce/Website/home-utente.php?action=gestisciProdotti&toast=deleteRec";
                 loadContent();
             }
         })
