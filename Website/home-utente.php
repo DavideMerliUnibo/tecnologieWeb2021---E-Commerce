@@ -23,6 +23,9 @@ if (isset($_GET["action"])) {
         case "visualizzaAcquisti":
             $templateParams["inner"] = "acquisti-passati.php";
             break;
+        case "visualizzaNotifiche":
+            $templateParams["inner"] = "notifiche.php";
+            break;
     }
 } else {
     $templateParams["inner"] = "gestisci-prodotti.php";
