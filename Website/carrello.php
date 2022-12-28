@@ -15,7 +15,11 @@ if(isset($_POST["metodoPagamento"]) && isset($_POST["nomeCarta"]) && isset($_POS
         echo $result;
         if( $result=="success"){
             //far comparire popup o qualcosa per avvertire che ordine è andato a buon fine. (anche un altra pagina volendo).
+<<<<<<< Updated upstream
             //gestire casi d'errore
+=======
+            $dbh -> insertNotifica("Acquisto avvenuto con successo!", $_SESSION["email"]);
+>>>>>>> Stashed changes
         }
 }
 require("template/base.php");
