@@ -12,6 +12,8 @@
           $dbh->createCart($_POST["email"]);
           $templateParams["nome"] = "signUpSuccess.php";
           $templateParams["title"] = "Funghi - Registrato!";
+          $dbh -> insertNotifica("Registrazione avvenuta con successo!
+          Benvenuto su tuttofungo.it. Qui puoi mettere in vendita i tuoi prodotti e condividere ricette con altri amanti dei funghi!", $_POST["email"]);
         }
   } else
   {
