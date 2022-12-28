@@ -1,3 +1,15 @@
+<?php
+// Funzione per eliminare una notifica
+$thisPage = "http://localhost/tecnologieWeb2021---E-Commerce/Website/home-utente.php?action=visualizzaNotifiche";
+if (isset($_POST["deleteNotifica"])) {
+    $codiceNotifica = $_POST["notifica"];
+    $dbh -> deleteNotifica($codiceNotifica);
+    header("Location: " . $thisPage);
+    unset($_POST["deleteNotifica"]);
+    unset($_POST["notifica"]);
+}
+?>
+
 <div class="container-fluid">
     <div class="row">
         <div class="row col-12 d-flex">
@@ -21,6 +33,7 @@
                         <a class="btn" id="" href="/tecnologieWeb2021---E-Commerce/Website/home-utente.php?action=gestisciInfoUtente">Gestisci info Utente</a>
                         <a class="btn" id="" href="/tecnologieWeb2021---E-Commerce/Website/home-utente.php?action=visualizzaProdottiVenduti">Visualizza prodotti venduti</a>
                         <a class="btn" id="" href="/tecnologieWeb2021---E-Commerce/Website/home-utente.php?action=visualizzaAcquisti">Visualizza acquisti passati</a>
+                        <a class="btn" id="" href="/tecnologieWeb2021---E-Commerce/Website/home-utente.php?action=visualizzaNotifiche">Notifiche</a>
                     </div>
                 </div>
             </div>
