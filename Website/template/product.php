@@ -176,7 +176,7 @@ if (isset($_POST["addReview"]) && isUserLoggedIn()) {
                     <?php foreach ($recensioni as $recensione) : ?>
                         <article class="row col-12 bg-light card-body my-1 border-bottom">
                             <div class="col-4 col-lg-2">
-                                <img src="img/profile.png" alt="" height="100" />
+                                <img src="img/profile.png" alt=""  />
                             </div>
                             <div class="col-8 col-lg-10">
                                 <p><strong><?php echo $recensione["titolo"]; ?></strong></p>

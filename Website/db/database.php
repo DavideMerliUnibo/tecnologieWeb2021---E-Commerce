@@ -560,6 +560,7 @@ class DatabaseHelper
                   WHERE p.codice = i.codProdotto
                   AND p.offerente = u.email
                   AND p.quantità > 0 
+                  GROUP BY p.nomeFungo
                   ORDER BY p.data DESC
                   LIMIT ?";
         $stmt = $this->db->prepare($query);
