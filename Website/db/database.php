@@ -524,8 +524,12 @@ class DatabaseHelper
         $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
         return $result[0]["cod"];
     }
-    public function addProductToCart($codprod, $quantità, $email)
+    public function addProductToCart($codprod, $quantità)
     {
+        if(!isUserLoggedIn()){
+            die("utente non loggato");
+        }
+        $email = $_SESSION["email"];
         $codCarr = $this->getCartID($email);
         $query = 'INSERT INTO prodotto_carrello
                    VALUES (?,?,?)';

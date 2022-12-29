@@ -20,9 +20,18 @@ if (isset($_POST["addReview"]) && isUserLoggedIn()) {
         unset($_POST["addReview"]);
     }
 }
-?>
+if (isset($_GET["toast"])) : ?>
+    <script>
+        $().ready(function() {
+            console.log("ciaone");
+            toastr.success("Prodotto aggiunto al carrello");
+        })
+    </script>
+
+<?php unset($toast);
+endif; ?>
 <!-- Funzione per eliminare una recensione -->
-<?php if (isset($_POST["deleteReview"])) {
+<?php if (isset($_POST["deleteReview"]) && isset($_POST["rev"]) && isUserLoggedIn()) {
     $dbh->deleteReviewById($_POST["rev"]);
     header("Location: " . $thisPage);
     unset($_POST["rev"]);
@@ -101,9 +110,9 @@ if (isset($_POST["addReview"]) && isUserLoggedIn()) {
                         </select>
                         <?php
                         if (isUserLoggedIn() && $prodotto["offerente"] == $_SESSION["email"]) : ?>
-                            <input disabled type="submit" name="quantity" value="Aggiungi al carrello" class="btn btn-warning my-1"></input>
+                            <input disabled type="submit" value="Aggiungi al carrello" class="btn btn-warning my-1"></input>
                         <?php else : ?>
-                            <input type="submit" name="quantity" value="Aggiungi al carrello" class="btn btn-warning my-1"></input>
+                            <input type="submit" value="Aggiungi al carrello" class="btn btn-warning my-1"></input>
                         <?php endif; ?>
                     </form>
                     <?php if (isUserLoggedIn() && $prodotto["offerente"] == $_SESSION["email"]) : ?>
@@ -112,12 +121,37 @@ if (isset($_POST["addReview"]) && isUserLoggedIn()) {
 
 
                 <?php endif; ?>
-                <?php
-                if (isset($_POST["quantity"])) {
-                    $quantità = $_POST["sel"];
-                    $dbh->addProductToCart($prodotto["codice"], $quantità, $_SESSION["email"]);
-                }
+                <script>
+                    $("input[type=submit][value='Aggiungi al carrello']").click(function(event) {
+                        event.preventDefault();
+                        aggiungiAlCarrello();
+                    })
 
+                    function aggiungiAlCarrello() {
+                        let codProd = new URLSearchParams(window.location.search).get("prodotto");
+                        let qty = $("select[name='sel']").val();
+                        $.ajax({
+                            url: "api-prodotto.php",
+                            data: {
+                                "action": "aggiungiAlCarrello",
+                                "codProd": codProd,
+                                "qty": qty
+                            },
+                            type: "post",
+                            cache: false,
+                            success: function(response) {
+                                window.location.href = "http://localhost/tecnologieWeb2021---E-Commerce/Website/product.php?prodotto="+codProd+"&toast=true";
+                            }
+                        });
+
+                    }
+                </script>
+
+                <?php
+                // if (isset($_POST["sel"])) {
+                //     $quantità = $_POST["sel"];
+                //     $dbh->addProductToCart($prodotto["codice"], $quantità);
+                // }
                 ?>
             </div>
     </article>
@@ -176,7 +210,7 @@ if (isset($_POST["addReview"]) && isUserLoggedIn()) {
                     <?php foreach ($recensioni as $recensione) : ?>
                         <article class="row col-12 bg-light card-body my-1 border-bottom">
                             <div class="col-4 col-lg-2">
-                                <img src="img/profile.png" alt=""  />
+                                <img src="img/profile.png" alt="" />
                             </div>
                             <div class="col-8 col-lg-10">
                                 <p><strong><?php echo $recensione["titolo"]; ?></strong></p>
@@ -203,9 +237,9 @@ if (isset($_POST["addReview"]) && isUserLoggedIn()) {
             <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">Aggiungi Recensione</button>
         </div>
         <?php
-        if (isset($errorRecensione) && $errorRecensione===1) : ?>
+        if (isset($errorRecensione) && $errorRecensione === 1) : ?>
             <p class="text-danger text-center"> Recensione utente già presente</p>
-        <?php elseif(isset($errorRecensione) && $errorRecensione===2) : ?>   
+        <?php elseif (isset($errorRecensione) && $errorRecensione === 2) : ?>
             <p class="text-danger text-center"> Non puoi recensire un tuo prodotto.</p>
         <?php
             unset($errorRecensione);
