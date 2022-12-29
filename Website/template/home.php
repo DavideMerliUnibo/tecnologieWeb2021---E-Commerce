@@ -1,39 +1,41 @@
 <?php
 // Funzione per eliminare una notifica
-$thisPage = "http://localhost/tecnologieWeb2021---E-Commerce/Website/home-utente.php?action=".$_GET["action"];
-
+$thisPage = "http://localhost/tecnologieWeb2021---E-Commerce/Website/home-utente.php?action=" . $_GET["action"];
+if(isset($_POST["logout"])){
+    logOut();
+}
 if (isset($_POST["deleteNotifica"])) {
     $codiceNotifica = $_POST["notifica"];
-    $dbh -> deleteNotifica($codiceNotifica);
+    $dbh->deleteNotifica($codiceNotifica);
     header("Location: " . $thisPage);
     unset($_POST["deleteNotifica"]);
     unset($_POST["notifica"]);
 }
 
 // Funzione per gestire i messaggi delle notifiche
-if(isset($_GET["toast"])){
-    switch($_GET["toast"]){
+if (isset($_GET["toast"])) {
+    switch ($_GET["toast"]) {
         case "addProd":
             echo '<script type="text/javascript">toastr.success("Prodotto inserito!");</script>';
-            $dbh -> insertNotifica("Prodotto inserito!", $_SESSION["email"]);
+            $dbh->insertNotifica("Prodotto inserito!", $_SESSION["email"]);
             break;
         case "deleteProd":
             echo '<script type="text/javascript">toastr.success("Prodotto eliminato!");</script>';
-            $dbh -> insertNotifica("Prodotto eliminato!", $_SESSION["email"]);
+            $dbh->insertNotifica("Prodotto eliminato!", $_SESSION["email"]);
             break;
         case "addRec":
             echo '<script type="text/javascript">toastr.success("Ricetta inserita!");</script>';
-            $dbh -> insertNotifica("Ricetta inserita!", $_SESSION["email"]);
+            $dbh->insertNotifica("Ricetta inserita!", $_SESSION["email"]);
             break;
         case "deleteRec":
             echo '<script type="text/javascript">toastr.success("Ricetta eliminata!");</script>';
-            $dbh -> insertNotifica("Ricetta eliminata!", $_SESSION["email"]);
+            $dbh->insertNotifica("Ricetta eliminata!", $_SESSION["email"]);
             break;
     }
-    
+
     echo "<script>history.replaceState({},'','$thisPage');</script>";
     unset($_GET["toast"]);
-}?>
+} ?>
 
 <div class="container-fluid">
     <div class="row">
@@ -42,10 +44,6 @@ if(isset($_GET["toast"])){
                 <button class="btn btn-primary ml-auto" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu" aria-controls="offcanvasMenu">Menu</button>
             </div>
             <div class="col-8 col-lg-10"></div>
-
-            <?php if(isset($_POST["logout"])){
-                logOut();
-            }?>
 
             <form method="post" class="col-2 col-lg-1">
                 <input type="submit" name="logout" value="Log Out" class="btn btn-primary ml-auto" type="button" style="white-space: nowrap;"></input>
@@ -66,8 +64,8 @@ if(isset($_GET["toast"])){
         <div class="row">
             <div class="col">
                 <section id="innerTemplate">
-                    <?php 
-                        require($templateParams['inner']);
+                    <?php
+                    require($templateParams['inner']);
                     ?>
                 </section>
             </div>
