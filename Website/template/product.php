@@ -110,8 +110,11 @@ endif; ?>
                             } ?>
                         </select>
                         <?php
-                        if (isUserLoggedIn() && $prodotto["offerente"] == $_SESSION["email"]) : ?>
+                        if ((isUserLoggedIn() && $prodotto["offerente"] == $_SESSION["email"]) || (!isUserLoggedIn())) : ?>
                             <input disabled type="submit" value="Aggiungi al carrello" class="btn btn-warning my-1"></input>
+                            <?php if (!isUserLoggedIn()) : ?>
+                            <p class="text-secondary">Devi essere loggato per poter aggiungere al carrello</p>
+                            <?php endif; ?>
                         <?php else : ?>
                             <input type="submit" value="Aggiungi al carrello" class="btn btn-warning my-1"></input>
                         <?php endif; ?>
@@ -141,9 +144,9 @@ endif; ?>
                             type: "post",
                             cache: false,
                             success: function(response) {
-                                if(response==="success"){
+                                if (response === "success") {
                                     window.location.href = "http://localhost/tecnologieWeb2021---E-Commerce/Website/product.php?prodotto=" + codProd + "&toast=true";
-                                } else if( response ==="max num raggiunto"){
+                                } else if (response === "max num raggiunto") {
                                     toastr.error("quantità max raggiunta per questo prodotto.");
                                 } else {
                                     console.log(response);

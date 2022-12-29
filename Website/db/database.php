@@ -551,6 +551,7 @@ class DatabaseHelper
     {
         if (!isUserLoggedIn()) {
             die("utente non loggato");
+            return "utente non loggato";
         }
         if ($quantità <= 0) {
             return "quantità non consentita";
