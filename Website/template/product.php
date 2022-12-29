@@ -141,7 +141,14 @@ endif; ?>
                             type: "post",
                             cache: false,
                             success: function(response) {
-                                window.location.href = "http://localhost/tecnologieWeb2021---E-Commerce/Website/product.php?prodotto=" + codProd + "&toast=true";
+                                if(response==="success"){
+                                    window.location.href = "http://localhost/tecnologieWeb2021---E-Commerce/Website/product.php?prodotto=" + codProd + "&toast=true";
+                                } else if( response ==="max num raggiunto"){
+                                    toastr.error("quantità max raggiunta per questo prodotto.");
+                                } else {
+                                    console.log(response);
+                                    toastr.error("qualcosa è andato storto");
+                                }
                             }
                         });
 

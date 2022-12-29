@@ -258,13 +258,13 @@ class DatabaseHelper
         if (!isUserLoggedIn()) {
             die("utente non loggato");
         }
-        if(!$this->checkOfferenteProdotto($prodotto)){
+        if (!$this->checkOfferenteProdotto($prodotto)) {
             return "Recensione non consentita su proprio prodotto";
         }
-        if(!$this->checkAcquistoProdotto($prodotto)){
+        if (!$this->checkAcquistoProdotto($prodotto)) {
             return "Recensione non consentita su prodotto mai acquistato";
         }
-        if(!$this->checkProdottoNotReviewed($prodotto,$utente)){
+        if (!$this->checkProdottoNotReviewed($prodotto, $utente)) {
             return "Recensione utente già presente";
         }
         $data = date("Y/m/d");
@@ -278,47 +278,51 @@ class DatabaseHelper
         return false;
     }
 
-    public function checkAcquistoProdotto($codProd){
-        if(!isUserLoggedIn()){
+    public function checkAcquistoProdotto($codProd)
+    {
+        if (!isUserLoggedIn()) {
             die("utente non loggato");
         }
         $stmt = $this->db->prepare("select * from acquisto_prodotto ap 
             join acquisto a on (a.codice = ap.codAcquisto) 
             where ap.codProdotto = ? 
             and a.acquirente = ?");
-        $stmt->bind_param("is",$codProd,$_SESSION["email"]);
-        if($stmt->execute()){
+        $stmt->bind_param("is", $codProd, $_SESSION["email"]);
+        if ($stmt->execute()) {
             return count($stmt->get_result()->fetch_all(MYSQLI_ASSOC)) != 0;
         }
         return false;
     }
-    public function checkOfferenteProdotto($codProd){
+    public function checkOfferenteProdotto($codProd)
+    {
         if (!isUserLoggedIn()) {
             die("utente non loggato");
         }
         $stmt = $this->db->prepare("select offerente from prodotto where codice = ?");
-        $stmt->bind_param("i",$codProd);
+        $stmt->bind_param("i", $codProd);
         $stmt->execute();
         $res = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-        if(count($res)>0){
+        if (count($res) > 0) {
             return $res[0]["offerente"] !== $_SESSION['email'];
         }
         return false;
     }
 
-    public function checkProdottoNotReviewed($codProd,$utente){
+    public function checkProdottoNotReviewed($codProd, $utente)
+    {
         $stmt = $this->db->prepare("select * from recensione where codProdotto = ? and utente = ?;");
-        $stmt->bind_param("is",$codProd,$utente);
+        $stmt->bind_param("is", $codProd, $utente);
         $stmt->execute();
         $res = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-        return count($res)==0;
+        return count($res) == 0;
     }
-    public function checkRicettaNotReviewed($ricetta,$autore){
+    public function checkRicettaNotReviewed($ricetta, $autore)
+    {
         $stmt = $this->db->prepare("select * from commento where ricetta = ? and autore = ?;");
-        $stmt->bind_param("ss",$ricetta,$autore);
+        $stmt->bind_param("ss", $ricetta, $autore);
         $stmt->execute();
         $res = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-        return count($res)==0;
+        return count($res) == 0;
     }
     public function getRicetteUtente()
     {
@@ -488,10 +492,10 @@ class DatabaseHelper
         if (!isUserLoggedIn()) {
             die("utente non loggato");
         }
-        if(!$this->checkAutoreRicetta($ricetta)){
+        if (!$this->checkAutoreRicetta($ricetta)) {
             return "Commento non consentito su propria ricetta";
         }
-        if(!$this->checkRicettaNotReviewed($ricetta,$autore)){
+        if (!$this->checkRicettaNotReviewed($ricetta, $autore)) {
             return "Commento utente già presente";
         }
         $data = date("Y/m/d");
@@ -502,15 +506,16 @@ class DatabaseHelper
         $stmt->execute();
     }
 
-    public function checkAutoreRicetta($ricetta){
+    public function checkAutoreRicetta($ricetta)
+    {
         if (!isUserLoggedIn()) {
             die("utente non loggato");
         }
         $stmt = $this->db->prepare("select autore from ricetta where titolo = ?");
-        $stmt->bind_param("s",$ricetta);
+        $stmt->bind_param("s", $ricetta);
         $stmt->execute();
         $res = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-        if(count($res)>0){
+        if (count($res) > 0) {
             return $res[0]["autore"] !== $_SESSION['email'];
         }
         return false;
@@ -541,18 +546,76 @@ class DatabaseHelper
         $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
         return $result[0]["cod"];
     }
-    public function addProductToCart($codprod, $quantità)
+
+    public function updateQtyProductCart($codprod, $quantità)
     {
-        if(!isUserLoggedIn()){
+        if (!isUserLoggedIn()) {
             die("utente non loggato");
+        }
+        if ($quantità <= 0) {
+            return "quantità non consentita";
         }
         $email = $_SESSION["email"];
         $codCarr = $this->getCartID($email);
+        if ($this->checkDisponibilitàProdotto($codprod, $quantità)) {
+            $stmt = $this->db->prepare("update prodotto_carrello set quantità=? 
+                where codCarrello = ? 
+                and codProdotto = ?;");
+            $stmt->bind_param('iii', $quantità, $codCarr, $codprod);
+            if($stmt->execute()){
+                return "success";
+            }
+        } else {
+            return "max num raggiunto";
+        }
+        return "failure";
+    }
+    public function addProductToCart($codprod, $quantità)
+    {
+        if (!isUserLoggedIn()) {
+            die("utente non loggato");
+        }
+
+        $email = $_SESSION["email"];
+        $codCarr = $this->getCartID($email);
+        $stmt = $this->db->prepare("select quantità from prodotto_carrello pc 
+            where codCarrello = ?
+            and codProdotto = ?;");
+        $stmt->bind_param('ii', $codCarr, $codprod);
+        $stmt->execute();
+        $res = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        if (count($res) != 0) {
+            $qty = $res[0]["quantità"];
+            $nuovaQty = $qty + $quantità;
+            if ($this->checkDisponibilitàProdotto($codprod, $nuovaQty)) {
+                $stmt = $this->db->prepare("update prodotto_carrello set quantità=? 
+                    where codCarrello = ? 
+                    and codProdotto = ?;");
+                $stmt->bind_param('iii', $nuovaQty, $codCarr, $codprod);
+                $stmt->execute();
+            } else {
+                return "max num raggiunto";
+            }
+        }
         $query = 'INSERT INTO prodotto_carrello
                    VALUES (?,?,?)';
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('iii', $codCarr, $codprod, $quantità);
-        $stmt->execute();
+        if ($stmt->execute()) {
+            return "success";
+        }
+        return "failure";
+    }
+    public function checkDisponibilitàProdotto($codProd, $qty)
+    {
+        if ($qty > 0) {
+            $qtyProd = $this->getProductById($codProd)[0]["quantità"];
+            if ($qty > $qtyProd) {
+                return false;
+            }
+            return true;
+        }
+        return false;
     }
     public function removeProductfromCart($codprod, $email)
     {
