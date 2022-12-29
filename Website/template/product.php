@@ -15,6 +15,8 @@ if (isset($_POST["addReview"]) && isUserLoggedIn()) {
         $errorRecensione = 1;
     } else if ($res === "Recensione non consentita su proprio prodotto") {
         $errorRecensione = 2;
+    } else if ($res === "Recensione non consentita su prodotto mai acquistato") {
+        $errorRecensione = 3;
     } else {
         header("Location: " . $thisPage);
         unset($_POST["addReview"]);
@@ -23,12 +25,11 @@ if (isset($_POST["addReview"]) && isUserLoggedIn()) {
 if (isset($_GET["toast"])) : ?>
     <script>
         $().ready(function() {
-            console.log("ciaone");
             toastr.success("Prodotto aggiunto al carrello");
         })
     </script>
 
-<?php unset($toast);
+<?php unset($_GET["toast"]);
 endif; ?>
 <!-- Funzione per eliminare una recensione -->
 <?php if (isset($_POST["deleteReview"]) && isset($_POST["rev"]) && isUserLoggedIn()) {
@@ -140,7 +141,7 @@ endif; ?>
                             type: "post",
                             cache: false,
                             success: function(response) {
-                                window.location.href = "http://localhost/tecnologieWeb2021---E-Commerce/Website/product.php?prodotto="+codProd+"&toast=true";
+                                window.location.href = "http://localhost/tecnologieWeb2021---E-Commerce/Website/product.php?prodotto=" + codProd + "&toast=true";
                             }
                         });
 
@@ -241,6 +242,8 @@ endif; ?>
             <p class="text-danger text-center"> Recensione utente già presente</p>
         <?php elseif (isset($errorRecensione) && $errorRecensione === 2) : ?>
             <p class="text-danger text-center"> Non puoi recensire un tuo prodotto.</p>
+        <?php elseif (isset($errorRecensione) && $errorRecensione === 3) : ?>
+            <p class="text-danger text-center"> Non Puoi recensire prodotto mai acquistato</p>
         <?php
             unset($errorRecensione);
         endif; ?>

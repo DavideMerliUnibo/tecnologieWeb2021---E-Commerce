@@ -261,6 +261,9 @@ class DatabaseHelper
         if(!$this->checkOfferenteProdotto($prodotto)){
             return "Recensione non consentita su proprio prodotto";
         }
+        if(!$this->checkAcquistoProdotto($prodotto)){
+            return "Recensione non consentita su prodotto mai acquistato";
+        }
         if(!$this->checkProdottoNotReviewed($prodotto,$utente)){
             return "Recensione utente già presente";
         }
@@ -275,6 +278,20 @@ class DatabaseHelper
         return false;
     }
 
+    public function checkAcquistoProdotto($codProd){
+        if(!isUserLoggedIn()){
+            die("utente non loggato");
+        }
+        $stmt = $this->db->prepare("select * from acquisto_prodotto ap 
+            join acquisto a on (a.codice = ap.codAcquisto) 
+            where ap.codProdotto = ? 
+            and a.acquirente = ?");
+        $stmt->bind_param("is",$codProd,$_SESSION["email"]);
+        if($stmt->execute()){
+            return count($stmt->get_result()->fetch_all(MYSQLI_ASSOC)) != 0;
+        }
+        return false;
+    }
     public function checkOfferenteProdotto($codProd){
         if (!isUserLoggedIn()) {
             die("utente non loggato");
