@@ -12,15 +12,14 @@ if(isUserloggedIn()){
 if(isset($_POST["metodoPagamento"]) && isset($_POST["nomeCarta"]) && isset($_POST["numeroCarta"]) 
     && isset($_POST["scadenzaCarta"]) && isset($_POST["ccvCarta"]) ){
         $result = $dbh->insertAcquisto($_POST["metodoPagamento"],$_POST["nomeCarta"], $_POST["numeroCarta"],$_POST["scadenzaCarta"],$_POST["ccvCarta"]);
-        echo $result;
         if( $result=="success"){
-            //far comparire popup o qualcosa per avvertire che ordine è andato a buon fine. (anche un altra pagina volendo).
-            //gestire casi d'errore
             $dbh -> insertNotifica("Acquisto avvenuto con successo!", $_SESSION["email"]);
             $templateParams["toast"] = "success";
-        } else {
+        } else  {
             $templateParams["toast"] = "error";
+            $_GET["error"]=true;
         }
+        header("location: /tecnologieWeb2021---E-Commerce/Website/confermaAcquisto.php");
 }
 require("template/base.php");
 
