@@ -64,7 +64,7 @@ require "template/registrazione-form.php"
             success: function(result) {
                 console.log(result);
                 console.log("oki");
-                window.location="http://localhost/tecnologieWeb2021---E-Commerce/Website/home-utente.php";
+                window.location="http://localhost/tecnologieWeb2021---E-Commerce/Website/home-utente.php?action=gestisciInfoUtente&toast=updateInfo";
             }
         });
        
