@@ -1,6 +1,10 @@
 <?php
 // Funzione per eliminare una notifica
-$thisPage = "http://localhost/tecnologieWeb2021---E-Commerce/Website/home-utente.php?action=" . $_GET["action"];
+$thisPage = "http://localhost/tecnologieWeb2021---E-Commerce/Website/home-utente.php";
+if (isset($_GET["action"])){
+    $thisPage = $thisPage . "?action=" . $_GET["action"];
+}
+
 if(isset($_POST["logout"])){
     logOut();
 }
@@ -23,6 +27,18 @@ if (isset($_GET["toast"])) {
             echo '<script type="text/javascript">toastr.success("Prodotto eliminato!");</script>';
             $dbh->insertNotifica("Prodotto eliminato!", $_SESSION["email"]);
             break;
+        case "updateProd":
+            echo '<script type="text/javascript">toastr.success("Prodotto modificato!");</script>';
+            $dbh->insertNotifica("Prodotto modificato!", $_SESSION["email"]);
+            break;
+        case "addImg":
+            echo '<script type="text/javascript">toastr.success("Immagine aggiunta!");</script>';
+            $dbh->insertNotifica("Immagine aggiunta!", $_SESSION["email"]);
+            break;
+        case "deleteImg":
+            echo '<script type="text/javascript">toastr.success("Immagine eliminata!");</script>';
+            $dbh->insertNotifica("Immagine eliminata!", $_SESSION["email"]);
+            break;
         case "addRec":
             echo '<script type="text/javascript">toastr.success("Ricetta inserita!");</script>';
             $dbh->insertNotifica("Ricetta inserita!", $_SESSION["email"]);
@@ -30,6 +46,14 @@ if (isset($_GET["toast"])) {
         case "deleteRec":
             echo '<script type="text/javascript">toastr.success("Ricetta eliminata!");</script>';
             $dbh->insertNotifica("Ricetta eliminata!", $_SESSION["email"]);
+            break;
+        case "updateRec":
+            echo '<script type="text/javascript">toastr.success("Ricetta modificata!");</script>';
+            $dbh->insertNotifica("Ricetta modificata!", $_SESSION["email"]);
+            break;
+        case "updateInfo":
+            echo '<script type="text/javascript">toastr.success("Info utente aggiornate!");</script>';
+            $dbh->insertNotifica("Info utente aggiornate!", $_SESSION["email"]);
             break;
     }
 
