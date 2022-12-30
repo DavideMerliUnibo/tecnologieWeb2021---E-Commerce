@@ -254,6 +254,7 @@ $ricette = $dbh->getProdottiUtente();
             success: function(data) {
                 console.log(codice + ' ' + nome + ' ' + data);
                 imag(codice);
+                window.location="http://localhost/tecnologieWeb2021---E-Commerce/Website/home-utente.php?action=gestisciProdotti&toast=deleteImg";
             }
         })
     }
