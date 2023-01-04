@@ -713,7 +713,7 @@ class DatabaseHelper
     }
     public function getProdottiInAcquisto($codice)
     {
-        $query = "SELECT ap.quantità, p.nomeFungo
+        $query = "SELECT ap.quantità, p.nomeFungo, p.offerente
                   FROM acquisto_prodotto ap, prodotto p
                   WHERE ap.codProdotto = p.codice
                   AND ap.codAcquisto = ?";
@@ -780,7 +780,7 @@ class DatabaseHelper
         if (!$this->insertAcquistoProdotti($idAcquisto)) {
             return "error with insert of acquisto prodotti";
         }
-        $this->svuotaCarrello($_SESSION["email"]);
+        
         return "success";
     }
 
@@ -1004,5 +1004,13 @@ class DatabaseHelper
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('sss', $msg, $data, $user);
         $stmt->execute();
+    }
+
+    public function getLatestAcquisto() {
+        $query = "SELECT MAX(codice) FROM acquisto";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        return $result;
     }
 }
