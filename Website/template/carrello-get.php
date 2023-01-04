@@ -2,10 +2,11 @@
     switch ($templateParams["toast"]) {
         case "success":
             echo '<script type="text/javascript">toastr.success("Acquisto completato!");</script>';
-            $dbh->insertNotifica("Acquisto completato!", $_SESSION["email"]);
+            $dbh -> insertNotifica("Acquisto completato!", $_SESSION["email"]);
             break;
         case "error":
             echo '<script type="text/javascript">toastr.error("Errore nell\'acquisto!");</script>';
+            $dbh -> insertNotifica("Errore nell'acquisto!", $_SESSION["email"]);
             break;
     }
     unset($templateParams["toast"]);
