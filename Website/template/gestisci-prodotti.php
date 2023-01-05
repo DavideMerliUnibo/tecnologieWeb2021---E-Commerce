@@ -1,5 +1,5 @@
 <?php
-//require("../bootstrap.php");
+ //require("../bootstrap.php");
 //require("/tecnologieWeb2021---E-Commerce/Website/bootstrap.php");
 if (!isUserLoggedIn()) {
     die();
@@ -52,19 +52,12 @@ $ricette = $dbh->getProdottiUtente();
                 let content = buildContent(data);
                 $("#gestisciProdottiRow div:nth-child(3)").addClass("table-responsive");
                 $("#gestisciProdottiRow div:nth-child(3)").html(content);
-                console.log($("tr td:nth-child(3)"));
-                let qtys = $("tr td:nth-child(3)");
-                for (elem of qtys) {
-                    if ($(elem).text() == "0") {
-                        $(elem).css("background-color","red");
-                    }
-                }
             }
         })
     }
 
     function buildContent(data) {
-        let content = `<table class="table text-center table-sm align-middle">
+        let content = `<table class="table text-center table-sm">
                     <thead class="table-light">
                         <th>Nome Fungo</th>
                         <th>Pezzo unità</th>
@@ -78,11 +71,11 @@ $ricette = $dbh->getProdottiUtente();
             content += `<td class="text-center" colspan="8">Nessuna ricetta inserita</td>`;
         } else {
             for (prodotto of data) {
-                content += `<tr">
-                            <td>${JSON.stringify(prodotto['nomeFungo'])}</td>
+                content += `<tr>
+                            <td> ${JSON.stringify(prodotto['nomeFungo'])}</td>
                             <td>${JSON.stringify(prodotto["prezzoPerUnità"])}</td>
                             <td>${JSON.stringify(prodotto["quantità"])}</td>
-                            <td><button onclick='setModal(${JSON.stringify(prodotto['informazioni'])},"Descrizione");' type="button" class="btn btn-light btn-sm" data-bs-toggle="modal" data-bs-target="#modalComponent">Descrizione</button></td>
+                            <td><button onclick='setModal(${JSON.stringify(prodotto['informazioni'])},"Descrizione");' type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#modalComponent">Descrizione</button></td>
                             <td>${JSON.stringify(prodotto["data"])}</td>
                             <td>
                                 <button onclick='deleteRow(${JSON.stringify(prodotto['codice'])});' class="btn btn-sm btn-light">Delete</button>
@@ -95,7 +88,7 @@ $ricette = $dbh->getProdottiUtente();
         content += ` </tbody>
                 </table>`;
         return content;
-
+        
     }
 
     $("button[name='inserisciButton']").click(function() {
@@ -116,7 +109,7 @@ $ricette = $dbh->getProdottiUtente();
             //forse meglio mettere diretto il template se non dobbiamo farci niente col form di modifica ricetta.
             url: "template/modifica-prodotto.php",
             cache: false,
-
+           
             success: function(data) {
                 $("#gestisciProdottiRow div:nth-child(3)").html(data);
                 //modifico ogni riga del template con value giusto di riga
@@ -141,7 +134,6 @@ $ricette = $dbh->getProdottiUtente();
                 "codice": codice
             },
             success: function() {
-                window.location="http://localhost/tecnologieWeb2021---E-Commerce/Website/home-utente.php?action=gestisciProdotti&toast=deleteProd";
                 loadContent();
             }
         })
@@ -254,8 +246,9 @@ $ricette = $dbh->getProdottiUtente();
             success: function(data) {
                 console.log(codice + ' ' + nome + ' ' + data);
                 imag(codice);
-                window.location="http://localhost/tecnologieWeb2021---E-Commerce/Website/home-utente.php?action=gestisciProdotti&toast=deleteImg";
             }
         })
     }
+
+  
 </script>

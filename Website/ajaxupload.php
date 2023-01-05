@@ -13,10 +13,10 @@ if ($_FILES['image']) {
             require("bootstrap.php");
             if(isset($_POST["titolo"])){
                 $dbh->insertImageToRecipe($img,$_POST["titolo"]);
-                header('location: http://localhost/tecnologieWeb2021---E-Commerce/Website/home-utente.php?action=gestisciRicette&toast=addImg');
+                header('location: http://localhost/tecnologieWeb2021---E-Commerce/Website/home-utente.php?action=gestisciRicette');
             } else if (isset($_POST["codProdotto"])){
                 $dbh->insertImgToProduct($img,$_POST["codProdotto"]);
-                header('location: http://localhost/tecnologieWeb2021---E-Commerce/Website/home-utente.php?action=gestisciProdotti&toast=addImg');
+                header('location: http://localhost/tecnologieWeb2021---E-Commerce/Website/home-utente.php?action=gestisciRicette');
             }
             
         }

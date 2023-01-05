@@ -32,7 +32,7 @@ function inserisciProdotto() {
         success: function(result) {
             console.log(result);
             console.log('ciao');
-            window.location="http://localhost/tecnologieWeb2021---E-Commerce/Website/home-utente.php?action=gestisciProdotti&toast=addProd";
+            window.location="http://localhost/tecnologieWeb2021---E-Commerce/Website/home-utente.php?action=gestisciRicette";
         }
     });
     return false;

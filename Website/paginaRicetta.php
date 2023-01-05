@@ -13,7 +13,6 @@ $templateParams["tabella"] = $dbh -> getNutritionalTable($titoloRicetta);
 $templateParams["ingredienti"] = $dbh -> getIngredientsForRecipe($titoloRicetta);
 $templateParams["immaginiRicetta"] = $dbh -> getRecipeImages($titoloRicetta);
 $templateParams["commenti"] = $dbh -> getRecipeComments($titoloRicetta);
-$templateParams["css"] = ['css/paginaRicetta.css'];
 
 require("template/base.php");
 

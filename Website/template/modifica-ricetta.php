@@ -34,7 +34,7 @@ function modificaRicetta() {
         success: function(result) {
             console.log(result);
             console.log('ciao');
-            window.location="http://localhost/tecnologieWeb2021---E-Commerce/Website/home-utente.php?action=gestisciRicette&toast=updateRec";
+            window.location="http://localhost/tecnologieWeb2021---E-Commerce/Website/home-utente.php?action=gestisciRicette";
         }
     });
     return false;

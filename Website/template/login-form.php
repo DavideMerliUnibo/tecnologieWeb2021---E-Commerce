@@ -4,7 +4,7 @@
             <div class="card">
                 <div class="row">
                     <div class="col-5">
-                        <img class="img-fluid rounded-start " src="./img/fungologin.jpg" alt="immagine fungo">
+                        <img class="img-fluid rounded-start" src="<?php echo UPLOAD_DIR ?>fungologin.jpg" alt="immagine fungo">
                     </div>
                     <div class="col-7 d-flex">
                         <div class="card-body mt-4">

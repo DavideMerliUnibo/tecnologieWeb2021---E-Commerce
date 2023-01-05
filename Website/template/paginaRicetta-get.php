@@ -2,30 +2,24 @@
 <?php $tabella = $templateParams["tabella"][0]; ?>
 <?php $immagini = $templateParams["immaginiRicetta"]; ?>
 <?php $commenti = $templateParams["commenti"]; ?>
-<?php $thisPage = "http://localhost/tecnologieWeb2021---E-Commerce/Website/paginaricetta.php?titoloRicetta=" . $ricetta["titolo"]; ?>
+<?php $thisPage = "http://localhost/tecnologieWeb2021---E-Commerce/Website/paginaricetta.php?titoloRicetta=".$ricetta["titolo"]; ?>
 
 <!-- Funzione per aggiungere un commento -->
-<?php
-if (isset($_POST["addComment"]) && isUserLoggedIn()) {
-    $contenuto = $_POST["contenutoCommento"];
-    $res = $dbh->addRecipeComment($contenuto, $_SESSION["email"], $ricetta["titolo"]);
-    if ($res === "Commento utente già presente") {
-        $errorCommento = 1;
-    } else if ($res === "Commento non consentito su propria ricetta") {
-        $errorCommento = 2;
-    } else {
-        header("Location: " . $thisPage);
+<?php  
+    if(isset($_POST["addComment"]) && isUserLoggedIn()){
+        $contenuto = $_POST["contenutoCommento"];
+        $dbh->addRecipeComment($contenuto, $_SESSION["email"], $ricetta["titolo"]);
+        header("Location: ".$thisPage);
         unset($_POST["addComment"]);
     }
-}
 ?>
 <!-- Funzione per eliminare un commento -->
-<?php if (isset($_POST["deleteComment"])) {
-    $dbh->deleteCommentById($_POST["com"]);
-    header("Location: " . $thisPage);
+<?php if(isset($_POST["deleteComment"])){
+    $dbh -> deleteCommentById($_POST["com"]);
+    header("Location: ".$thisPage);
     unset($_POST["com"]);
     unset($_POST["deleteComment"]);
-} ?>
+}?>
 
 <div class="container-fluid">
     <div class="row">
@@ -36,19 +30,18 @@ if (isset($_POST["addComment"]) && isUserLoggedIn()) {
             <div class="row justify-content-center">
                 <div id="carousel1" class="carousel slide col-10 " data-bs-ride="carousel" data-pause="hover">
                     <div class="carousel-inner">
-                        <?php foreach ($immagini as $img) : ?>
-                            <div class="carousel-item <?php if ($img == $immagini[0]) {
-                                                            echo "active";
-                                                        } ?>">
-                                <img src="<?php echo UPLOAD_DIR . $img["nome"]; ?>" class="d-block m-auto img-fluid" alt="...">
-                            </div>
+                        <?php foreach($immagini as $img): ?>
+                        <div class="carousel-item <?php if ($img == $immagini[0]) { echo "active"; } ?>">
+                            <img src="img/<?php echo $img["nome"]; ?>" class="d-block m-auto img-fluid" alt="...">
+                        </div>
                         <?php endforeach; ?>
                     </div>
                     <button class="carousel-control-prev m-auto" type="button" data-bs-target="#carousel1" data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Previous</span>
                     </button>
-                    <button class="carousel-control-next m-auto" type="button" data-bs-target="#carousel1" data-bs-slide="next">
+                    <button class="carousel-control-next m-auto" type="button" data-bs-target="#carousel1"
+                    data-bs-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Next</span>
                     </button>
@@ -86,8 +79,8 @@ if (isset($_POST["addComment"]) && isUserLoggedIn()) {
                                             </tr>
                                             <tr>
                                                 <th>Fibre</th>
-                                                <td><?php echo $tabella["fibre"]; ?> g</td>
-                                            </tr>
+                                            <td><?php echo $tabella["fibre"]; ?> g</td>
+                                                </tr>
                                             <tr>
                                                 <th>Sodio</th>
                                                 <td><?php echo $tabella["sodio"]; ?> g</td>
@@ -100,10 +93,10 @@ if (isset($_POST["addComment"]) && isUserLoggedIn()) {
                         <div class="col-12">
                             <h2 class="text-center">Ingredienti</h2>
                             <ul class="list-group">
-                                <?php foreach ($templateParams["ingredienti"] as $ingrediente) : ?>
-                                    <li class="list-group-item d-flex justify-content-between align-items-center"><?php echo $ingrediente["nome"]; ?>
-                                        <span class="badge bg-primary rounded-pill"><?php echo $ingrediente["quantità"]; ?></span>
-                                    </li>
+                                <?php foreach($templateParams["ingredienti"] as $ingrediente): ?>
+                                <li class="list-group-item d-flex justify-content-between align-items-center"><?php echo $ingrediente["nome"]; ?>
+                                    <span class="badge bg-primary rounded-pill"><?php echo $ingrediente["quantità"]; ?></span>
+                                </li>
                                 <?php endforeach; ?>
                             </ul>
                         </div>
@@ -120,20 +113,26 @@ if (isset($_POST["addComment"]) && isUserLoggedIn()) {
         <div class="col-12 float-md-start col-md-3 mx-auto">
             <h2 class="text-center">Altre ricette</h2>
             <div class="row flex-nowrap flex-md-wrap text-center g-2 mt-1" id="altreRicetteContainer">
-                <?php
-                $ricette = $dbh->getLatestRecipes(5);
-                foreach ($ricette as $ricetta) : ?>
-                    <div class="card col-4 col-md-12 mt-1 justify-content-around" >
-                        <div class="card-body row">
-
-                            <img class="img-thumbnail col-12 col-md-3" src="<?php echo UPLOAD_DIR . $ricetta['immagine'] ?>" alt="" style="width:5rem" />
-                            <a class="text-dark col-12 col-md-9 align-self-center" style="text-decoration:none;" href="/tecnologieWeb2021---E-Commerce/Website/paginaricetta.php?titoloRicetta=<?php echo $ricetta["titolo"] ?>"><?php echo $ricetta["titolo"] ?></a>
-                        </div>
+                <div class="col-3 col-md-12 mt-1 justify-content-around">
+                    <div class="card card-body">
+                        <a href="#">altra ricetta</a>
+                        <p class="card-text">buona assai</p>
                     </div>
-                <?php endforeach; ?>
-
-
-
+                </div>
+               
+                <div class="col-3 col-md-12 mt-1 justify-content-around">
+                    <div class="card card-body">
+                        <a href="#">altra ricetta</a>
+                        <p class="card-text">buona assai</p>
+                    </div>
+                </div>
+                <div class="col-3 col-md-12 mt-1 justify-content-around">
+                    <div class="card card-body">
+                        <a href="#">altra ricetta</a>
+                        <p class="card-text">buona assai</p>
+                    </div>
+                </div>
+                      
             </div>
         </div>
 
@@ -149,21 +148,17 @@ if (isset($_POST["addComment"]) && isUserLoggedIn()) {
                         </div>
                         <div class="modal-body">
                             <form method="post">
-                                <?php if (!isUserLoggedIn()) : ?>
-                                    <h3>Utente non loggato!</h3>
+                                <?php if (!isUserLoggedIn()):?>
+                                <h3>Utente non loggato!</h3>
                                 <?php endif; ?>
                                 <div class="mb-3">
                                     <label for="message-text" class="col-form-label">Contenuto commento:</label>
-                                    <textarea class="form-control" id="message-text" name="contenutoCommento" <?php if (!isUserLoggedIn()) {
-                                                                                                                    echo "disabled";
-                                                                                                                } ?>></textarea>
+                                    <textarea class="form-control" id="message-text" name="contenutoCommento" <?php if(!isUserLoggedIn()){ echo "disabled"; }?>></textarea>
                                 </div>
 
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
-                                    <input type="submit" name="addComment" value="Invia" class="btn btn-primary" <?php if (!isUserLoggedIn()) {
-                                                                                                                        echo "disabled";
-                                                                                                                    } ?>></input>
+                                    <input type="submit" name="addComment" value="Invia" class="btn btn-primary" <?php if(!isUserLoggedIn()){ echo "disabled"; }?>></input>
                                 </div>
                             </form>
                         </div>
@@ -172,29 +167,29 @@ if (isset($_POST["addComment"]) && isUserLoggedIn()) {
             </div>
             <div class="row">
                 <div class="col-12">
-                    <?php if (empty($commenti)) : ?>
+                    <?php if(empty($commenti)): ?>
                         <p class="text-center p-2">Non ci sono commenti per questa ricetta.</p>
                     <?php endif; ?>
                     <div tabindex="0" class="divScrollabile">
-                        <?php foreach ($commenti as $commento) : ?>
-                            <article class="row col-12 bg-light card-body my-1 border-bottom">
-                                <div class="col-4 col-lg-2">
-                                    <img src="img/profile.png" alt=""  />
-                                </div>
-                                <div class="col-8 col-lg-10">
-                                    <p>by <strong><?php echo $commento["username"]; ?></strong></p>
-                                    <p><?php echo $commento["contenuto"]; ?></p>
-                                    <p><small class="text-muted"><?php echo $commento["data"]; ?></small></p>
-                                </div>
-                                <?php if (isset($_SESSION["username"]) && $_SESSION["username"] == $commento["username"]) : ?>
-                                    <div class="d-flex flex-column align-items-end">
-                                        <form method="post">
-                                            <input type="hidden" name="com" value="<?php echo $commento["codice"]; ?>"></input>
-                                            <input type="submit" name="deleteComment" value="Cancella" class="btn btn-warning"></input>
-                                        </form>
-                                    </div>
-                                <?php endif; ?>
-                            </article>
+                        <?php foreach($commenti as $commento): ?>
+                        <article class="row col-12 bg-light card-body my-1 border-bottom">
+                            <div class="col-4 col-lg-2">
+                                <img src="img/profile.png" alt="" height="100"/>
+                            </div>
+                            <div class="col-8 col-lg-10">
+                                <p>by <strong><?php echo $commento["username"]; ?></strong></p>
+                                <p><?php echo $commento["contenuto"]; ?></p>
+                                <p><small class="text-muted"><?php echo $commento["data"]; ?></small></p>
+                            </div>
+                            <?php if(isset($_SESSION["username"]) && $_SESSION["username"] == $commento["username"]):?>
+                            <div class="d-flex flex-column align-items-end">
+                                <form method="post">
+                                    <input type="hidden" name="com" value="<?php echo $commento["codice"]; ?>"></input>
+                                    <input type="submit" name="deleteComment" value="Cancella" class="btn btn-warning"></input>
+                                </form>
+                            </div>
+                            <?php endif; ?> 
+                        </article>
                         <?php endforeach; ?>
                     </div>
                 </div>
@@ -202,14 +197,6 @@ if (isset($_POST["addComment"]) && isUserLoggedIn()) {
             <div class="text-center">
                 <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Aggiungi Commento</button>
             </div>
-            <?php if (isset($errorCommento) && $errorCommento === 1) : ?>
-                <p class="text-danger text-center"> Commento utente già presente </p>
-            <?php elseif (isset($errorCommento) && $errorCommento === 2) : ?>
-                <p class="text-danger text-center"> Non puoi commentare una tua ricetta </p>
-            <?php
-                unset($errorCommento);
-            endif; ?>
-
         </div>
     </div>
 </div>
