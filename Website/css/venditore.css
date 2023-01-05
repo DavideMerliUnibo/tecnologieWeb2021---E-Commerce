@@ -1,0 +1,59 @@
+section article div div p {
+    font-weight: bold;
+
+}
+
+
+div#prodotti section article {
+    height: 120px;
+    overflow: hidden;
+}
+
+div#ricette section article {
+    height: 150px;
+    overflow: hidden;
+}
+
+div.container div.row div#info {
+    font-size: small;
+    padding-left: 2%;
+    padding-right: 0%;
+
+}
+
+section article div h3 a {
+    color: black;
+}
+
+div#ricette article div img,
+div#prodotti article div img {
+    max-height: 100px;
+    max-width: 100px;
+}
+
+div#ricette article div h3 a {
+    color: black;
+}
+
+button a {
+    color:black;
+}
+
+@media screen and (min-width: 426px) {
+    div.container div.row div#info {
+        padding-left: 20%;
+        padding-right: 20%;
+        font-size: large;
+    }
+
+}
+p {
+    font-size: small;
+}
+
+@media screen and (min-width: 426px) {
+    p{
+        font-size: medium;
+    }
+}
+

@@ -162,6 +162,7 @@ $ricette = $dbh->getRicetteUtente();
                 "titolo": titolo
             },
             success: function() {
+                window.location="http://localhost/tecnologieWeb2021---E-Commerce/Website/home-utente.php?action=gestisciRicette&toast=deleteRec";
                 loadContent();
             }
         })
@@ -316,6 +317,7 @@ $ricette = $dbh->getRicetteUtente();
             success: function(data) {
                 console.log(titolo + ' ' + nome + ' ' + data);
                 imag(titolo);
+                window.location="http://localhost/tecnologieWeb2021---E-Commerce/Website/home-utente.php?action=gestisciRicette&toast=deleteImg";
             }
         })
     }

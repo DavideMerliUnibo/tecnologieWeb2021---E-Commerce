@@ -1,0 +1,9 @@
+div.divScrollabile article div img {
+    width: 75px;
+}
+
+@media screen and (min-width:426px){
+    div.divScrollabile article div img {
+        width: 100px;
+    }
+}

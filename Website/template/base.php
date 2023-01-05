@@ -8,6 +8,16 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="css/style.css"/>
+        <!-- For toast -->
+        <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet"/>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+        
+        <?php if(isset($templateParams["css"]) && count($templateParams["css"])!= 0){
+            foreach($templateParams["css"] as $script): ?>
+                <link rel="stylesheet" type="text/css" href="<?php echo $script?>"/>
+        <?php endforeach; } ?>
+        
         <script src="js/jquery-3.6.0.min.js"></script>
         <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script> -->
         <script src="js/navbarOpenClose.js"></script>
@@ -61,7 +71,7 @@
                             echo '<li class="nav-item">Devi loggarti per vedere il carrello</li>';   
                         }
                         else{
-                            $templateParams["prodottiCarrello"] = $dbh-> getProductInCart($_SESSION['email']);
+                            $templateParams["prodottiCarrello"] = $dbh-> getProductsInCart($_SESSION['email']);
                             if(count($templateParams["prodottiCarrello"])==0){
                                 echo '<li class="nav-item">Carrello Vuoto</li>';   
                             } else{
