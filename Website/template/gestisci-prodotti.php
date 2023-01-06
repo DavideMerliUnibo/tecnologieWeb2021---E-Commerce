@@ -75,7 +75,7 @@ $ricette = $dbh->getProdottiUtente();
                     </thead>
                     <tbody class="">`;
         if (data.length === 0) {
-            content += `<td class="text-center" colspan="8">Nessuna ricetta inserita</td>`;
+            content += `<td class="text-center" colspan="8">Nessun prodotto inserito</td>`;
         } else {
             for (prodotto of data) {
                 content += `<tr">
