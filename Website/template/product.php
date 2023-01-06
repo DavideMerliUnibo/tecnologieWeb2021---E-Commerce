@@ -226,6 +226,9 @@ endif; ?>
                             <div class="col-8 col-lg-10">
                                 <p><strong><?php echo $recensione["titolo"]; ?></strong></p>
                                 <p>by <strong><?php echo $recensione["username"]; ?></strong></p>
+                                <?php for ($i = 0; $i < intval($recensione["valutazione"]); $i++) {
+	                                echo '<span style="color:orange;" class="fa fa-star checked"></span>';
+                                }?>
                                 <p><?php echo $recensione["contenuto"]; ?></p>
                                 <p><small class="text-muted"><?php echo $recensione["data"]; ?></small></p>
                             </div>
