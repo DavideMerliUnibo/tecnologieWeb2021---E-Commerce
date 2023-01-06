@@ -7,6 +7,7 @@ if (!isUserLoggedIn()) {
 require "template/registrazione-form.php"
 
 ?>
+
 <script>
     $("div img.card-img-top").parent().remove();
     $("div.card div.card-body h1").text("Aggiorna informazioni");

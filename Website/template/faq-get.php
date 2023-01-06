@@ -1,4 +1,4 @@
-<h1>Le FAQ più comuni:</h1>
+<h1 class="px-5 py-2">Le FAQ più comuni</h1>
 
 <p>
   <a class="btn btn-primary mx-3 mt-3" data-bs-toggle="collapse" href="#contatti" role="button" aria-expanded="false" aria-controls="collapseExample">
@@ -7,7 +7,7 @@
 </p>
 
 <div class="collapse mx-3" id="contatti">
-  <div class="card card-body" id="f">
+  <div class="card card-body bg-light" id="f">
     Invia un'email all'indirizzo tuttofungo.it@gmail.com.
   </div>
 </div>
@@ -19,7 +19,7 @@
 </p>
 
 <div class="collapse mx-3" id="allergie">
-  <div class="card card-body" id="f">
+  <div class="card card-body bg-light" id="f">
     Documentati con cura prima di effettuare acquisti. Tuttofungo.it è una piattaforma in cui qualunque utente può vendere prodotti a piacimento, e pertanto non si prende la responsabilità di eventuali danni causati ai compratori.
   </div>
 </div>
@@ -31,7 +31,7 @@
 </p>
 
 <div class="collapse mx-3" id="funghiDisponibili">
-  <div class="card card-body" id="f">
+  <div class="card card-body bg-light" id="f">
     Il nostro database comprende una limitata selezione di funghi. Al momento abbiamo:
     <ul>
       <?php foreach($dbh -> getProducts() as $p): ?>
@@ -49,7 +49,7 @@
 </p>
 
 <div class="collapse mx-3" id="ricetta">
-  <div class="card card-body" id="f">
+  <div class="card card-body bg-light" id="f">
     Sì, purché tale ricetta contenga un qualche tipo di funghi e sia ben documentata. Ogni ricetta che non rispetta tali caratteristiche verrà automaticamente rimossa entro un paio di giorni lavorativi.
   </div>
 </div>
@@ -61,7 +61,7 @@
 </p>
 
 <div class="collapse mx-3" id="commentiRecensioni">
-  <div class="card card-body" id="f">
+  <div class="card card-body bg-light" id="f">
     Per aggiungere commenti e recensioni è necessario effettuare il login.
   </div>
 </div>
@@ -73,7 +73,7 @@
 </p>
 
 <div class="collapse mx-3" id="notifiche">
-  <div class="card card-body" id="f">
+  <div class="card card-body bg-light" id="f">
     Effettua l'accesso e controlla la sezione "Notifiche" dell'area personale. Se qualcuno ha acquistato un tuo prodotto, vi comparirà un'apposita notifica.
   </div>
 </div>

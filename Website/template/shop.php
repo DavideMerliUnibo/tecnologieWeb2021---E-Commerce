@@ -1,11 +1,13 @@
 <h1 class="px-5">Shop</h1>
 
-<div class="row p-3">
+<div class="row text-center mx-2">
     <?php foreach ($templateParams["prodotti"] as $prodotto) : ?>
-        <div class="card my-1 col-12 col-md-3 px-0">
+        <div class="card my-1 col-12 col-md-3 bg-light">
             <div class="row">
                 <div class="col-6 col-md-12 mx-auto d-flex">
-                    <img src="<?php echo UPLOAD_DIR . $prodotto["img"] ?>" class="img-fluid rounded-left mx-auto" alt="...">
+                    <a href="product.php?prodotto=<?php echo $prodotto["codice"]; ?>">
+                        <img src="<?php echo UPLOAD_DIR . $prodotto["img"] ?>" class="img-fluid rounded-left mx-auto" alt="...">
+                    </a>
                 </div>
                 <div class="col-6 col-md-12">
                     <div class="card-body">
