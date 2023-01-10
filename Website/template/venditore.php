@@ -50,7 +50,7 @@ $user = $templateParams["user"];
             <?php endfor; ?>
             <div class="row">
                 <div class="d-flex col-12">
-                    <button class="ms-auto me-4 btn btn-secondary btn-sm ml-auto"><a href="shop.php?username=<?php echo $user["username"] ?>">Vedi altro..</a> </button>
+                <a href="ricette.php?username=<?php echo $user["username"] ?>" type="button" class="ms-auto me-4 btn btn-info btn-sm ml-auto text-white">Vedi altro..</a> 
                 </div>
             </div>
         </div>
@@ -58,33 +58,37 @@ $user = $templateParams["user"];
             <h3 class="text-center">Ricette:</h3>
             <?php $ricette = $dbh->getRicetteUtenteByUsername($user["username"]);
             $x = 0;
-            if (count($ricette) < 3) {
-                $x = count($ricette);
-            } else {
-                $x = 3;
-            }
-            for ($i = 0; $i < $x; $i++) : ?>
-                <section class="px-3">
-                    <article class="row align-items-center bg-light border my-2 ">
-                        <div class="col-3 col-lg-2 d-flex justify-content-center  ">
-                            <img src="<?php echo UPLOAD_DIR . $ricette[$i]["img"]; ?>" class="img-thumbnail img-fluid m-auto w-100 h-100 " alt="" />
-                        </div>
-                        <div class="col-9 col-lg-10">
-                            <h3><a href="paginaricetta.php?titoloRicetta=<?php echo $ricette[$i]["titolo"]; ?>"><?php echo $ricette[$i]["titolo"]; ?></a></h3>
-                            <p><?php echo substr($ricette[$i]["descrizione"], 0, 100) . ".."; ?></p>
-                        </div>
-                    </article>
+            if(count($ricette)>0){
+                if (count($ricette) < 3) {
+                   $x = count($ricette);
+                } else {
+                    $x = 3;
+                }
+                for ($i = 0; $i < $x; $i++) : ?>
+                    <section class="px-3">
+                        <article class="row align-items-center bg-light border my-2 ">
+                            <div class="col-3 col-lg-2 d-flex justify-content-center  ">
+                                <img src="<?php echo UPLOAD_DIR . $ricette[$i]["img"]; ?>" class="img-thumbnail img-fluid m-auto w-100 h-100 " alt="" />
+                            </div>
+                            <div class="col-9 col-lg-10">
+                                <h3><a href="paginaricetta.php?titoloRicetta=<?php echo $ricette[$i]["titolo"]; ?>"><?php echo $ricette[$i]["titolo"]; ?></a></h3>
+                                <p><?php echo substr($ricette[$i]["descrizione"], 0, 100) . ".."; ?></p>
+                            </div>
+                        </article>
 
                 <?php endfor; ?>
                 </section>
                 <div class="row">
                     <div class="d-flex col-12">
-                        <button class="ms-auto me-4 btn btn-secondary btn-sm ml-auto"><a href="ricette.php?username=<?php echo $user["username"] ?>">Vedi altro..</a> </button>
+                        <a href="ricette.php?username=<?php echo $user["username"] ?>" type="button" class="ms-auto me-4 btn btn-info btn-sm ml-auto text-white">Vedi altro..</a> 
                     </div>
                 </div>
-
-
-                <!--sezione ricette-->
+            <?php
+            }else if(count($ricette)==0): ?>
+                <div class="row text-center">
+                    <p>Non ci sono ricette per questo articolo</p>
+                </div>
+            <?php endif;?>
         </div>
 
     </div>

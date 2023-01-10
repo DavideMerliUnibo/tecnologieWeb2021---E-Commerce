@@ -96,29 +96,3 @@ if (isset($_GET["toast"])) {
         </div>
     </div>
 </div>
-
-<!-- questo non serve piu perche` questa parte non e` piu dinamica il contenuto pero` lo e` -->
-<!-- <script>
-    
-    $("#gestisciRicetteButton").on("click", event => {
-        //forse meglio cosi`, non prende il focus sul main menu al primo click se faccio manualmente
-        $("#offcanvasMenu").removeClass("show");
-        $("div .offcanvas-backdrop.show.fade").removeClass("show");
-        // $.get("template/gestisci-ricette.php", function(data) {
-        //     $("section").html(data);
-        // });
-
-        $.ajax({
-            url: "template/gestisci-ricette.php",
-            cache: false,
-            success: function(data) {
-                $("section").html(data);
-            }
-        })
-    });
-</script> -->
-<!-- <script>
-    $("#gestisciRicetteButton").on("click", event => {
-            window.location = "http://localhost/tecnologieWeb2021---E-Commerce/Website/home-utente.php?action=gestisciRicette";
-        });
-</script> -->
