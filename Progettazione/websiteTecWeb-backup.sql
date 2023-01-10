@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Dic 28, 2022 alle 17:40
+-- Creato il: Gen 10, 2023 alle 13:40
 -- Versione del server: 10.4.21-MariaDB
 -- Versione PHP: 8.0.11
 
@@ -40,11 +40,7 @@ CREATE TABLE `acquisto` (
 --
 
 INSERT INTO `acquisto` (`codice`, `data`, `totale`, `acquirente`, `idCarta`) VALUES
-(10, '2022-12-26', '29.91', 'LuxMasayuki@gmail.com', 11),
-(11, '2022-12-27', '15.00', 'LuxMasayuki@gmail.com', 12),
-(12, '2022-12-28', '1.00', 'LuxMasayuki@gmail.com', 13),
-(13, '2022-12-28', '15.00', 'LuxMasayuki@gmail.com', 14),
-(14, '2022-12-28', '15.00', 'LuxMasayuki@gmail.com', 14);
+(17, '2022-12-29', '15.00', 'LuxMasayuki@gmail.com', 14);
 
 -- --------------------------------------------------------
 
@@ -63,12 +59,7 @@ CREATE TABLE `acquisto_prodotto` (
 --
 
 INSERT INTO `acquisto_prodotto` (`codProdotto`, `codAcquisto`, `quantità`) VALUES
-(1, 10, 1),
-(2, 10, 1),
-(2, 11, 1),
-(14, 12, 1),
-(2, 13, 1),
-(2, 14, 1);
+(2, 17, 1);
 
 -- --------------------------------------------------------
 
@@ -117,7 +108,8 @@ INSERT INTO `cartadicredito` (`ID`, `codiceCarta`, `titolare`) VALUES
 (11, '99', 'LuxMasayuki@gmail.com'),
 (12, '1111', 'LuxMasayuki@gmail.com'),
 (13, '222', 'LuxMasayuki@gmail.com'),
-(14, '111', 'LuxMasayuki@gmail.com');
+(14, '111', 'LuxMasayuki@gmail.com'),
+(15, '999', 'LuxMasayuki@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -254,7 +246,13 @@ INSERT INTO `notifica` (`codice`, `messaggio`, `data`, `utente`) VALUES
 (1, 'Acquisto avvenuto con successo!', '2022-12-28', 'LuxMasayuki@gmail.com'),
 (2, 'Acquisto completato!', '2022-12-28', 'LuxMasayuki@gmail.com'),
 (3, 'Acquisto avvenuto con successo!', '2022-12-28', 'LuxMasayuki@gmail.com'),
-(4, 'Acquisto completato!', '2022-12-28', 'LuxMasayuki@gmail.com');
+(4, 'Acquisto completato!', '2022-12-28', 'LuxMasayuki@gmail.com'),
+(5, 'Acquisto avvenuto con successo!', '2022-12-29', 'LuxMasayuki@gmail.com'),
+(6, 'Acquisto completato!', '2022-12-29', 'LuxMasayuki@gmail.com'),
+(7, 'Acquisto avvenuto con successo!', '2022-12-29', 'LuxMasayuki@gmail.com'),
+(8, 'Acquisto completato!', '2022-12-29', 'LuxMasayuki@gmail.com'),
+(9, 'Acquisto avvenuto con successo!', '2022-12-29', 'LuxMasayuki@gmail.com'),
+(10, 'Acquisto completato!', '2022-12-29', 'LuxMasayuki@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -279,7 +277,7 @@ CREATE TABLE `prodotto` (
 
 INSERT INTO `prodotto` (`codice`, `prezzoPerUnità`, `quantità`, `informazioni`, `mediaValutazione`, `nomeFungo`, `data`, `offerente`) VALUES
 (1, 14.91, 0, 'Raccolto in val di Fiemme. Ideale per molte ricette. Non velenoso. Ottimo per molte ricette a base di porcini.', 4.25, 'Boletus edulis', '0000-00-00', 'davide.merli5@studio.unibo.it'),
-(2, 15, 6, 'Conosciuta fin dai tempi antichi come fungo in grado di provocare allucinazioni. E\' tra i funghi più conosciuti, specie a causa del suo aspetto appariscente.Non mangiare (a meno di non essere masochisti o sciamani).', 5, 'Amanita muscaria', '0000-00-00', 'ryan.perrina@studio.unibo.it'),
+(2, 15, 3, 'Conosciuta fin dai tempi antichi come fungo in grado di provocare allucinazioni. E\' tra i funghi più conosciuti, specie a causa del suo aspetto appariscente.Non mangiare (a meno di non essere masochisti o sciamani).', 2, 'Amanita muscaria', '0000-00-00', 'ryan.perrina@studio.unibo.it'),
 (3, 2.98, 20, 'I funghi champignon, nome scientifico Agaricus bisporus, appartengono alla famiglia delle Agaricaceae. Sono uno dei funghi maggiormente apprezzati e commercializzati al mondo. Hanno effetti benefici sulla salute grazie ai loro composti antiossidanti e bioattivi. Il loro consumo secondo gli studi potenzia anche il sistema immunitario.', 3, 'Champignon', '0000-00-00', 'davide.merli5@studio.unibo.it'),
 (6, 48.54, 52, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam a nunc at mi venenatis vestibulum ut sit amet nisi. Cras consequat, tellus vitae pulvinar sagittis, nisi sem pulvinar felis, eu sollicitudin massa urna a magna. Mauris vehicula, mauris sit amet fringilla commodo, lacus lectus vestibulum lectus, sit amet eleifend urna lacus vel turpis. Curabitur sodales sagittis arcu quis mattis. Pellentesque placerat risus ac dignissim imperdiet. Aliquam nec vehicula metus, viverra auctor velit. Don', 0, 'Boletus edulis', '2022-12-21', 'LuxMasayuki@gmail.com'),
 (12, 6.57, 83, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam a nunc at mi venenatis vestibulum ut sit amet nisi. Cras consequat, tellus vitae pulvinar sagittis, nisi sem pulvinar felis, eu sollicitudin massa urna a magna. Mauris vehicula, mauris sit amet fringilla commodo, lacus lectus vestibulum lectus, sit amet eleifend urna lacus vel turpis. Curabitur sodales sagittis arcu quis mattis. Pellentesque placerat risus ac dignissim imperdiet. Aliquam nec vehicula metus, viverra auctor velit. Don', 0, 'Champignon', '2022-12-20', 'LuxMasayuki@gmail.com'),
@@ -304,7 +302,8 @@ CREATE TABLE `prodotto_carrello` (
 
 INSERT INTO `prodotto_carrello` (`codCarrello`, `codProdotto`, `quantità`) VALUES
 (1, 1, 1),
-(1, 2, 1);
+(1, 2, 1),
+(3, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -329,7 +328,8 @@ CREATE TABLE `recensione` (
 INSERT INTO `recensione` (`codice`, `titolo`, `contenuto`, `valutazione`, `data`, `utente`, `codProdotto`) VALUES
 (1, 'Bene ma non benissim', 'L\'ho usato per un bel risotto, molto buono, ma la scatola in cui è arrivato non era in ottime condizioni.', 3.5, '0000-00-00', 'ryan.perrina@studio.unibo.it', 1),
 (2, 'Fungo di qualità', 'Miglior porcino mai mangiato in vita mia. Si sente che è freschissimo. Arrivato in tempi brevi, tra l\'altro.', 5, '0000-00-00', 'manuel.luzietti@studio.unibo.i', 1),
-(3, 'Non ci siamo', 'La confezione era scadente, ed è arrivato dopo un mese da quando l\'ho ordinato. Molto male.', 1, '0000-00-00', 'davide.merli5@studio.unibo.it', 2);
+(3, 'Non ci siamo', 'La confezione era scadente, ed è arrivato dopo un mese da quando l\'ho ordinato. Molto male.', 1, '0000-00-00', 'davide.merli5@studio.unibo.it', 2),
+(44, 'aaa', 'dffff', 5, '2023-01-05', 'LuxMasayuki@gmail.com', 2);
 
 -- --------------------------------------------------------
 
@@ -444,7 +444,7 @@ INSERT INTO `utente` (`nome`, `cognome`, `email`, `password`, `username`, `indir
 ('bho', 'bho', 'diobono@gmail.com', 'password', 'Lillop', 'Viale Cesena  5', '2022-12-08', 0, 0, 0, 'Annamo bene'),
 ('Lux', 'Masayuki', 'LuxMasayuki@gmail.com', 'password', 'adminn', 'Viale Cesena  5', '1996-04-26', 1, 1, 0, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus dolor enim, faucibus ultrices tortor eget, ornare iaculis mauris. Fusce ullamcorper commodo purus, eget cursus urna bibendum eu. In vitae commodo diam. Mauris dignissim sem diam, id maximus enim iaculis eu. Pellentesque at lectus consectetur erat hendrerit maximus. Nulla bibendum non enim sit amet placerat. Donec at sapien sit amet libero bibendum hendrerit. Etiam elementum elit lacus, non volutpat metus ullamcorper quis. Sed sit amet laoreet tortor. Nunc a molestie neque.\r\n\r\nDonec pharetra ante urna. Aliquam sit amet cursus augue, tincidunt semper sem. Aliquam fermentum magna sed justo luctus, tempor finibus sapien venenatis. Praesent semper quam et tellus vulputate malesuada ut in metus. Quisque efficitur orci nec ex eleifend convallis. Duis mollis elit consectetur sem vehicula tempor. Aenean vehicula accumsan dui, sed vehicula nunc ultrices in. Vestibulum maximus risus et nunc porta, non tempor nisi scelerisque. Duis'),
 ('Manuel', 'Luzietti', 'manuel.luzietti@studio.unibo.i', 'password', 'manuel.luz', 'via Inventata 15', '0000-00-00', 0, 0, 0, NULL),
-('Ryan', 'Perrina', 'ryan.perrina@studio.unibo.it', 'password', 'ryan.perri', 'via Del Poggio 10', '0000-00-00', 3, 0, 0, NULL),
+('Ryan', 'Perrina', 'ryan.perrina@studio.unibo.it', 'password', 'ryan.perri', 'via Del Poggio 10', '0000-00-00', 6, 0, 2, NULL),
 ('zio', 'bello', 'ziobello@gmail.com', '26041996', 'ziobello', 'viale cesena ', '2022-12-09', 0, 0, 0, NULL);
 
 --
@@ -582,7 +582,7 @@ ALTER TABLE `utente`
 -- AUTO_INCREMENT per la tabella `acquisto`
 --
 ALTER TABLE `acquisto`
-  MODIFY `codice` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `codice` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT per la tabella `carrello`
@@ -594,7 +594,7 @@ ALTER TABLE `carrello`
 -- AUTO_INCREMENT per la tabella `cartadicredito`
 --
 ALTER TABLE `cartadicredito`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT per la tabella `commento`
@@ -606,7 +606,7 @@ ALTER TABLE `commento`
 -- AUTO_INCREMENT per la tabella `notifica`
 --
 ALTER TABLE `notifica`
-  MODIFY `codice` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `codice` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT per la tabella `prodotto`
@@ -618,7 +618,7 @@ ALTER TABLE `prodotto`
 -- AUTO_INCREMENT per la tabella `recensione`
 --
 ALTER TABLE `recensione`
-  MODIFY `codice` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `codice` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT per la tabella `tabellanutrizionale`
