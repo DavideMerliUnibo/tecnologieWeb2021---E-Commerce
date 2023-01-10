@@ -81,7 +81,7 @@ endif; ?>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <p>Info venditore:</br><strong><?php echo $dbh->getUtente($prodotto["username"])[0]["info_venditore"] ?> </strong></p>
+                                <p><?php echo $dbh->getUtente($prodotto["username"])[0]["info_venditore"] ?> </p>
                             </div>
 
                         </div>
@@ -168,7 +168,7 @@ endif; ?>
     </article>
 
     <!-- Recensioni degli utenti -->
-    <div class="col-12 col-md-8 mx-auto">
+    <div class="col-12 col-md-8 mx-auto mt-4">
         <h2 class="text-center my-auto">Recensioni degli utenti</h2>
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -213,7 +213,7 @@ endif; ?>
             </div>
         </div>
         <div>
-            <div class="col-12">
+            <div class="col-12 mt-3">
                 <?php if (empty($recensioni)) : ?>
                     <p class="text-center p-2">Non ci sono recensioni per questo prodotto.</p>
                 <?php endif; ?>
@@ -248,7 +248,7 @@ endif; ?>
 
         </div>
         <div class="text-center">
-            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">Aggiungi Recensione</button>
+            <button type="button" class="btn btn-warning mt-4" data-bs-toggle="modal" data-bs-target="#exampleModal">Aggiungi Recensione</button>
         </div>
         <?php
         if (isset($errorRecensione) && $errorRecensione === 1) : ?>

@@ -61,7 +61,7 @@ if (isset($_POST["addComment"]) && isUserLoggedIn()) {
                 <div class="col-12 col-md-3">
                     <div class="row">
                         <div class="col-12">
-                            <div class="row m-3 justify-content-around align-items-center d-md-none" id="calories">
+                            <div class="row m-3 justify-content-around align-items-center" id="calories">
                                 <h5 class="m-0 col-9">Calorie</h5>
                                 <div class="col-3 d-flex justify-content-end"><button type="button" data-bs-toggle="collapse" data-bs-target="#calInfo" aria-expanded="false" aria-controls="calInfo" class="btn btn-primary p-0 my-2">info+</button>
                                 </div>
@@ -114,16 +114,87 @@ if (isset($_POST["addComment"]) && isUserLoggedIn()) {
                     <p class="text-justify"><?php echo $ricetta["procedimento"]; ?></p>
                     <h2 class="text-center">Consigli</h2>
                     <p class="text-justify"><?php echo $ricetta["consigli"]; ?></p>
+                    <!-- Commenti -->
+                    <h2 class="text-center my-auto">Commenti</h2>
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Nuovo commento</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form method="post">
+                                        <?php if (!isUserLoggedIn()) : ?>
+                                            <h3>Utente non loggato!</h3>
+                                        <?php endif; ?>
+                                        <div class="mb-3">
+                                            <label for="message-text" class="col-form-label">Contenuto commento:</label>
+                                            <textarea class="form-control" id="message-text" name="contenutoCommento" <?php if (!isUserLoggedIn()) {
+                                                                                                                            echo "disabled";
+                                                                                                                        } ?>></textarea>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+                                            <input type="submit" name="addComment" value="Invia" class="btn btn-primary" <?php if (!isUserLoggedIn()) {
+                                                                                                                                echo "disabled";
+                                                                                                                            } ?>></input>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <?php if (empty($commenti)) : ?>
+                                <p class="text-center p-2">Non ci sono commenti per questa ricetta.</p>
+                            <?php endif; ?>
+                        <div tabindex="0" class="divScrollabile">
+                                <?php foreach ($commenti as $commento) : ?>
+                                    <article class="row col-12 bg-light card-body my-1 border-bottom">
+                                        <div class="col-4 col-lg-2">
+                                            <img src="img/profile.png" alt=""  />
+                                        </div>
+                                        <div class="col-8 col-lg-10">
+                                            <p>by <strong><?php echo $commento["username"]; ?></strong></p>
+                                            <p><?php echo $commento["contenuto"]; ?></p>
+                                            <p><small class="text-muted"><?php echo $commento["data"]; ?></small></p>
+                                        </div>
+                                        <?php if (isset($_SESSION["username"]) && $_SESSION["username"] == $commento["username"]) : ?>
+                                            <div class="d-flex flex-column align-items-end">
+                                                <form method="post">
+                                                    <input type="hidden" name="com" value="<?php echo $commento["codice"]; ?>"></input>
+                                                    <input type="submit" name="deleteComment" value="Cancella" class="btn btn-warning"></input>
+                                                </form>
+                                            </div>
+                                        <?php endif; ?>
+                                    </article>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <button type="button" class="btn btn-warning my-4" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Aggiungi Commento</button>
+                    </div>
+                    <?php if (isset($errorCommento) && $errorCommento === 1) : ?>
+                        <p class="text-danger text-center"> Commento utente già presente </p>
+                    <?php elseif (isset($errorCommento) && $errorCommento === 2) : ?>
+                        <p class="text-danger text-center"> Non puoi commentare una tua ricetta </p>
+                    <?php
+                        unset($errorCommento);
+                    endif; ?>
                 </div>
             </div>
         </div>
-        <div class="col-12 float-md-start col-md-3 mx-auto">
+        
+        <div class="col-12 mx-auto">
             <h2 class="text-center">Altre ricette</h2>
             <div class="row flex-nowrap flex-md-wrap text-center g-2 mt-1" id="altreRicetteContainer">
                 <?php
                 $ricette = $dbh->getLatestRecipes(5);
                 foreach ($ricette as $ricetta) : ?>
-                    <div class="card col-4 col-md-12 mt-1 justify-content-around" >
+                    <div class="card col-4 mt-1 justify-content-around" >
                         <div class="card-body row">
 
                             <img class="img-thumbnail col-12 col-md-3" src="<?php echo UPLOAD_DIR . $ricetta['immagine'] ?>" alt="" style="width:5rem" />
@@ -131,85 +202,7 @@ if (isset($_POST["addComment"]) && isUserLoggedIn()) {
                         </div>
                     </div>
                 <?php endforeach; ?>
-
-
-
             </div>
-        </div>
-
-        <!-- Commenti -->
-        <div class="col-12 col-md-8 mx-auto py-3">
-            <h2 class="text-center my-auto">Commenti</h2>
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Nuovo commento</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form method="post">
-                                <?php if (!isUserLoggedIn()) : ?>
-                                    <h3>Utente non loggato!</h3>
-                                <?php endif; ?>
-                                <div class="mb-3">
-                                    <label for="message-text" class="col-form-label">Contenuto commento:</label>
-                                    <textarea class="form-control" id="message-text" name="contenutoCommento" <?php if (!isUserLoggedIn()) {
-                                                                                                                    echo "disabled";
-                                                                                                                } ?>></textarea>
-                                </div>
-
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
-                                    <input type="submit" name="addComment" value="Invia" class="btn btn-primary" <?php if (!isUserLoggedIn()) {
-                                                                                                                        echo "disabled";
-                                                                                                                    } ?>></input>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12">
-                    <?php if (empty($commenti)) : ?>
-                        <p class="text-center p-2">Non ci sono commenti per questa ricetta.</p>
-                    <?php endif; ?>
-                    <div tabindex="0" class="divScrollabile">
-                        <?php foreach ($commenti as $commento) : ?>
-                            <article class="row col-12 bg-light card-body my-1 border-bottom">
-                                <div class="col-4 col-lg-2">
-                                    <img src="img/profile.png" alt=""  />
-                                </div>
-                                <div class="col-8 col-lg-10">
-                                    <p>by <strong><?php echo $commento["username"]; ?></strong></p>
-                                    <p><?php echo $commento["contenuto"]; ?></p>
-                                    <p><small class="text-muted"><?php echo $commento["data"]; ?></small></p>
-                                </div>
-                                <?php if (isset($_SESSION["username"]) && $_SESSION["username"] == $commento["username"]) : ?>
-                                    <div class="d-flex flex-column align-items-end">
-                                        <form method="post">
-                                            <input type="hidden" name="com" value="<?php echo $commento["codice"]; ?>"></input>
-                                            <input type="submit" name="deleteComment" value="Cancella" class="btn btn-warning"></input>
-                                        </form>
-                                    </div>
-                                <?php endif; ?>
-                            </article>
-                        <?php endforeach; ?>
-                    </div>
-                </div>
-            </div>
-            <div class="text-center">
-                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Aggiungi Commento</button>
-            </div>
-            <?php if (isset($errorCommento) && $errorCommento === 1) : ?>
-                <p class="text-danger text-center"> Commento utente già presente </p>
-            <?php elseif (isset($errorCommento) && $errorCommento === 2) : ?>
-                <p class="text-danger text-center"> Non puoi commentare una tua ricetta </p>
-            <?php
-                unset($errorCommento);
-            endif; ?>
-
         </div>
     </div>
 </div>
