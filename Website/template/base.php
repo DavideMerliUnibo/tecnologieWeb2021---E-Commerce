@@ -12,6 +12,8 @@
         <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet"/>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+        <!-- for star rating -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         
         <?php if(isset($templateParams["css"]) && count($templateParams["css"])!= 0){
             foreach($templateParams["css"] as $script): ?>
