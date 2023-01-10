@@ -27,6 +27,9 @@ SET time_zone = "+00:00";
 -- Struttura della tabella `acquisto`
 --
 
+CREATE DATABASE databasefunghi;
+USE databasefunghi;
+
 CREATE TABLE `acquisto` (
   `codice` int(11) NOT NULL,
   `data` date NOT NULL,
