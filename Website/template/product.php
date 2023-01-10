@@ -69,7 +69,7 @@ endif; ?>
         </div>
 
         <!-- Dati prodotto -->
-        <div class="row col-12">
+        <div class="row col-12 mt-2">
             <div class="col-12 col-md-10">
                 <p>Venduto da: <a href="venditore.php?username=<?php echo $prodotto["username"] ?>"><strong><?php echo $prodotto["username"]; ?></strong></a></p>
 
@@ -88,8 +88,8 @@ endif; ?>
                     </div>
                 </div>
                 <p>Prezzo: <strong><?php echo $prodotto["prezzoPerUnità"]; ?> €/Kg</strong></p>
-                <p>Informazioni:</br><strong><?php echo $prodotto["informazioni"]; ?></strong></p>
-                <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#modalInfoVenditore">
+                <p>Informazioni:</br><?php echo $prodotto["informazioni"]; ?></p>
+                <button type="button" class="btn btn-secondary btn-sm mb-2" data-bs-toggle="modal" data-bs-target="#modalInfoVenditore">
                     Visualizza Info Venditore
                 </button>
 
