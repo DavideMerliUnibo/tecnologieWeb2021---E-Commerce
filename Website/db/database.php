@@ -745,7 +745,7 @@ class DatabaseHelper
 
     public function getUtente($username)
     {
-        $stmt = $this->db->prepare("select nome,cognome,email,indirizzo,'data nascita',username,funghiVendutiKg,offerteInserite,mediaValutazioni,info_venditore from utente where username=?");
+        $stmt = $this->db->prepare("select nome,cognome,email,indirizzo,`data nascita`,username,funghiVendutiKg,offerteInserite,mediaValutazioni,info_venditore from utente where username=?");
         $stmt->bind_param("s", $username);
         $stmt->execute();
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
