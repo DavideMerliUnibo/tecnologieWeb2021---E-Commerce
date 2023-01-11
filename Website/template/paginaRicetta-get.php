@@ -187,20 +187,25 @@ if (isset($_POST["addComment"]) && isUserLoggedIn()) {
                 </div>
             </div>
         </div>
-        
-        <div class="col-12 mx-auto">
-            <h2 class="text-center">Altre ricette</h2>
-            <div class="row flex-nowrap flex-md-wrap text-center g-2 mt-1" id="altreRicetteContainer">
-                <?php
-                $ricette = $dbh->getLatestRecipes(5);
-                foreach ($ricette as $ricetta) : ?>
-                    <div class="card col-4 mt-1 justify-content-around" >
-                        <div class="card-body row">
 
-                            <img class="img-thumbnail col-12 col-md-3" src="<?php echo UPLOAD_DIR . $ricetta['immagine'] ?>" alt="" style="width:5rem" />
-                            <a class="text-dark col-12 col-md-9 align-self-center" style="text-decoration:none;" href="/tecnologieWeb2021---E-Commerce/Website/paginaricetta.php?titoloRicetta=<?php echo $ricetta["titolo"] ?>"><?php echo $ricetta["titolo"] ?></a>
+        <div class="container py-2 px-5">
+            <h2 class="text-center">Altre ricette</h2>
+            <div class="row text-center">
+                <?php
+                $ricette = $dbh->getLatestRecipes(3);
+                foreach ($ricette as $ricetta) : ?>
+                <div class="col-4">
+                    <div class="card bg-light ">
+                        <div class="row align-items-center">
+                            <div class="col-12 col-md-4 my-2">
+                                <a href="/tecnologieWeb2021---E-Commerce/Website/paginaricetta.php?titoloRicetta=<?php echo $ricetta["titolo"] ?>"><img class="img-thumbnail col-12 col-md-3" src="<?php echo UPLOAD_DIR . $ricetta['immagine'] ?>" alt="" style="width:5rem" /></a>
+                            </div>
+                            <div class="col-12 col-md-8">
+                                <a class="text-dark col-12 col-md-9 align-self-center" style="text-decoration:none;" href="/tecnologieWeb2021---E-Commerce/Website/paginaricetta.php?titoloRicetta=<?php echo $ricetta["titolo"] ?>"><?php echo $ricetta["titolo"] ?></a>
+                            </div>
                         </div>
                     </div>
+                </div>
                 <?php endforeach; ?>
             </div>
         </div>
