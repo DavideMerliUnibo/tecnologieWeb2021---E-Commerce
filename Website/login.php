@@ -20,10 +20,7 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
 if (isUserLoggedIn()) {
     header("location: home-utente.php");
     die();
-    //$templateParams["nome"] = "login-home.php";
 } else {
-    //sostituire anche titolo
-    //$templateParams["titolo"] = 'Login';
     $templateParams["nome"] = "login-form.php";
     $templateParams["title"] = "Funghi - Login";
 }

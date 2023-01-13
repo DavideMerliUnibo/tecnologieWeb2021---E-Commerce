@@ -1,17 +1,14 @@
 <div class="container">
     <div class="row">
-        <?php if (isset($templateParams['errorMessage'])) : ?>
-            <div class="col-12 text-center">
-                <p class="bg-red"><?php echo $templateParams["errorMessage"] ?></p>
-            </div>
-        <?php endif; ?>
+        <?php if (isset($templateParams['errorMessage'])){
+            echo '<script type="text/javascript">toastr.error("'.$templateParams["errorMessage"].'");</script>';
+        }?>
         <div class="col-12 col-md-8 m-auto">
             <div class="card">
-                <div>
-                    <img src="<?php echo UPLOAD_DIR ?>forest1.jpg" alt="immagine foresta" class="card-img-top" />
+                <div class="jumbotron jumbotron-fluid py-5 my-0" style="background: url('<?php echo UPLOAD_DIR ?>forest1.jpg') no-repeat center; background-size: cover;">
                 </div>
                 <div class="card-body">
-                    <h1 class="text-center">Registrazione</h1>
+                    <h1 class="text-center card-title">Registrazione</h1>
 
                     <form method="post" action="#" id="form-register-update">
                         <div class="row my-3">
@@ -40,6 +37,12 @@
                                 <label class="form-label w-100" for="passwordInput" hidden>Password </label>
                             </div>
                         </div>
+                        <?php if (isset($templateParams["errorMessage"]) && str_contains($templateParams["errorMessage"], "Password")): ?>
+                            <div class="col-12 text-center" style="color:red;">
+                                La password deve avere una lunghezza di almeno 8 caratteri e contenere almeno una lettera minuscola, una lettera maiuscola, un numero e un carattere speciale.
+                            </div>
+                            <?php unset($templateParams["errorMessage"]); ?>
+                        <?php endif; ?>
                         <div class="row my-3">
                             <div class="col">
                                 <input class="form-control form-control-sm" type="text" name="indirizzo" id="indirizzoInput" placeholder="Indirizzo">
