@@ -1,7 +1,7 @@
 <?php require "../template/inserisci-modifica-template-form-prodotto.php";?>
 <script>
     $().ready(function(){
-        $("input[name=submitProdotto]").attr('onclick','return inserisciProdotto();').val('inserisci');
+        $("input[name=submitProdotto]").attr('onclick','return inserisciProdotto();').val('Inserisci');
 
     });
 function inserisciProdotto() {

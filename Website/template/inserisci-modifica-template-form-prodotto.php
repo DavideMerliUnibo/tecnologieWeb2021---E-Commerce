@@ -6,7 +6,6 @@
                 <form method="POST" action="#" id="formGestioneProdotti">
                     <div class="row text-start">
                         <div class="col-12 mb-2">
-                            <!-- <label class="form-label" for="titolo">Nome Fungo</label><input required class="form-control form-control-sm" id="titolo" type="text" name="titolo"> -->
                             <label class="form-label" for="nomeFungo">Nome Fungo</label>
 
                             <select class="form-select" id="nomeFungo" name="nomeFungo">
@@ -17,7 +16,7 @@
                         </div>
 
                         <div class="col-12 mb-2">
-                            <label class="form-label" for="descrizione">Descizione</label>
+                            <label class="form-label" for="descrizione">Descrizione</label>
                             <textarea required class="form-control form-control-sm" rows="2" id="descrizione" name="descrizione"></textarea>
                         </div>
 
@@ -37,7 +36,7 @@
                         </div>
                         <div class="col-12 mb-2 ">
                             <div class="d-none">>
-                                <input type="number" id="idProdotto" name="idProdotto" value=""/>s
+                                <input type="number" id="idProdotto" name="idProdotto" value=""/>
                             </div>
                         </div>
                     
@@ -47,7 +46,7 @@
                         <!-- continuare -->
                     </div>
                     <div class="col-12 mt-1">
-                        <input class="btn btn-secondary" type="submit" name="submitProdotto" value="Inserisci" onclick="">
+                        <input class="btn btn-success" type="submit" name="submitProdotto" value="Inserisci" onclick="">
                     </div>
                 </form>
             </div>
