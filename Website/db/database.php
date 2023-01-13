@@ -713,7 +713,7 @@ class DatabaseHelper
     }
     public function getProdottiInAcquisto($codice)
     {
-        $query = "SELECT ap.quantità, p.nomeFungo, p.offerente
+        $query = "SELECT ap.quantità, p.nomeFungo, p.offerente, p.codice
                   FROM acquisto_prodotto ap, prodotto p
                   WHERE ap.codProdotto = p.codice
                   AND ap.codAcquisto = ?";
@@ -1007,7 +1007,15 @@ class DatabaseHelper
     }
 
     public function getLatestAcquisto() {
-        $query = "SELECT MAX(codice) FROM acquisto";
+        $query = "SELECT MAX(codice) as codice FROM acquisto";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        return $result;
+    }
+
+    public function getTipologieFunghi() {
+        $query = "SELECT nomeScientifico FROM tipologiafungo";
         $stmt = $this->db->prepare($query);
         $stmt->execute();
         $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
