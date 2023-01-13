@@ -147,10 +147,10 @@ endif; ?>
                                 if (response === "success") {
                                     window.location.href = "http://localhost/tecnologieWeb2021---E-Commerce/Website/product.php?prodotto=" + codProd + "&toast=true";
                                 } else if (response === "max num raggiunto") {
-                                    toastr.error("quantità max raggiunta per questo prodotto.");
+                                    toastr.error("Quantità massima raggiunta per questo prodotto.");
                                 } else {
                                     console.log(response);
-                                    toastr.error("qualcosa è andato storto");
+                                    toastr.error("Errore nell'acquisto.");
                                 }
                             }
                         });
@@ -185,8 +185,8 @@ endif; ?>
                             <div class="mb-3">
                                 <label for="message-text" class="col-form-label">Titolo recensione:</label>
                                 <textarea class="form-control" id="message-text" name="titoloRecensione" <?php if (!isUserLoggedIn()) {
-                                                                                                                echo "disabled";
-                                                                                                            } ?>></textarea>
+                                                                                                            echo "disabled";
+                                                                                                         } ?>></textarea>
                             </div>
                             <div class="mb-3">
                                 <label for="message-text" class="col-form-label">Contenuto recensione:</label>
