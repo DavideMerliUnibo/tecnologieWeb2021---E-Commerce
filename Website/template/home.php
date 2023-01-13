@@ -65,12 +65,12 @@ if (isset($_GET["toast"])) {
     <div class="row">
         <div class="row col-12 d-flex">
             <div class="col-2 col-lg-1">
-                <button class="btn btn-primary ml-auto" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu" aria-controls="offcanvasMenu">Menu</button>
+                <button class="btn btn-success ml-auto" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu" aria-controls="offcanvasMenu">Menu</button>
             </div>
             <div class="col-8 col-lg-10"></div>
 
             <form method="post" class="col-2 col-lg-1">
-                <input type="submit" name="logout" value="Log Out" class="btn btn-primary ml-auto" type="button" style="white-space: nowrap;"></input>
+                <input type="submit" name="logout" value="Log Out" class="btn btn-success ml-auto" type="button" style="white-space: nowrap;"></input>
             </form>
             <div class="offcanvas offcanvas-start" id="offcanvasMenu">
                 <div class="offcanvas-body">
