@@ -37,7 +37,7 @@
                             <?php else : ?>
                                 <p class="w-50 ms-auto me-0 justify-content-end d-flex align-items-center">
                                     <?php $max = $dbh->getProductById($prodotto['codice'])[0]['quantità'] ?>
-                                    <input pattern="[0-9]{2}" type="number" max="<?php echo $max; ?>" class="w-50 mt-2 form-control" onchange="onchangeFunction(event,<?php echo $prodotto['codice']; ?>);" value="<?php echo $prodotto["quantità"]; ?>"></input>
+                                    <input pattern="[0-9]{2}" type="number" max="<?php echo $max; ?>" class="w-50 mt-2 px-1 form-control" onchange="onchangeFunction(event,<?php echo $prodotto['codice']; ?>);" value="<?php echo $prodotto["quantità"]; ?>"></input>
                                 </p>
                             <?php endif ?>
 
