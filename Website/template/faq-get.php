@@ -1,19 +1,7 @@
 <h1 class="px-5 py-2">Le FAQ più comuni</h1>
 
 <p>
-  <a class="btn btn-primary mx-3 mt-3" data-bs-toggle="collapse" href="#contatti" role="button" aria-expanded="false" aria-controls="collapseExample">
-    Come contattarci?
-  </a>
-</p>
-
-<div class="collapse mx-3" id="contatti">
-  <div class="card card-body bg-light" id="f">
-    Invia un'email all'indirizzo tuttofungo.it@gmail.com.
-  </div>
-</div>
-
-<p>
-  <a class="btn btn-primary mx-3 mt-3" data-bs-toggle="collapse" href="#allergie" role="button" aria-expanded="false" aria-controls="collapseExample">
+  <a class="btn btn-success mx-3 mt-3" data-bs-toggle="collapse" href="#allergie" role="button" aria-expanded="false" aria-controls="collapseExample">
     Allergie?
   </a>
 </p>
@@ -25,7 +13,19 @@
 </div>
 
 <p>
-  <a class="btn btn-primary mx-3 mt-3" data-bs-toggle="collapse" href="#funghiDisponibili" role="button" aria-expanded="false" aria-controls="collapseExample">
+  <a class="btn btn-success mx-3 mt-3" data-bs-toggle="collapse" href="#contatti" role="button" aria-expanded="false" aria-controls="collapseExample">
+    Come contattarci?
+  </a>
+</p>
+
+<div class="collapse mx-3" id="contatti">
+  <div class="card card-body bg-light" id="f">
+    Invia un'email all'indirizzo tuttofungo.it@gmail.com.
+  </div>
+</div>
+
+<p>
+  <a class="btn btn-success mx-3 mt-3" data-bs-toggle="collapse" href="#funghiDisponibili" role="button" aria-expanded="false" aria-controls="collapseExample">
     Che tipi di funghi posso vendere?
   </a>
 </p>
@@ -34,8 +34,8 @@
   <div class="card card-body bg-light" id="f">
     Il nostro database comprende una limitata selezione di funghi. Al momento abbiamo:
     <ul>
-      <?php foreach($dbh -> getProducts() as $p): ?>
-        <li><?php echo $p["nomeFungo"];?></li>
+      <?php foreach($dbh -> getTipologieFunghi() as $f): ?>
+        <li><?php echo $f["nomeScientifico"];?></li>
       <?php endforeach; ?>
     </ul>
     Per aggiungere altre specie di funghi inviaci una mail con il nome della specie. Ti notificheremo non appena tale fungo è disponibile per la vendita.
@@ -43,7 +43,7 @@
 </div>
 
 <p>
-  <a class="btn btn-primary mx-3 mt-3" data-bs-toggle="collapse" href="#ricetta" role="button" aria-expanded="false" aria-controls="collapseExample">
+  <a class="btn btn-success mx-3 mt-3" data-bs-toggle="collapse" href="#ricetta" role="button" aria-expanded="false" aria-controls="collapseExample">
     Posso aggiungere qualsiasi tipo di ricetta?
   </a>
 </p>
@@ -55,7 +55,7 @@
 </div>
 
 <p>
-  <a class="btn btn-primary mx-3 mt-3" data-bs-toggle="collapse" href="#commentiRecensioni" role="button" aria-expanded="false" aria-controls="collapseExample">
+  <a class="btn btn-success mx-3 mt-3" data-bs-toggle="collapse" href="#commentiRecensioni" role="button" aria-expanded="false" aria-controls="collapseExample">
     Se non riesco ad aggiungere commenti e recensioni?
   </a>
 </p>
@@ -67,7 +67,7 @@
 </div>
 
 <p>
-  <a class="btn btn-primary mx-3 mt-3" data-bs-toggle="collapse" href="#notifiche" role="button" aria-expanded="false" aria-controls="collapseExample">
+  <a class="btn btn-success mx-3 mt-3" data-bs-toggle="collapse" href="#notifiche" role="button" aria-expanded="false" aria-controls="collapseExample">
     Come faccio a sapere se qualcuno ha comprato un mio prodotto?
   </a>
 </p>
