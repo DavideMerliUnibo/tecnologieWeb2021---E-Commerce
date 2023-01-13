@@ -63,7 +63,7 @@
                         </div>
                         <div class="row">
                             <div class="col d-flex">
-                                <button class="btn btn-primary mx-auto" type="submit" name="submit">Subscribe</button>
+                                <button class="btn btn-success mx-auto" type="submit" name="submit">Subscribe</button>
                             </div>
                         </div>
                     </form>
