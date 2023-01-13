@@ -1,5 +1,6 @@
-<h1 class="px-5">Shop</h1>
-
+<header>
+    <h1 class="px-5">Shop</h1>
+</header>
 <div class="container py-2">
     <div class="row text-center g-2">
         <?php foreach ($templateParams["prodotti"] as $prodotto) : ?>
@@ -13,7 +14,7 @@
                     </div>
                     <div class="col-6 col-md-12">
                         <div class="card-body">
-                            <h5 class="card-title"><a href="product.php?prodotto=<?php echo $prodotto["codice"]; ?>"><?php echo $prodotto["nomeFungo"]; ?></a></h5>
+                            <p0 class="card-title"><a href="product.php?prodotto=<?php echo $prodotto["codice"]; ?>"><?php echo $prodotto["nomeFungo"]; ?></a></p>
                             <p>venduto da <strong><?php echo $prodotto["username"]; ?></strong></p>
                             <p><strong><?php echo $prodotto["prezzoPerUnità"]; ?> €/Kg</strong></p>
                             <?php if ($prodotto["quantità"] <= 0) : ?>
