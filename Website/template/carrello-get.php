@@ -56,7 +56,7 @@
                     </li>
                 <?php endforeach; ?>
             </ol>
-            <div class="col-12 mt-3 d-flex justify-content-around align-items-center">
+            <div class="col-12 text-center">
                 <h3 class="ms-2 fst-italic fw-bold">Totale: <?php echo $totale; ?> €</h3>
                 <p class=" fw-bold fs-1 text-primary"></p>
             </div>
@@ -65,8 +65,8 @@
 </div>
 <hr class="mb-4">
 <form action="#" method="post">
-    <h4 class="mb-3">Payment</h4>
-    <div class="custom-control custom-radio">
+    <h4 class="mb-3 mx-2">Payment</h4>
+    <div class="custom-control custom-radio mx-2">
         <div class="row">
             <div class="col-12">
                 <input id="credit" name="metodoPagamento" type="radio" class="custom-control-input" checked="" required="" value="cartaCredito">
@@ -83,24 +83,24 @@
         </div>
     </div>
 
-    <div class="col-md-6 mb-3">
+    <div class="col-md-6 my-3 mx-2">
         <label for="cc-name">Nome sulla carta</label>
         <input type="text" class="form-control" id="cc-name" placeholder="" required="" name="nomeCarta">
         <small class="text-muted">Nome completo come scritto sulla carta</small>
         <div class="invalid-feedback">Inserire il nome è necessario </div>
     </div>
-    <div class="col-md-6 mb-3">
+    <div class="col-md-6 mb-3 mx-2">
         <label for="cc-number">Numero della carta</label>
         <input type="text" class="form-control" id="cc-number" placeholder="" required="" name="numeroCarta">
         <div class="invalid-feedback"> Inserire il numero è necessario </div>
     </div>
 
-    <div class="col-md-3 mb-3">
+    <div class="col-md-3 mb-3 mx-2">
         <label for="cc-expiration">Scadenza</label>
-        <input type="text" class="form-control" id="cc-expiration" placeholder="" required="" name="scadenzaCarta">
+        <input type="date" class="form-control" id="cc-expiration" placeholder="" required="" name="scadenzaCarta">
         <div class="invalid-feedback"> Inserire la scadenza è necessario</div>
     </div>
-    <div class="col-md-3 mb-3">
+    <div class="col-md-3 mb-3 mx-2">
         <label for="cc-cvv">CVV</label>
         <input type="text" class="form-control" id="cc-cvv" placeholder="" required="" name="ccvCarta">
         <div class="invalid-feedback"> Inserire il codice di sicurezza è necessario </div>
