@@ -14,7 +14,7 @@
                     </div>
                     <div class="col-6 col-md-12">
                         <div class="card-body">
-                            <p0 class="card-title"><a href="product.php?prodotto=<?php echo $prodotto["codice"]; ?>"><?php echo $prodotto["nomeFungo"]; ?></a></p>
+                            <p class="card-title fs-4 text"><a href="product.php?prodotto=<?php echo $prodotto["codice"]; ?>"><?php echo $prodotto["nomeFungo"]; ?></a></p>
                             <p>venduto da <strong><?php echo $prodotto["username"]; ?></strong></p>
                             <p><strong><?php echo $prodotto["prezzoPerUnità"]; ?> €/Kg</strong></p>
                             <?php if ($prodotto["quantità"] <= 0) : ?>

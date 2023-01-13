@@ -1,4 +1,4 @@
-<h1 style="text-align: left" class="m-4">Chi siamo?</h1>
+<h1 class="px-5 py-2">Chi siamo?</h1>
 <div class="container">
     <div class="row">
         <div class="col-12">
