@@ -22,7 +22,7 @@
                     <li class="list-group-item d-flex justify-content-between align-items-start">
                         <div class="ms-2 me-auto">
                             <div class="fw-bold"><a href="/tecnologieWeb2021---E-Commerce/Website/product.php?prodotto=<?php echo $prodotto["codice"] ?>" class="text-dark"><?php echo $prodotto["nomeFungo"]; ?></a></div>
-                            <div class="fw-italic mt-1">quantità</div>
+                            <label for="quantità">quantità</label>
                         </div>
                         <div class="ms-auto d-flex flex-column">
                             <span class="badge bg-primary rounded-pill ms-auto me-2">
@@ -37,7 +37,7 @@
                             <?php else : ?>
                                 <p class="w-50 ms-auto me-0 justify-content-end d-flex align-items-center">
                                     <?php $max = $dbh->getProductById($prodotto['codice'])[0]['quantità'] ?>
-                                    <input pattern="[0-9]{2}" type="number" max="<?php echo $max; ?>" class="w-50 mt-2 px-1 form-control" onchange="onchangeFunction(event,<?php echo $prodotto['codice']; ?>);" value="<?php echo $prodotto["quantità"]; ?>"></input>
+                                    <input pattern="[0-9]{2}" type="number" max="<?php echo $max; ?>" id="quantità" class="w-50 mt-2 px-1 form-control" onchange="onchangeFunction(event,<?php echo $prodotto['codice']; ?>);" value="<?php echo $prodotto["quantità"]; ?>"></input>
                                 </p>
                             <?php endif ?>
 
@@ -57,7 +57,7 @@
                 <?php endforeach; ?>
             </ol>
             <div class="col-12 text-center">
-                <h3 class="ms-2 fst-italic fw-bold">Totale: <?php echo $totale; ?> €</h3>
+                <h2 class="ms-2 fst-italic fw-bold">Totale: <?php echo $totale; ?> €</h2>
                 <p class=" fw-bold fs-1 text-primary"></p>
             </div>
         </div>
@@ -65,9 +65,9 @@
 </div>
 <hr class="mb-4">
 <form action="#" method="post">
-    <h4 class="mb-3 mx-2">Payment</h4>
     <div class="custom-control custom-radio mx-2">
-        <div class="row">
+        <fieldset>
+            <legend>Metodo pagamento</legend>
             <div class="col-12">
                 <input id="credit" name="metodoPagamento" type="radio" class="custom-control-input" checked="" required="" value="cartaCredito">
                 <label class="custom-control-label" for="credit">Carta di credito</label>
@@ -80,7 +80,7 @@
                 <input id="paypal" name="metodoPagamento" type="radio" class="custom-control-input" required="" value="paypal">
                 <label class="custom-control-label" for="paypal">PayPal</label>
             </div>
-        </div>
+        </fieldset>
     </div>
 
     <div class="col-md-6 my-3 mx-2">
