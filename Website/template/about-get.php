@@ -1,5 +1,5 @@
 <h1 class="px-5 py-2">Chi siamo?</h1>
-<div class="row px-2">
+<div class="row col-12 px-2">
     <div class="col-12 col-md-4 mb-5 text-center">
         <div class="bg-white rounded shadow-sm py-5 px-4"><img src="img/davide.jpg" alt="Davide Merli" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
             <h5 class="mb-0">Davide Merli</h5><span class="small text-uppercase text-muted">CEO - Fondatore</span>
