@@ -63,7 +63,7 @@ if (isset($_POST["addComment"]) && isUserLoggedIn()) {
                         <div class="col-12">
                             <div class="row m-3 justify-content-around align-items-center" id="calories">
                                 <h5 class="m-0 col-9">Calorie</h5>
-                                <div class="col-3 d-flex justify-content-end"><button type="button" data-bs-toggle="collapse" data-bs-target="#calInfo" aria-expanded="false" aria-controls="calInfo" class="btn btn-primary p-0 my-2">info+</button>
+                                <div class="col-3 d-flex justify-content-end"><button type="button" data-bs-toggle="collapse" data-bs-target="#calInfo" aria-expanded="false" aria-controls="calInfo" class="btn btn-success p-0 my-2">info+</button>
                                 </div>
                                 <div class="collapse" id="calInfo">
                                     <div class="card card-body mb-2">
@@ -102,7 +102,7 @@ if (isset($_POST["addComment"]) && isUserLoggedIn()) {
                             <ul class="list-group">
                                 <?php foreach ($templateParams["ingredienti"] as $ingrediente) : ?>
                                     <li class="list-group-item d-flex justify-content-between align-items-center"><?php echo $ingrediente["nome"]; ?>
-                                        <span class="badge bg-primary rounded-pill"><?php echo $ingrediente["quantità"]; ?></span>
+                                        <span class="badge bg-success rounded-pill"><?php echo $ingrediente["quantità"]; ?></span>
                                     </li>
                                 <?php endforeach; ?>
                             </ul>

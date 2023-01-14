@@ -25,7 +25,7 @@ $ricette = $dbh->getProdottiUtente();
                 <h2>Gestisci Prodotti</h2>
             </div>
             <div class="col-12 text-center mb-2">
-                <button class="fs-0 btn btn-sm btn-info" type="button" name="inserisciButton">Inserisci prodotto</button>
+                <button class="fs-0 btn btn-sm text-white" type="button" name="inserisciButton" style="background-color:#3EBB4A;">Inserisci prodotto</button>
             </div>
             <div class="col-12 table-responsive">
 
