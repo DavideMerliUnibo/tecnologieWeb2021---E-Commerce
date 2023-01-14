@@ -25,7 +25,7 @@
                             <label for="quantità">quantità</label>
                         </div>
                         <div class="ms-auto d-flex flex-column">
-                            <span class="badge bg-primary rounded-pill ms-auto me-2">
+                            <span class="badge bg-success rounded-pill ms-auto me-2">
                                 <?php $totale = $totale + $prodotto["quantità"] * $prodotto["prezzoPerUnità"];
                                 echo $prodotto["prezzoPerUnità"], " €/Kg ";
                                 ?>
@@ -37,7 +37,7 @@
                             <?php else : ?>
                                 <p class="w-50 ms-auto me-0 justify-content-end d-flex align-items-center">
                                     <?php $max = $dbh->getProductById($prodotto['codice'])[0]['quantità'] ?>
-                                    <input pattern="[0-9]{2}" type="number" max="<?php echo $max; ?>" id="quantità" class="w-50 mt-2 px-1 form-control" onchange="onchangeFunction(event,<?php echo $prodotto['codice']; ?>);" value="<?php echo $prodotto["quantità"]; ?>"></input>
+                                    <input type="number"  max="<?php echo $max; ?>" id="quantità" class="w-50 mt-2 px-1 form-control" onchange="onchangeFunction(event,<?php echo $prodotto['codice']; ?>);" value="<?php echo $prodotto["quantità"]; ?>" />
                                 </p>
                             <?php endif ?>
 
@@ -85,24 +85,24 @@
 
     <div class="col-md-6 my-3 mx-2">
         <label for="cc-name">Nome sulla carta</label>
-        <input type="text" class="form-control" id="cc-name" placeholder="" required="" name="nomeCarta">
+        <input type="text" class="form-control" id="cc-name" required="" name="nomeCarta">
         <small class="text-muted">Nome completo come scritto sulla carta</small>
         <div class="invalid-feedback">Inserire il nome è necessario </div>
     </div>
     <div class="col-md-6 mb-3 mx-2">
         <label for="cc-number">Numero della carta</label>
-        <input type="text" class="form-control" id="cc-number" placeholder="" required="" name="numeroCarta">
+        <input type="text" class="form-control" id="cc-number" required="" name="numeroCarta">
         <div class="invalid-feedback"> Inserire il numero è necessario </div>
     </div>
 
     <div class="col-md-3 mb-3 mx-2">
         <label for="cc-expiration">Scadenza</label>
-        <input type="date" class="form-control" id="cc-expiration" placeholder="" required="" name="scadenzaCarta">
+        <input type="date" class="form-control" id="cc-expiration" required="" name="scadenzaCarta">
         <div class="invalid-feedback"> Inserire la scadenza è necessario</div>
     </div>
     <div class="col-md-3 mb-3 mx-2">
         <label for="cc-cvv">CVV</label>
-        <input type="text" class="form-control" id="cc-cvv" placeholder="" required="" name="ccvCarta">
+        <input type="text" class="form-control" id="cc-cvv" required="" name="ccvCarta">
         <div class="invalid-feedback"> Inserire il codice di sicurezza è necessario </div>
     </div>
 

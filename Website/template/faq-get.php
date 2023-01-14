@@ -1,7 +1,7 @@
 <h1 class="px-5 py-2">Le FAQ più comuni</h1>
 
 <p>
-  <a class="btn btn-success mx-3 mt-3" data-bs-toggle="collapse" href="#allergie" role="button" aria-expanded="false" aria-controls="collapseExample">
+  <a class="btn btn-success mx-3 mt-3" data-bs-toggle="collapse" href="#allergie" role="button" aria-expanded="false">
     Allergie?
   </a>
 </p>
@@ -13,7 +13,7 @@
 </div>
 
 <p>
-  <a class="btn btn-success mx-3 mt-3" data-bs-toggle="collapse" href="#contatti" role="button" aria-expanded="false" aria-controls="collapseExample">
+  <a class="btn btn-success mx-3 mt-3" data-bs-toggle="collapse" href="#contatti" role="button" aria-expanded="false">
     Come contattarci?
   </a>
 </p>
@@ -25,7 +25,7 @@
 </div>
 
 <p>
-  <a class="btn btn-success mx-3 mt-3" data-bs-toggle="collapse" href="#funghiDisponibili" role="button" aria-expanded="false" aria-controls="collapseExample">
+  <a class="btn btn-success mx-3 mt-3" data-bs-toggle="collapse" href="#funghiDisponibili" role="button" aria-expanded="false">
     Che tipi di funghi posso vendere?
   </a>
 </p>
@@ -43,7 +43,7 @@
 </div>
 
 <p>
-  <a class="btn btn-success mx-3 mt-3" data-bs-toggle="collapse" href="#ricetta" role="button" aria-expanded="false" aria-controls="collapseExample">
+  <a class="btn btn-success mx-3 mt-3" data-bs-toggle="collapse" href="#ricetta" role="button" aria-expanded="false">
     Posso aggiungere qualsiasi tipo di ricetta?
   </a>
 </p>
@@ -55,7 +55,7 @@
 </div>
 
 <p>
-  <a class="btn btn-success mx-3 mt-3" data-bs-toggle="collapse" href="#commentiRecensioni" role="button" aria-expanded="false" aria-controls="collapseExample">
+  <a class="btn btn-success mx-3 mt-3" data-bs-toggle="collapse" href="#commentiRecensioni" role="button" aria-expanded="false">
     Se non riesco ad aggiungere commenti e recensioni?
   </a>
 </p>
@@ -67,7 +67,7 @@
 </div>
 
 <p>
-  <a class="btn btn-success mx-3 mt-3" data-bs-toggle="collapse" href="#notifiche" role="button" aria-expanded="false" aria-controls="collapseExample">
+  <a class="btn btn-success mx-3 mt-3" data-bs-toggle="collapse" href="#notifiche" role="button" aria-expanded="false">
     Come faccio a sapere se qualcuno ha comprato un mio prodotto?
   </a>
 </p>

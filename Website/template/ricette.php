@@ -8,13 +8,13 @@
             <div class="card bg-light my-2">
                 <div class="row">
                     <div class="col-6 col-md-12 mx-auto d-flex">
-                        <a href="paginaRicetta.php?titoloRicetta=<?php echo $ricetta["titolo"]; ?>">
+                        <a href="paginaRicetta.php?titoloRicetta=<?php echo str_replace(' ', '%20', $ricetta['titolo']); ?>">
                             <img src="<?php echo UPLOAD_DIR.$ricetta["img"]; ?>" class="img-fluid rounded-left mx-auto" alt="...">
                         </a>
                     </div>
                     <div class="col-6 col-md-12">
                         <div class="card-body">
-                            <p class="card-title fs-4 text"><a href="paginaRicetta.php?titoloRicetta=<?php echo $ricetta["titolo"]; ?>"><?php echo $ricetta["titolo"]; ?></a></p>
+                            <p class="card-title fs-4 text"><a href="paginaRicetta.php?titoloRicetta=<?php echo str_replace(' ', '%20', $ricetta['titolo']); ?>"><?php echo $ricetta["titolo"]; ?></a></p>
                             <p class="card-text"><?php echo $ricetta["descrizione"]; ?></p>
                             <p class="card-text"><small class="text-muted"><?php echo $ricetta["data"]; ?></small></p>
                         </div>

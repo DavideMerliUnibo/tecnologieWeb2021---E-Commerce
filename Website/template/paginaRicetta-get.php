@@ -2,7 +2,7 @@
 <?php $tabella = $templateParams["tabella"][0]; ?>
 <?php $immagini = $templateParams["immaginiRicetta"]; ?>
 <?php $commenti = $templateParams["commenti"]; ?>
-<?php $thisPage = "http://localhost/tecnologieWeb2021---E-Commerce/Website/paginaricetta.php?titoloRicetta=" . $ricetta["titolo"]; ?>
+<?php $thisPage = "http://localhost/tecnologieWeb2021---E-Commerce/Website/paginaricetta.php?titoloRicetta=" . str_replace(' ', '%20', $ricetta['titolo']); ?>
 
 <!-- Funzione per aggiungere un commento -->
 <?php
@@ -139,7 +139,7 @@ if (isset($_POST["addComment"]) && isUserLoggedIn()) {
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
                                             <input type="submit" name="addComment" value="Invia" class="btn btn-primary" <?php if (!isUserLoggedIn()) {
                                                                                                                                 echo "disabled";
-                                                                                                                            } ?>></input>
+                                                                                                                            } ?>/>
                                         </div>
                                     </form>
                                 </div>
@@ -165,8 +165,8 @@ if (isset($_POST["addComment"]) && isUserLoggedIn()) {
                                         <?php if (isset($_SESSION["username"]) && $_SESSION["username"] == $commento["username"]) : ?>
                                             <div class="d-flex flex-column align-items-end">
                                                 <form method="post">
-                                                    <input type="hidden" name="com" value="<?php echo $commento["codice"]; ?>"></input>
-                                                    <input type="submit" name="deleteComment" value="Cancella" class="btn btn-warning"></input>
+                                                    <input type="hidden" name="com" value="<?php echo $commento["codice"]; ?>" />
+                                                    <input type="submit" name="deleteComment" value="Cancella" class="btn btn-warning" />
                                                 </form>
                                             </div>
                                         <?php endif; ?>
@@ -199,10 +199,10 @@ if (isset($_POST["addComment"]) && isUserLoggedIn()) {
                     <div class="card bg-light ">
                         <div class="row align-items-center">
                             <div class="col-12 col-md-4 my-2">
-                                <a href="/tecnologieWeb2021---E-Commerce/Website/paginaricetta.php?titoloRicetta=<?php echo $ricetta["titolo"] ?>"><img class="img-thumbnail col-12 col-md-3" src="<?php echo UPLOAD_DIR . $ricetta['immagine'] ?>" alt="immagine che illusrtra la ricetta" style="width:5rem" /></a>
+                                <a href="/tecnologieWeb2021---E-Commerce/Website/paginaricetta.php?titoloRicetta=<?php echo str_replace(' ', '%20', $ricetta['titolo']); ?>"><img class="img-thumbnail col-12 col-md-3" src="<?php echo UPLOAD_DIR . $ricetta['immagine'] ?>" alt="immagine che illusrtra la ricetta" style="width:5rem" /></a>
                             </div>
                             <div class="col-12 col-md-8">
-                                <a class="text-dark col-12 col-md-9 align-self-center" style="text-decoration:none;" href="/tecnologieWeb2021---E-Commerce/Website/paginaricetta.php?titoloRicetta=<?php echo $ricetta["titolo"] ?>"><?php echo $ricetta["titolo"] ?></a>
+                                <a class="text-dark col-12 col-md-9 align-self-center" style="text-decoration:none;" href="/tecnologieWeb2021---E-Commerce/Website/paginaricetta.php?titoloRicetta=<?php echo str_replace(' ', '%20', $ricetta['titolo']); ?>"><?php echo $ricetta["titolo"] ?></a>
                             </div>
                         </div>
                     </div>
