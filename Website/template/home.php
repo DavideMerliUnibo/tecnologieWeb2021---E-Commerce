@@ -70,17 +70,17 @@ if (isset($_GET["toast"])) {
             <div class="col-8 col-lg-10"></div>
 
             <form method="post" class="col-2 col-lg-1">
-                <input type="submit" name="logout" value="Log Out" class="btn btn-success ml-auto" type="button" style="white-space: nowrap;"></input>
+                <input type="submit" name="logout" value="Log Out" class="btn btn-success ml-auto" style="white-space: nowrap;"/>
             </form>
             <div class="offcanvas offcanvas-start" id="offcanvasMenu">
                 <div class="offcanvas-body">
                     <div class="vstack mt-2">
-                        <a class="btn" id="gestisciRicetteButton" href="/tecnologieWeb2021---E-Commerce/Website/home-utente.php?action=gestisciRicette">Gestisci ricette</a>
-                        <a class="btn" id="" href="/tecnologieWeb2021---E-Commerce/Website/home-utente.php?action=gestisciProdotti">Gestisci prodotti</a>
-                        <a class="btn" id="" href="/tecnologieWeb2021---E-Commerce/Website/home-utente.php?action=gestisciInfoUtente">Gestisci info Utente</a>
-                        <a class="btn" id="" href="/tecnologieWeb2021---E-Commerce/Website/home-utente.php?action=visualizzaProdottiVenduti">Visualizza prodotti venduti</a>
-                        <a class="btn" id="" href="/tecnologieWeb2021---E-Commerce/Website/home-utente.php?action=visualizzaAcquisti">Visualizza acquisti passati</a>
-                        <a class="btn" id="" href="/tecnologieWeb2021---E-Commerce/Website/home-utente.php?action=visualizzaNotifiche">Notifiche</a>
+                        <a class="btn" id="gestisciRicettiButton" href="/tecnologieWeb2021---E-Commerce/Website/home-utente.php?action=gestisciRicette">Gestisci ricette</a>
+                        <a class="btn" id="gestisciProdottiButton" href="/tecnologieWeb2021---E-Commerce/Website/home-utente.php?action=gestisciProdotti">Gestisci prodotti</a>
+                        <a class="btn" id="gestisciInfoButton" href="/tecnologieWeb2021---E-Commerce/Website/home-utente.php?action=gestisciInfoUtente">Gestisci info Utente</a>
+                        <a class="btn" id="visualizzaVenditeButton" href="/tecnologieWeb2021---E-Commerce/Website/home-utente.php?action=visualizzaProdottiVenduti">Visualizza prodotti venduti</a>
+                        <a class="btn" id="visulizzaAcquistiButton" href="/tecnologieWeb2021---E-Commerce/Website/home-utente.php?action=visualizzaAcquisti">Visualizza acquisti passati</a>
+                        <a class="btn" id="notificheButton" href="/tecnologieWeb2021---E-Commerce/Website/home-utente.php?action=visualizzaNotifiche">Notifiche</a>
                     </div>
                 </div>
             </div>
