@@ -88,7 +88,7 @@ endif; ?>
                 </div>
                 <p>Prezzo: <strong><?php echo $prodotto["prezzoPerUnità"]; ?> €/Kg</strong></p>
                 <p>Informazioni:<br><?php echo $prodotto["informazioni"]; ?></p>
-                <button type="button" class="btn btn-secondary btn-sm mb-2" data-bs-toggle="modal" data-bs-target="#modalInfoVenditore">
+                <button type="button" class="btn btn-outline-success btn-sm mb-2" data-bs-toggle="modal" data-bs-target="#modalInfoVenditore">
                     Visualizza Info Venditore
                 </button>
 

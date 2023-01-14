@@ -91,7 +91,7 @@
     </div>
     <div class="col-md-6 mb-3 mx-2">
         <label for="cc-number">Numero della carta</label>
-        <input type="text" class="form-control" id="cc-number" required="" name="numeroCarta">
+        <input type="text" pattern="[0-9]{1,}" title="Inserire codice numerico" class="form-control" id="cc-number" required="" name="numeroCarta">
         <div class="invalid-feedback"> Inserire il numero è necessario </div>
     </div>
 
@@ -102,7 +102,7 @@
     </div>
     <div class="col-md-3 mb-3 mx-2">
         <label for="cc-cvv">CVV</label>
-        <input type="text" class="form-control" id="cc-cvv" required="" name="ccvCarta">
+        <input type="text" pattern="[0-9]{3}" title="Numero a tre cifre" class="form-control" id="cc-cvv" required="" name="ccvCarta" max-length="3">
         <div class="invalid-feedback"> Inserire il codice di sicurezza è necessario </div>
     </div>
 

@@ -26,10 +26,12 @@ if(isset($_POST["metodoPagamento"]) && isset($_POST["nomeCarta"]) && isset($_POS
             }
             $dbh -> svuotaCarrello($_SESSION["email"]);
             $templateParams["toast"] = "success";
+            header("location: /tecnologieWeb2021---E-Commerce/Website/confermaAcquisto.php?esito=success");
         } else  {
             $templateParams["toast"] = "error";
+            header("location: /tecnologieWeb2021---E-Commerce/Website/confermaAcquisto.php?esito=error");
         }
-        header("location: /tecnologieWeb2021---E-Commerce/Website/confermaAcquisto.php");
+        
 }
 require("template/base.php");
 
