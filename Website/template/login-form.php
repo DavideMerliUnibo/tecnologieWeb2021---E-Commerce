@@ -3,10 +3,12 @@
         <div class="col">
             <div class="card">
                 <div class="row">
-                    <div class="col-5">
-                        <img class="img-fluid rounded-start " src="./img/fungologin.jpg" alt="immagine fungo">
-                    </div>
-                    <div class="col-7 d-flex">
+                    <div class="col-12 col-md-7">
+                        <img src="<?php echo UPLOAD_DIR ?>fungologin.jpg" alt="" class='img-fluid d-none d-md-inline-block'/>                  
+                        <div class="center-cropped d-md-none" style="background-image: url('<?php echo UPLOAD_DIR ?>fungologin.jpg');">
+                    </div>  
+                </div>
+                    <div class="col-12 col-md-5 d-flex">
                         <div class="card-body mt-4">
                             <h1 class="text-center text-success">Login</h1>
                             <?php if(isset($templateParams["erroreLogin"])): ?>

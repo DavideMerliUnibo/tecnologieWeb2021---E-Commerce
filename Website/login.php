@@ -23,6 +23,7 @@ if (isUserLoggedIn()) {
 } else {
     $templateParams["nome"] = "login-form.php";
     $templateParams["title"] = "Funghi - Login";
+    $templateParams['css'] = ['css/login.css'];
 }
 
 require("template/base.php");
