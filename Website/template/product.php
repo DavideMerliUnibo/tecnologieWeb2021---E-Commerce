@@ -39,7 +39,7 @@ endif; ?>
     unset($_POST["deleteReview"]);
 } ?>
 
-<main>
+<div>
     <h1 class="p-2"><?php echo $prodotto["nomeFungo"]; ?></h1>
     <!-- Prodotto -->
     <article class="bg-light border p-2 m-2">
@@ -87,13 +87,13 @@ endif; ?>
                     </div>
                 </div>
                 <p>Prezzo: <strong><?php echo $prodotto["prezzoPerUnità"]; ?> €/Kg</strong></p>
-                <p>Informazioni:</br><?php echo $prodotto["informazioni"]; ?></p>
+                <p>Informazioni:<br><?php echo $prodotto["informazioni"]; ?></p>
                 <button type="button" class="btn btn-secondary btn-sm mb-2" data-bs-toggle="modal" data-bs-target="#modalInfoVenditore">
                     Visualizza Info Venditore
                 </button>
 
             </div>
-
+                                                    </div>
             <!-- Add to cart button -->
 
             <div class="text-center col-6 col-md-2 mx-auto my-auto ">
@@ -103,7 +103,7 @@ endif; ?>
                     
                     <form method="post">
                         <label for="sel" class="my-1">Scegli quantità:</label>
-                        <select class="form-control text-center my-1" id="sel" name="sel" style:="width: 50;">
+                        <select class="form-control text-center my-1" id="sel" name="sel">
                             <?php
                             for ($i = 1; $i <= $prodotto["quantità"]; $i++) {
                                 echo '<option>', $i, '</option>';
@@ -111,12 +111,12 @@ endif; ?>
                         </select>
                         <?php
                         if ((isUserLoggedIn() && $prodotto["offerente"] == $_SESSION["email"]) || (!isUserLoggedIn())) : ?>
-                            <input disabled type="submit" value="Aggiungi al carrello" class="btn btn-warning my-1"></input>
+                            <input disabled type="submit" value="Aggiungi al carrello" class="btn btn-warning my-1"/>
                             <?php if (!isUserLoggedIn()) : ?>
                             <p class="text-secondary">Devi essere loggato per poter aggiungere al carrello</p>
                             <?php endif; ?>
                         <?php else : ?>
-                            <input type="submit" value="Aggiungi al carrello" class="btn btn-warning my-1"></input>
+                            <input type="submit" value="Aggiungi al carrello" class="btn btn-warning my-1"/>
                         <?php endif; ?>
                     </form>
                     <?php if (isUserLoggedIn() && $prodotto["offerente"] == $_SESSION["email"]) : ?>
@@ -196,7 +196,7 @@ endif; ?>
                             </div>
                             <div class="mb-3">
                                 <label for="votoRecensione" class="col-form-label">Valutazione:</label>
-                                <output>0</output><input required class="form-range" oninput="this.previousElementSibling.value = parseFloat(this.value).toFixed(1)" id="votoRecensione" type="range" step="1" min="0" max="5" value="0" name="votoRecensione" <?php if (!isUserLoggedIn()) {
+                                <output>0</output><input class="form-range" oninput="this.previousElementSibling.value = parseFloat(this.value).toFixed(1)" id="votoRecensione" type="range" step="1" min="0" max="5" value="0" name="votoRecensione" <?php if (!isUserLoggedIn()) {
                                                                                                                                                                                                                                                                     echo " disabled";
                                                                                                                                                                                                                                                                 } ?>>
                             </div>
@@ -205,7 +205,7 @@ endif; ?>
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
                                 <input type="submit" name="addReview" value="Invia" class="btn btn-primary" <?php if (!isUserLoggedIn()) {
                                                                                                                 echo "disabled";
-                                                                                                            } ?>></input>
+                                                                                                            } ?>/>
                             </div>
                         </form>
                     </div>
@@ -235,8 +235,8 @@ endif; ?>
                             <?php if (isset($_SESSION["username"]) && $_SESSION["username"] == $recensione["username"]) : ?>
                                 <div class="d-flex flex-column align-items-end">
                                     <form method="post">
-                                        <input type="hidden" name="rev" value="<?php echo $recensione["codice"]; ?>"></input>
-                                        <input type="submit" name="deleteReview" value="Cancella" class="btn btn-warning"></input>
+                                        <input type="hidden" name="rev" value="<?php echo $recensione["codice"]; ?>"/>
+                                        <input type="submit" name="deleteReview" value="Cancella" class="btn btn-warning"/>
                                     </form>
                                 </div>
                             <?php endif; ?>
@@ -262,4 +262,4 @@ endif; ?>
         endif; ?>
     </div>
     </div>
-</main>
+    
