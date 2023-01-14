@@ -139,8 +139,7 @@ if (isset($_POST["addComment"]) && isUserLoggedIn()) {
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
                                             <input type="submit" name="addComment" value="Invia" class="btn btn-primary" <?php if (!isUserLoggedIn()) {
                                                                                                                                 echo "disabled";
-                                                                                                                            } ?>></input>
-                                        </div>
+                                                                                                                            } ?>/>                                        </div>
                                     </form>
                                 </div>
                             </div>
