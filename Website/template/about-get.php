@@ -5,7 +5,7 @@
             <div class="card m-3 bg-light">
                 <div class="row">
                     <div class="col-4">
-                        <img src="img/davide.jpg" class="img-fluid rounded-start" />
+                        <img src="img/davide.jpg" class="img-fluid rounded-start" alt="immagine di davi"/>
                     </div>
                     <div class="col-8">
                         <div class=" card-body">
@@ -26,7 +26,7 @@
                         </div>
                     </div>    
                     <div class="col-4">
-                        <img src="img/ryan.jpg" class="img-fluid rounded-start" />
+                        <img src="img/ryan.jpg" class="img-fluid rounded-start" alt="immagine di ryan "/>
                     </div>
                     
                 </div>
@@ -34,7 +34,7 @@
             <div class="card m-3 bg-light">
                 <div class="row">
                     <div class="col-4">
-                        <img src="img/manuel.jpg" class="img-fluid rounded-start" />
+                        <img src="img/manuel.jpg" class="img-fluid rounded-start" alt="immagine di manu"/>
                     </div>
                     <div class="col-8">
                         <div class=" card-body">

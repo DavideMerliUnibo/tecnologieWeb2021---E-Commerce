@@ -62,7 +62,7 @@ if (isset($_POST["addComment"]) && isUserLoggedIn()) {
                     <div class="row">
                         <div class="col-12">
                             <div class="row m-3 justify-content-around align-items-center" id="calories">
-                                <h5 class="m-0 col-9">Calorie</h5>
+                                <h2 class="m-0 col-9">Calorie</h2>
                                 <div class="col-3 d-flex justify-content-end"><button type="button" data-bs-toggle="collapse" data-bs-target="#calInfo" aria-expanded="false" aria-controls="calInfo" class="btn btn-primary p-0 my-2">info+</button>
                                 </div>
                                 <div class="collapse" id="calInfo">
@@ -110,17 +110,17 @@ if (isset($_POST["addComment"]) && isUserLoggedIn()) {
                     </div>
                 </div>
                 <div class="col-12 col-md-9">
-                    <h2 class="text-center">Preparazione</h2>
+                    <h3 class="text-center">Preparazione</h3>
                     <p class="text-justify"><?php echo $ricetta["procedimento"]; ?></p>
-                    <h2 class="text-center">Consigli</h2>
+                    <h3 class="text-center">Consigli</h3>
                     <p class="text-justify"><?php echo $ricetta["consigli"]; ?></p>
                     <!-- Commenti -->
-                    <h2 class="text-center my-auto">Commenti</h2>
+                    <h3 class="text-center my-auto">Commenti</h3>
                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Nuovo commento</h5>
+                                    <h4 class="modal-title" id="exampleModalLabel">Nuovo commento</h4>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
@@ -198,7 +198,7 @@ if (isset($_POST["addComment"]) && isUserLoggedIn()) {
                     <div class="card bg-light ">
                         <div class="row align-items-center">
                             <div class="col-12 col-md-4 my-2">
-                                <a href="/tecnologieWeb2021---E-Commerce/Website/paginaricetta.php?titoloRicetta=<?php echo $ricetta["titolo"] ?>"><img class="img-thumbnail col-12 col-md-3" src="<?php echo UPLOAD_DIR . $ricetta['immagine'] ?>" alt="" style="width:5rem" /></a>
+                                <a href="/tecnologieWeb2021---E-Commerce/Website/paginaricetta.php?titoloRicetta=<?php echo $ricetta["titolo"] ?>"><img class="img-thumbnail col-12 col-md-3" src="<?php echo UPLOAD_DIR . $ricetta['immagine'] ?>" alt="immagine che illusrtra la ricetta" style="width:5rem" /></a>
                             </div>
                             <div class="col-12 col-md-8">
                                 <a class="text-dark col-12 col-md-9 align-self-center" style="text-decoration:none;" href="/tecnologieWeb2021---E-Commerce/Website/paginaricetta.php?titoloRicetta=<?php echo $ricetta["titolo"] ?>"><?php echo $ricetta["titolo"] ?></a>
