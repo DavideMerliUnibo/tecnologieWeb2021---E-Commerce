@@ -77,7 +77,7 @@
                             if(count($templateParams["prodottiCarrello"])==0){
                                 echo '<li class="nav-item text-white">Carrello Vuoto</li>';   
                             } else{
-                                echo '<li class"nav-item"> <a id="carrelloBtnLetters" class="btn btn-outline-success" href="carrello.php"> Visualizza carrello</a> </li> ';
+                                echo '<li class="nav-item"> <a id="carrelloBtnLetters" class="btn btn-outline-success" href="carrello.php"> Visualizza carrello</a> </li> ';
                             }
                         }?>
                         

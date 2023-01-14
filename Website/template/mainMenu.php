@@ -18,7 +18,7 @@
             <img src="<?php echo UPLOAD_DIR.$prodotto["img"];?>" class="img-fluid" alt=""/>
         </div>
         <div class="col-8 col-lg-10">
-            <h3 style="font-size: large;"><a href="product.php?prodotto=<?php echo $prodotto["codice"]; ?>"><?php echo $prodotto["nomeFungo"]; ?></a></h2>
+            <h3 style="font-size: large;"><a href="product.php?prodotto=<?php echo $prodotto["codice"]; ?>"><?php echo $prodotto["nomeFungo"]; ?></a></h3>
             <p>venduto da <strong><?php echo $prodotto["username"]; ?></strong></p>
             <p><strong><?php echo $prodotto["prezzoPerUnità"]; ?> €/Kg</strong></p>
             <p><?php echo $prodotto["quantità"]; ?> in stock</p>
@@ -27,7 +27,7 @@
     <?php endforeach; ?>
 </section>
 <div class="d-flex flex-column align-items-end">
-    <a href="shop.php" type="button" class="btn btn-warning my-1 mx-1">Vai al negozio</a>
+    <a href="shop.php"  class="btn btn-warning my-1 mx-1">Vai al negozio</a>
 </div>
 
 <!-- Sezione ultime ricette -->
@@ -39,7 +39,7 @@
             <img src="<?php echo UPLOAD_DIR.$ricetta["immagine"]; ?>" class="img-fluid" alt=""/>
         </div>
         <div class="col-8 col-lg-10">
-            <h3 style="font-size: large;"><a href="paginaricetta.php?titoloRicetta=<?php echo $ricetta["titolo"]; ?>"><?php echo $ricetta["titolo"]; ?></a></h2>
+            <h3 style="font-size: large;"><a href="paginaricetta.php?titoloRicetta=<?php echo str_replace(" ","%20",$ricetta["titolo"]); ?>"><?php echo $ricetta["titolo"]; ?></a></h3>
             <p>di <strong><?php echo $ricetta["autore"]; ?></strong></p>
             <p><?php echo $ricetta["descrizione"]; ?></p>
         </div>
@@ -47,5 +47,5 @@
     <?php endforeach; ?>
 </section>
 <div class="d-flex flex-column align-items-end">
-    <a href="ricette.php" type="button" class="btn btn-warning my-1 mx-1">Vedi tutte</a>
+    <a href="ricette.php" class="btn btn-warning my-1 mx-1">Vedi tutte</a>
 </div>
