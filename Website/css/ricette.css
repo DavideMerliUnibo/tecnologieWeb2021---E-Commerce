@@ -1,0 +1,16 @@
+
+@import "shop.css";
+
+.card-text {
+    margin-top: 4px;
+}
+
+.card-body {
+    padding-bottom: 0;
+}
+
+@media screen and (min-width: 321px) {
+    .card-body {
+        padding-bottom: 16px;
+    }
+}

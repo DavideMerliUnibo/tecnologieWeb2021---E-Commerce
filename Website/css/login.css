@@ -1,0 +1,17 @@
+.center-cropped {
+    width: auto;
+    height: 200px;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+
+
+  @media screen and (min-width:426px) {
+    .center-cropped {
+        width: auto;
+        height: 600px;
+        background-position: left top;
+
+ 
+    }
+  }

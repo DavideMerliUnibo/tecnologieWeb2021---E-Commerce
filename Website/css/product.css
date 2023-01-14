@@ -1,0 +1,30 @@
+div.divScrollabile article div img {
+    width: 75px;
+}
+
+button.carousel-control-prev span.carousel-control-prev-icon{
+    background-color: black;
+    border-radius: 50px;
+    padding: 10px;
+}
+button.carousel-control-next span.carousel-control-next-icon{
+    background-color: rgba(0, 0, 0, 0.473);
+    border-radius: 50px;
+    padding: 10px;
+}
+
+div.carousel-item img {
+    max-width: 300px;
+}
+
+@media screen and (min-width:426px){
+    div.divScrollabile article div img {
+        width: 100px;
+    }
+
+    div.carousel-item img {
+        max-width: 500px;
+    }
+    
+}
+
