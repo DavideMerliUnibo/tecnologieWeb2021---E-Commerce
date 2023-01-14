@@ -38,7 +38,7 @@
                             </div>
                         </div>
                         <?php if (isset($templateParams["errorMessage"]) && str_contains($templateParams["errorMessage"], "Password")): ?>
-                            <div class="col-12 text-center" style="color:red;">
+                            <div class="col-12 text-center text-danger">
                                 La password deve avere una lunghezza di almeno 8 caratteri e contenere almeno una lettera minuscola, una lettera maiuscola, un numero e un carattere speciale.
                             </div>
                             <?php unset($templateParams["errorMessage"]); ?>

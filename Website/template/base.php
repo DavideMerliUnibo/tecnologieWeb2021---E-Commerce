@@ -77,14 +77,8 @@
                             if(count($templateParams["prodottiCarrello"])==0){
                                 echo '<li class="nav-item text-white">Carrello Vuoto</li>';   
                             } else{
-                                foreach($templateParams["prodottiCarrello"] as $prodotto){
-                                    echo '<li class="nav-item d-lg-none">';
-                                    echo '<a class="nav-link text-white" href="/tecnologieWeb2021---E-Commerce/Website/product.php?prodotto='.$prodotto["codice"].'">',$prodotto["nomeFungo"],'</a>';    
-                                    echo '</li>';
-                                }
                                 echo '<li class"nav-item"> <a id="carrelloBtnLetters" class="btn btn-outline-success" href="carrello.php"> Visualizza carrello</a> </li> ';
                             }
-                           
                         }?>
                         
                     </ul>

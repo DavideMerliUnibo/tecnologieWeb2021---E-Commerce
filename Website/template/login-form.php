@@ -8,7 +8,7 @@
                     </div>
                     <div class="col-7 d-flex">
                         <div class="card-body mt-4">
-                            <h1 class="text-center text-info">Login</h1>
+                            <h1 class="text-center text-success">Login</h1>
                             <?php if(isset($templateParams["erroreLogin"])): ?>
                                 <p class="text-center text-danger"><?php echo $templateParams["erroreLogin"]; ?></p>
                             <?php endif;?>
@@ -22,7 +22,7 @@
                                     <input class="form-control" type="password" id="passwordLogin" name="password" placeholder="Password"/>
                                 </div>
                                 <div class="my-2 d-flex">
-                                    <button class="btn btn-info w-75 m-auto" type="submit">Login</button>
+                                    <button class="btn w-75 m-auto text-white" type="submit" style="background-color:#3EBB4A;">Login</button>
                                 </div>
                             </form>
                             <div class="d-flex">

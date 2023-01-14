@@ -14,7 +14,7 @@
                     </div>
                     <div class="col-6 col-md-12">
                         <div class="card-body">
-                            <h5 class="card-title"><a href="paginaRicetta.php?titoloRicetta=<?php echo $ricetta["titolo"]; ?>"><?php echo $ricetta["titolo"]; ?></a></h5>
+                            <p class="card-title fs-4 text"><a href="paginaRicetta.php?titoloRicetta=<?php echo $ricetta["titolo"]; ?>"><?php echo $ricetta["titolo"]; ?></a></p>
                             <p class="card-text"><?php echo $ricetta["descrizione"]; ?></p>
                             <p class="card-text"><small class="text-muted"><?php echo $ricetta["data"]; ?></small></p>
                         </div>

@@ -34,7 +34,7 @@
   <div class="card card-body bg-light" id="f">
     Il nostro database comprende una limitata selezione di funghi. Al momento abbiamo:
     <ul>
-      <?php foreach($dbh -> getTipologieFunghi() as $f): ?>
+      <?php foreach($dbh -> getNomiScientificiFunghi() as $f): ?>
         <li><?php echo $f["nomeScientifico"];?></li>
       <?php endforeach; ?>
     </ul>
