@@ -63,15 +63,18 @@ if (isset($_GET["toast"])) {
 
 <div class="container-fluid">
     <div class="row">
-        <div class="row col-12 d-flex">
-            <div class="col-2 col-lg-1">
-                <button class="btn btn-success ml-auto" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu" aria-controls="offcanvasMenu">Menu</button>
-            </div>
-            <div class="col-8 col-lg-10"></div>
+        <div class="col-12 ">
+            <div class="row justify-content-between">
+                <div class="col-4 col-lg-1">
+                    <button class="btn btn-success ml-auto" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu" aria-controls="offcanvasMenu">Menu</button>
+                </div>
 
-            <form method="post" class="col-2 col-lg-1">
-                <input type="submit" name="logout" value="Log Out" class="btn btn-success ml-auto" style="white-space: nowrap;"/>
-            </form>
+                <div class="col-4 col-lg-1 d-flex justify-content-end">
+                    <form method="post" >
+                        <input type="submit" name="logout" value="Log Out" class="btn btn-success ml-auto" style="white-space: nowrap;"/>
+                    </form>
+                </div>
+            </div>
             <div class="offcanvas offcanvas-start" id="offcanvasMenu">
                 <div class="offcanvas-body">
                     <div class="vstack mt-2">
