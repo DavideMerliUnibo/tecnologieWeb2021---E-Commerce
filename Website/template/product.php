@@ -101,14 +101,16 @@ endif; ?>
                 <?php if ($prodotto["quantità"] <= 0) : ?>
                     <p class="text-danger"> Prodotto non disponibile </p>
                 <?php else : ?>
-                    <label for="sel" class="my-1">Scegli quantità:</label>
+                    
                     <form method="post">
+                    <label for="sel" class="my-1">Scegli quantità:
                         <select class="form-control text-center my-1" name="sel" style:="width: 50;">
                             <?php
                             for ($i = 1; $i <= $prodotto["quantità"]; $i++) {
                                 echo '<option>', $i, '</option>';
                             } ?>
                         </select>
+                        </label>
                         <?php
                         if ((isUserLoggedIn() && $prodotto["offerente"] == $_SESSION["email"]) || (!isUserLoggedIn())) : ?>
                             <input disabled type="submit" value="Aggiungi al carrello" class="btn btn-warning my-1"></input>
@@ -183,19 +185,19 @@ endif; ?>
                                 <h3>Utente non loggato!</h3>
                             <?php endif; ?>
                             <div class="mb-3">
-                                <label for="message-text" class="col-form-label">Titolo recensione:</label>
-                                <textarea class="form-control" id="message-text" name="titoloRecensione" <?php if (!isUserLoggedIn()) {
+                                <p>Titolo recensione:</p>
+                                <textarea class="form-control" id="titoloRecensione" name="titoloRecensione" <?php if (!isUserLoggedIn()) {
                                                                                                             echo "disabled";
                                                                                                          } ?>></textarea>
                             </div>
                             <div class="mb-3">
-                                <label for="message-text" class="col-form-label">Contenuto recensione:</label>
-                                <textarea class="form-control" id="message-text" name="contenutoRecensione" <?php if (!isUserLoggedIn()) {
+                                <p>Contenuto recensione:</p>
+                                <textarea class="form-control" id="contenutoRecensione" name="contenutoRecensione" <?php if (!isUserLoggedIn()) {
                                                                                                                 echo "disabled";
                                                                                                             } ?>></textarea>
                             </div>
                             <div class="mb-3">
-                                <label for="message-text" class="col-form-label">Valutazione:</label>
+                                <p>Valutazione:</p>
                                 <output>0</output><input required class="form-range" oninput="this.previousElementSibling.value = parseFloat(this.value).toFixed(1)" id="votoRecensione" type="range" step="1" min="0" max="5" value="0" name="votoRecensione" <?php if (!isUserLoggedIn()) {
                                                                                                                                                                                                                                                                     echo " disabled";
                                                                                                                                                                                                                                                                 } ?>>

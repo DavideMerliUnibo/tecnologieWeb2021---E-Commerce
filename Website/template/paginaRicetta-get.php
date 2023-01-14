@@ -64,7 +64,7 @@ if (isset($_POST["addComment"]) && isUserLoggedIn()) {
                             <div class="row m-3 justify-content-around align-items-center" id="calories">
 
                                 <h2 class="m-0 col-9">Calorie</h2>
-                                <div class="col-3 d-flex justify-content-end"><button type="button" data-bs-toggle="collapse" data-bs-target="#calInfo" aria-expanded="false" aria-controls="calInfo" class="btn btn-primary p-0 my-2">info+</button>
+                                <div class="col-3 d-flex justify-content-end"><button type="button" data-bs-toggle="collapse" data-bs-target="#calInfo" aria-expanded="false" aria-controls="calInfo" class="btn btn-success p-0 my-2">info+</button>
                                 </div>
                                 <div class="collapse" id="calInfo">
                                     <div class="card card-body mb-2">

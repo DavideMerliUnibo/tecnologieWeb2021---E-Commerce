@@ -14,7 +14,7 @@
     </div>
             
     <div class="col-12 col-md-4 mb-5 text-center">
-        <div class="bg-white rounded shadow-sm py-5 px-4"><img src="img/ryan.jpg" alt="Davide Merli" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
+        <div class="bg-white rounded shadow-sm py-5 px-4"><img src="img/ryan.jpg" alt="Ryan Perrina" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
             <h5 class="mb-0">Ryan Perrina</h5><span class="small text-uppercase text-muted">Stagista</span>
             <p><small>"Ripetizioni di matematica go brrrrrrrr"</small></p>
             <ul class="social mb-0 list-inline mt-3">
@@ -27,7 +27,7 @@
     </div>
 
     <div class="col-12 col-md-4 mb-5 text-center">
-        <div class="bg-white rounded shadow-sm py-5 px-4"><img src="img/manuel.jpg" alt="Davide Merli" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
+        <div class="bg-white rounded shadow-sm py-5 px-4"><img src="img/manuel.jpg" alt="Manuel Luzietti" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
             <h5 class="mb-0">Manuel Luzietti</h5><span class="small text-uppercase text-muted">Full-stack developer</span>
             <p><small>"Redbull is love, Redbull is life"</small></p>
             <ul class="social mb-0 list-inline mt-3">
