@@ -30,3 +30,35 @@
     
     
 }
+
+@keyframes blackout {
+    from {
+        background-color: white;
+
+    }
+    to {
+        background-color: black;
+    }
+}
+.blackout {
+    animation-name: blackout;
+    animation-duration: 4s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes header-blackout {
+    from {
+        color: black;
+        opacity: 0%;
+
+    }
+    to {
+        color: red;
+        opacity: 100%;
+    }
+}
+.header-blackout{
+    animation-name: header-blackout;
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+}

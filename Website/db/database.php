@@ -208,9 +208,26 @@ class DatabaseHelper
         //restituisce prodotti con immagine associata ma solo una tra le immagini
         $query = "SELECT p.nomeFungo, p.prezzoPerUnità, p.quantità, p.codice, p.data, i.nome as img, u.username
                   FROM prodotto p, immagineprodotto i, utente u
-                  WHERE p.codice = i.codProdotto
+                  WHERE p.codice = i.codProdotto 
+                  and legale = 1
                   AND p.offerente = u.email
-                  GROUP BY p.codice";
+                  GROUP BY p.codice
+                  ";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        return $result;
+    }
+    public function getProductsIllegal()
+    {
+        //restituisce prodotti con immagine associata ma solo una tra le immagini
+        $query = "SELECT p.nomeFungo, p.prezzoPerUnità, p.quantità, p.codice, p.data, i.nome as img, u.username
+                  FROM prodotto p, immagineprodotto i, utente u
+                  WHERE p.codice = i.codProdotto 
+                  and legale = 0
+                  AND p.offerente = u.email
+                  GROUP BY p.codice
+                  ";
         $stmt = $this->db->prepare($query);
         $stmt->execute();
         $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
@@ -405,7 +422,7 @@ class DatabaseHelper
 
     public function getNomiScientificiFunghi()
     {
-        $query = "select nomeScientifico from tipologiafungo";
+        $query = "select nomeScientifico from tipologiafungo where legale=1";
         $stmt = $this->db->prepare($query);
         $stmt->execute();
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
@@ -645,6 +662,7 @@ class DatabaseHelper
                   WHERE p.codice = i.codProdotto
                   AND p.offerente = u.email
                   AND p.quantità > 0 
+                  and p.legale = 1
                   GROUP BY p.nomeFungo
                   ORDER BY p.data DESC
                   LIMIT ?";
