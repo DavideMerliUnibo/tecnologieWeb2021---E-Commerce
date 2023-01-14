@@ -46,24 +46,34 @@ endif; ?>
         <!-- Immagini -->
         <div class="col-12">
             <div class="row justify-content-center">
-                <div id="carousel1" class="carousel slide col-10 " data-bs-ride="carousel" data-pause="hover">
-                    <div class="carousel-inner">
-                        <?php foreach ($immagini as $img) : ?>
-                            <div class="carousel-item <?php if ($img == $immagini[0]) {
-                                                            echo "active";
-                                                        } ?>">
-                                <img src="<?php echo UPLOAD_DIR . $img["nome"] ?>" class="d-block m-auto img-fluid" alt="...">
-                            </div>
-                        <?php endforeach; ?>
+                <div class='col-10 col-md-8'>
+                    <div id="carousel" class="carousel slide  carousel-fade" data-bs-ride="carousel" data-pause="hover">
+                        <div class="carousel-indicators">
+                            <?php if(count($immagini)>=1):?>
+                            <button type="button" data-bs-target="#carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                            <?php for($x = 0 ; $x<count($immagini)-1;$x++): ?>
+                                <button type="button" data-bs-target="#carousel" data-bs-slide-to="<?php echo $x + 1?>"  aria-label="Slide <?php echo $x + 2?>"></button>
+                            <?php endfor; 
+                                endif;?>
+                        </div>
+                        <div class="carousel-inner d-flex align-items-center">
+                            <?php foreach ($immagini as $img) : ?>
+                                <div class="carousel-item <?php if ($img == $immagini[0]) {
+                                                                echo "active";
+                                                            } ?> d-flex justify-content-center  ">
+                                    <img src="<?php echo UPLOAD_DIR . $img["nome"] ?>" class="m-auto img-fluid " alt="...">
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                        <button class="carousel-control-prev m-auto " type="button" data-bs-target="#carousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next m-auto" type="button" data-bs-target="#carousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
                     </div>
-                    <button class="carousel-control-prev m-auto" type="button" data-bs-target="#carousel1" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next m-auto" type="button" data-bs-target="#carousel1" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
                 </div>
             </div>
         </div>

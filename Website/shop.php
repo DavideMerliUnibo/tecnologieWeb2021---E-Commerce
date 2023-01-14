@@ -7,5 +7,6 @@
     } else {
         $templateParams["prodotti"] = $dbh -> getProducts();
     }
+    $templateParams['css'] = ['css/shop.css'];
     require("template/base.php");
 ?>

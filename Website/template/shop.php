@@ -13,16 +13,19 @@
                         </a>
                     </div>
                     <div class="col-6 col-md-12">
-                        <div class="card-body">
-                            <p class="card-title fs-4 text"><a href="product.php?prodotto=<?php echo $prodotto["codice"]; ?>"><?php echo $prodotto["nomeFungo"]; ?></a></p>
-                            <p>venduto da <strong><?php echo $prodotto["username"]; ?></strong></p>
-                            <p><strong><?php echo $prodotto["prezzoPerUnità"]; ?> €/Kg</strong></p>
-                            <?php if ($prodotto["quantità"] <= 0) : ?>
-                                <p class="text-danger"> Non disponibile </p>
-                            <?php else : ?>
-                                <p><?php echo $prodotto["quantità"]; ?> in stock</p>
-                            <?php endif; ?>
-                            <p class="card-text"><small class="text-muted"><?php echo $prodotto["data"]; ?></small></p>
+                        <div class="card-body pt-1 ">
+                            <p class="card-title  cut-text"><a href="product.php?prodotto=<?php echo $prodotto["codice"]; ?>" alt=""><?php echo $prodotto["nomeFungo"]; ?></a></p>
+                            
+                            <p class="card-text">
+                                <?php if ($prodotto["quantità"] <= 0) : ?>
+                                     <span class="text-danger fs-7">Not available</span></br>
+                                <?php else : ?>
+                                    <?php echo $prodotto["quantità"]; ?> in stock </br>
+                                <?php endif; ?>
+                                <span class="d-none d-md-block">Venduto da </span><strong class='cut-text'><?php echo $prodotto["username"]; ?></strong></br>
+                                <strong><?php echo $prodotto["prezzoPerUnità"]; ?> €/Kg</strong></br>
+                                <small class="text-muted d-none d-sm-block"><?php echo $prodotto["data"]; ?></small>
+                            </p>
                         </div>
                     </div>
                 </div>

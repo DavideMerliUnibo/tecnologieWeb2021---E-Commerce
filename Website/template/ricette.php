@@ -13,10 +13,13 @@
                         </a>
                     </div>
                     <div class="col-6 col-md-12">
-                        <div class="card-body">
-                            <p class="card-title fs-4 text"><a href="paginaRicetta.php?titoloRicetta=<?php echo str_replace(' ', '%20', $ricetta['titolo']); ?>"><?php echo $ricetta["titolo"]; ?></a></p>
-                            <p class="card-text"><?php echo $ricetta["descrizione"]; ?></p>
-                            <p class="card-text"><small class="text-muted"><?php echo $ricetta["data"]; ?></small></p>
+                        <div class="card-body ">
+                            <p class="card-title fs-6 cut-text"><a href="paginaRicetta.php?titoloRicetta=<?php echo str_replace(' ', '%20', $ricetta['titolo']); ?>"><?php echo $ricetta["titolo"]; ?></a></p>
+                            <p class="card-text">
+                                Autore: </br>
+                                <?php echo $ricetta["autore"]; ?> </br> 
+                                <small class="text-muted"><?php echo $ricetta["data"]; ?></small>
+                            </p>
                         </div>
                     </div>
                 </div>

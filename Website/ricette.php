@@ -8,4 +8,5 @@
     }else{
         $templateParams["ricette"] = $dbh -> getRecipes();
     }
+    $templateParams['css'] = ['css/ricette.css'];
     require("template/base.php");
