@@ -72,12 +72,11 @@ endif; ?>
         <div class="row col-12 mt-2">
             <div class="col-12 col-md-10">
                 <p>Venduto da: <a href="venditore.php?username=<?php echo $prodotto["username"] ?>"><strong><?php echo $prodotto["username"]; ?></strong></a></p>
-
                 <div class="modal fade" id="modalInfoVenditore" tabindex="-1" aria-labelledby="modalInfoVenditoreLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="modalInfoVenditoreLabel">Info Venditore</h5>
+                                <h2 class="modal-title" id="modalInfoVenditoreLabel">Info Venditore</h2>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
@@ -103,14 +102,13 @@ endif; ?>
                 <?php else : ?>
                     
                     <form method="post">
-                    <label for="sel" class="my-1">Scegli quantità:
-                        <select class="form-control text-center my-1" name="sel" style:="width: 50;">
+                        <label for="sel" class="my-1">Scegli quantità:</label>
+                        <select class="form-control text-center my-1" id="sel" name="sel" style:="width: 50;">
                             <?php
                             for ($i = 1; $i <= $prodotto["quantità"]; $i++) {
                                 echo '<option>', $i, '</option>';
                             } ?>
                         </select>
-                        </label>
                         <?php
                         if ((isUserLoggedIn() && $prodotto["offerente"] == $_SESSION["email"]) || (!isUserLoggedIn())) : ?>
                             <input disabled type="submit" value="Aggiungi al carrello" class="btn btn-warning my-1"></input>
@@ -176,28 +174,28 @@ endif; ?>
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Nuova recensione</h5>
+                        <h3 class="modal-title" id="exampleModalLabel">Nuova recensione</h3>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <form method="post">
                             <?php if (!isUserLoggedIn()) : ?>
-                                <h3>Utente non loggato!</h3>
+                                <h4>Utente non loggato!</h4>
                             <?php endif; ?>
                             <div class="mb-3">
-                                <p>Titolo recensione:</p>
+                                <label for="titoloRecensione" class="col-form-label">Titolo recensione:</label>
                                 <textarea class="form-control" id="titoloRecensione" name="titoloRecensione" <?php if (!isUserLoggedIn()) {
                                                                                                             echo "disabled";
                                                                                                          } ?>></textarea>
                             </div>
                             <div class="mb-3">
-                                <p>Contenuto recensione:</p>
+                            <label for="contenutoRecensione" class="col-form-label">Contenuto recensione:</label>
                                 <textarea class="form-control" id="contenutoRecensione" name="contenutoRecensione" <?php if (!isUserLoggedIn()) {
                                                                                                                 echo "disabled";
                                                                                                             } ?>></textarea>
                             </div>
                             <div class="mb-3">
-                                <p>Valutazione:</p>
+                                <label for="votoRecensione" class="col-form-label">Valutazione:</label>
                                 <output>0</output><input required class="form-range" oninput="this.previousElementSibling.value = parseFloat(this.value).toFixed(1)" id="votoRecensione" type="range" step="1" min="0" max="5" value="0" name="votoRecensione" <?php if (!isUserLoggedIn()) {
                                                                                                                                                                                                                                                                     echo " disabled";
                                                                                                                                                                                                                                                                 } ?>>
