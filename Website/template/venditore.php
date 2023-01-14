@@ -51,7 +51,7 @@ $user = $templateParams["user"];
             <?php endfor; ?>
             <div class="row">
                 <div class="d-flex col-12">
-                <a href="ricette.php?username=<?php echo $user["username"] ?>" type="button" class="ms-auto me-4 btn btn-info btn-sm ml-auto text-white">Vedi altro...</a> 
+                <a href="shop.php?username=<?php echo $user["username"] ?>" type="button" class="ms-auto me-4 btn btn-info btn-sm ml-auto text-white">Vedi altro...</a> 
                 </div>
             </div>
         </div>
